@@ -8,8 +8,6 @@ README を「正しく書く」ための道具ではない。README を含む **
 
 ### Claude Code は README を超える
 
-Claude Code は README を含む包括ハーネスです（2026-07 時点で7つの拡張プリミティブ）。
-
 | プリミティブ | 役割 |
 |---|---|
 | CLAUDE.md / Rules | 常に効く文脈・指示 |
@@ -19,45 +17,44 @@ Claude Code は README を含む包括ハーネスです（2026-07 時点で7つ
 | MCP | 外部システム接続 |
 | Plugins | 上記を束ねて配布 |
 
-README は CLAUDE.md の一部にすぎません。「README 整備道具」という位置付けでは Claude Code 本体の機能のほんの一部しか支えません。
+### 権限スコープとモードも扱う
 
-### 誰の、どんな苦痛を消すか
+| スコープ | 場所 |
+|---|---|
+| ユーザー | `~/.claude/settings.json` |
+| プロジェクト共有 | `.claude/settings.json` |
+| プロジェクト個人 | `.claude/settings.local.json`（Git 除外） |
+| 管理者 | OS 固定（上書き不可） |
 
-| ペルソナ | 苦痛 | これが解くこと |
-|---|---|---|
-| Claude Code 利用者 | 設定がバラバラで AI が方針を取り違える | 意味ブロックから一貫生成 |
-| 設定保守者 | 「消していい？根拠どこ？」が分からない | 根拠・依存・来歴を強制 |
-| 初見読者 | 何を AI に渡しているか分からない | 人間向けビューで俯瞰 |
+モードは `default` / `acceptEdits` / `plan` / `auto` / `dontAsk` / `bypassPermissions`。`deny` はスコープ間で常に優先する。
+
+### リアルな対話品質
+
+自動生成物は、実際に人間が Claude Code と対話したときに取り違え・迷子・停滞が起きない品質が必要。検証とベンチマークに加えて、代表ペルソナでの対話観察を `evidence` として残す。
 
 ---
 
 ## v1 の範囲（正直に）
 
-**v1 は README ビューのみ** です。CLAUDE.md, Skills, Hooks, Subagents の生成は次段階（ロードマップ参照）。
+**v1 は README ビューのみ**。CLAUDE.md, Skills, Hooks, Subagents の生成は次段階（[`roadmap`](https://github.com/miyaur-yuta/meaning-first-readme/blob/release/v1.0.0/content/blocks/140-roadmap.md) 参照）。
 
-それでも v1 には意味があります：
-- 意味ブロック管理の基盤ができている
-- 検証・監査・差分の仕組みが動いている
+それでも v1 には意味がある：
+- 意味ブロック管理の基盤が完成
+- 検証・監査・差分の仕組みが動く
 - 次段階は同じ基盤から各種ハーネス設定を生やすだけ
 
 ---
 
-## ここだけ見ればOK（所要30秒）
+## ここだけ見ればOK（30秒）
 
 1. ⭐ [`docs/START_HERE.md`](https://github.com/miyaur-yuta/meaning-first-readme/blob/release/v1.0.0/docs/START_HERE.md)
 2. 🎯 [`content/blocks/002-thesis-frictionless.md`](https://github.com/miyaur-yuta/meaning-first-readme/blob/release/v1.0.0/content/blocks/002-thesis-frictionless.md) — 思想
-3. 🗺️ [`content/blocks/140-roadmap.md`](https://github.com/miyaur-yuta/meaning-first-readme/blob/release/v1.0.0/content/blocks/140-roadmap.md) — 次段階
+3. 🔒 [`content/blocks/064-constraint-permission-scope.md`](https://github.com/miyaur-yuta/meaning-first-readme/blob/release/v1.0.0/content/blocks/064-constraint-permission-scope.md) — 権限
 4. ✅ [`release/VALIDATION_REPORT.md`](https://github.com/miyaur-yuta/meaning-first-readme/blob/release/v1.0.0/release/VALIDATION_REPORT.md)
 
 CI: 🟢 3.11 / 3.12 / 3.13 通過済み
 
 ---
-
-## スマホから見る時のヒント
-
-- 上のリンクだけ開けば理解できる
-- 細かい差分は見なくてよい（生成物は自動）
-- コメントあれば順次対応します
 
 ## 既知の限界
 

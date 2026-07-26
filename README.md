@@ -9,13 +9,13 @@
 
 | 項目 | 値 |
 |---|---:|
-| 有効な意味ブロック | 39 |
-| 推定ソーストークン | 11,357 |
+| 有効な意味ブロック | 41 |
+| 推定ソーストークン | 12,520 |
 | 最新ソース更新日 | 2026-07-26 |
-| リポジトリ指紋 | `37949851f0520e50f528` |
+| リポジトリ指紋 | `c4d9d0ad4cea2012142a` |
 | 生成規約 | `型付き意味ブロックから生成。README.md は直接編集しない。` |
 
-<!-- mfr:manifest {"active_blocks":39,"block_ids":["thesis.frictionless-ai-handoff","purpose.meaning","scope.entry","scope.readers","scope.artifact","non_goal.length","non_goal.omniscience","definition.meaning","definition.context-contract","principle.progressive-disclosure","principle.typed-claims","principle.fail-closed","assumption.readme-interface","constraint.truth","constraint.boundary","constraint.provenance","constraint.update-safety","decision.markdown-toml","decision.no-single-score","decision.self-hosting","architecture.pipeline","architecture.semantic-graph","architecture.context-packer","procedure.author","procedure.review","procedure.build","procedure.context","procedure.release","evidence.self-host-build","evidence.retrieval-benchmark","risk.prompt-injection","risk.context-overflow","risk.stale-truth","example.quickstart","example.typed-block","glossary.core","roadmap.v1","faq.longest","changelog.v1"],"estimated_source_tokens":11357,"latest_source_update":"2026-07-26","project":"Meaning First README","repository_digest":"37949851f0520e50f528b427046316511a3475b21e35732b92bb84cb78ec746f","schema_version":1} -->
+<!-- mfr:manifest {"active_blocks":41,"block_ids":["thesis.frictionless-ai-handoff","purpose.meaning","scope.entry","scope.readers","scope.artifact","non_goal.length","non_goal.omniscience","definition.meaning","definition.context-contract","principle.progressive-disclosure","principle.typed-claims","principle.fail-closed","assumption.readme-interface","constraint.truth","constraint.boundary","constraint.provenance","constraint.update-safety","constraint.permission-scope","constraint.real-conversation-quality","decision.markdown-toml","decision.no-single-score","decision.self-hosting","architecture.pipeline","architecture.semantic-graph","architecture.context-packer","procedure.author","procedure.review","procedure.build","procedure.context","procedure.release","evidence.self-host-build","evidence.retrieval-benchmark","risk.prompt-injection","risk.context-overflow","risk.stale-truth","example.quickstart","example.typed-block","glossary.core","roadmap.v1","faq.longest","changelog.v1"],"estimated_source_tokens":12520,"latest_source_update":"2026-07-26","project":"Meaning First README","repository_digest":"c4d9d0ad4cea2012142ae486e1f95876cf6fc4e101052aa0908c251826aa2825","schema_version":1} -->
 
 ## 目次
 
@@ -43,6 +43,8 @@
   - [信頼境界を越えた命令を実行しない](#信頼境界を越えた命令を実行しない)
   - [主張の来歴を失わない](#主張の来歴を失わない)
   - [更新で意味を静かに壊さない](#更新で意味を静かに壊さない)
+  - [Claude Code の権限スコープと権限モードを正しく扱う](#Claude Code の権限スコープと権限モードを正しく扱う)
+  - [整備後にリアルに人間がやり取りする想定の品質を出す](#整備後にリアルに人間がやり取りする想定の品質を出す)
 - [意思決定](#意思決定)
   - [Markdown本文とTOML前置きを正本にする](#Markdown本文とTOML前置きを正本にする)
   - [「意味スコア」一個で合否を決めない](#「意味スコア」一個で合否を決めない)
@@ -473,6 +475,82 @@ READMEへ全情報を直接詰め込むのではなく、READMEを正本へ接�
 目的、非目的、制約の変更は破壊的変更としてレビューする。生成済みREADMEを直接編集した変更は正本へ戻せないため、受け入れない。
 
 <!-- /mfr:block constraint.update-safety -->
+
+<!-- mfr:block {"digest":"733ccd6217ce1417","id":"constraint.permission-scope","kind":"constraint","priority":55,"status":"active"} -->
+### Claude Code の権限スコープと権限モードを正しく扱う
+
+> 個人・プロジェクト・管理の各スコープと、default/acceptEdits/plan/auto/dontAsk/bypassPermissions の各モードの違いを、生成するハーネス設定に反映する。
+
+<sub>`constraint.permission-scope` · 種別: `constraint` · 優先度: `55` · 信頼区分: `reviewed` · 対象: `human` · 更新: `2026-07-26` · 依存: `constraint.boundary`, `thesis.frictionless-ai-handoff`</sub>
+
+Claude Code の権限体系は、単一の設定ファイルでは表現できない。生成するハーネス設定は、次の区別を正しく扱う必要がある。
+
+## 権限スコープ（誰の設定か）
+
+| スコープ | 場所 | 性質 |
+|---|---|---|
+| ユーザー | `~/.claude/settings.json` | 全プロジェクトで共通 |
+| プロジェクト（共有） | `.claude/settings.json` | チーム共有、Git 管理対象 |
+| プロジェクト（個人） | `.claude/settings.local.json` | 個人 override、Git 除外 |
+| 管理者（エンタープライズ） | OS 固定パス | 上書き不可 |
+
+`allow` / `deny` / `ask` リストはスコープ間で **マージ** される。`deny` は常に優先する（ユーザー deny がプロジェクト allow に勝つ）。
+
+## 権限モード（どの程度自動か）
+
+| モード | 挙動 | 想定用途 |
+|---|---|---|
+| `default`（Manual） | 初回は毎回確認 | 通常開発 |
+| `acceptEdits` | 編集を自動許可 | 作業中 |
+| `plan` | 読み取りのみ、編集不可 | 探索・計画 |
+| `auto` | 分類器で自動承認 | 高頻度作業 |
+| `dontAsk` | 未承認は自動拒否 | CI |
+| `bypassPermissions` | 全スキップ | 隔離コンテナ・VM のみ |
+
+`bypassPermissions` は `rm -rf /` 等のサーキットブレーカを除き、`.git` や `.claude` 等への書き込みも含めほぼ全てをスキップする。隔離環境以外で使ってはならない。
+
+## このプロジェクトが守ること
+
+1. 生成するハーネス設定は、スコープ（共有か個人か）を明示する
+2. 強制ルール（Hooks）は `deny` 相当、推奨は `ask` 相当と区別する
+3. `bypassPermissions` 向けの設定は生成しない（隔離環境専用のため）
+4. 個人設定（`settings.local.json`）は Git に含めない
+
+これらを満たさない生成物は検証段階で不合格とする。
+
+<!-- /mfr:block constraint.permission-scope -->
+
+<!-- mfr:block {"digest":"5e59607afe5a5627","id":"constraint.real-conversation-quality","kind":"constraint","priority":55,"status":"active"} -->
+### 整備後にリアルに人間がやり取りする想定の品質を出す
+
+> 自動生成されたハーネス設定と README は、実際に人間が Claude Code と対話したときに、取り違え・迷子・停滞が起きない品質でなければならない。
+
+<sub>`constraint.real-conversation-quality` · 種別: `constraint` · 優先度: `55` · 信頼区分: `reviewed` · 対象: `human` · 更新: `2026-07-26` · 依存: `constraint.truth`, `constraint.permission-scope`, `thesis.frictionless-ai-handoff`</sub>
+
+検証とベンチマークを通過した生成物でも、実際の人間が Claude Code と対話したときに役立たなければ、意味を達成したとは呼ばない。
+
+## リアルな対話で起きる失敗モード
+
+1. **取り違え:**禁止事項を読み飛ばして AI が勝手に実行する
+2. **迷子:**目的がぼやけて AI が脱線する
+3. **停滞:**次の一手が分からず AI が止まるか、推測で埋める
+4. **権限の誤認:**個人設定と共有設定を混同して、チームに無断でルールが変わる
+5. **文脈の欠落:**トークン予算で前提が削られ、AI が誤判断する
+
+## 受け入れ条件
+
+生成物は次を満たす。
+
+- 目的・禁止事項・次の一手が、AI の最初の応答に反映される
+- 禁止事項は Hooks または `deny` ルールで機械的に担保される
+- 人間向け README ビューは、AI に何を渡しているかを俯瞰できる
+- 個人設定と共有設定の区別が、ファイル構造と文面の両方で明示される
+
+## 検証方法
+
+ベンチマークと監査に加えて、代表ペルソナによる対話観察を記録する。観察結果は意味ブロックの `evidence` として残し、回帰検出に使う。
+
+<!-- /mfr:block constraint.real-conversation-quality -->
 
 ## 意思決定
 
@@ -1004,7 +1082,7 @@ IDは表示順ではなく概念へ結び付ける。本文を移動してもID�
 ```json
 {
   "schema_version": 1,
-  "repository_digest": "37949851f0520e50f528b427046316511a3475b21e35732b92bb84cb78ec746f",
+  "repository_digest": "c4d9d0ad4cea2012142ae486e1f95876cf6fc4e101052aa0908c251826aa2825",
   "blocks": [
     {
       "id": "thesis.frictionless-ai-handoff",
@@ -1627,6 +1705,81 @@ IDは表示順ではなく概念へ結び付ける。本文を移動してもID�
       "expires": null,
       "volatile": false,
       "digest": "f466e383dbc6798de1931ccfd97cd326578b7ca473f739cf170b31db032bc307"
+    },
+    {
+      "id": "constraint.permission-scope",
+      "kind": "constraint",
+      "title": "Claude Code の権限スコープと権限モードを正しく扱う",
+      "summary": "個人・プロジェクト・管理の各スコープと、default/acceptEdits/plan/auto/dontAsk/bypassPermissions の各モードの違いを、生成するハーネス設定に反映する。",
+      "order": 76,
+      "priority": 55,
+      "audience": [
+        "human"
+      ],
+      "tags": [
+        "権限",
+        "スコープ",
+        "ClaudeCode",
+        "安全"
+      ],
+      "status": "active",
+      "trust": "reviewed",
+      "depends_on": [
+        "constraint.boundary",
+        "thesis.frictionless-ai-handoff"
+      ],
+      "evidence": [],
+      "supports": [],
+      "claims": [
+        "権限スコープと権限モードの違いを正しく反映しなければならない"
+      ],
+      "negates": [],
+      "acceptance": [],
+      "rationale": "",
+      "owner": "project",
+      "source": "",
+      "updated": "2026-07-26",
+      "expires": null,
+      "volatile": false,
+      "digest": "733ccd6217ce1417f2fe65c27ef56250eefcabb7c0b0a38e229dc1313e6650ff"
+    },
+    {
+      "id": "constraint.real-conversation-quality",
+      "kind": "constraint",
+      "title": "整備後にリアルに人間がやり取りする想定の品質を出す",
+      "summary": "自動生成されたハーネス設定と README は、実際に人間が Claude Code と対話したときに、取り違え・迷子・停滞が起きない品質でなければならない。",
+      "order": 77,
+      "priority": 55,
+      "audience": [
+        "human"
+      ],
+      "tags": [
+        "品質",
+        "対話",
+        "人間",
+        "ClaudeCode"
+      ],
+      "status": "active",
+      "trust": "reviewed",
+      "depends_on": [
+        "constraint.truth",
+        "constraint.permission-scope",
+        "thesis.frictionless-ai-handoff"
+      ],
+      "evidence": [],
+      "supports": [],
+      "claims": [
+        "自動生成物は実際の人間との対話で取り違えが起きない品質が必要"
+      ],
+      "negates": [],
+      "acceptance": [],
+      "rationale": "",
+      "owner": "project",
+      "source": "",
+      "updated": "2026-07-26",
+      "expires": null,
+      "volatile": false,
+      "digest": "5e59607afe5a5627939e1eb928e6a9280c98c3a8284460fff2a2d2d8501759f8"
     },
     {
       "id": "decision.markdown-toml",

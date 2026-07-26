@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "repository_digest": "37949851f0520e50f528b427046316511a3475b21e35732b92bb84cb78ec746f",
+  "repository_digest": "c4d9d0ad4cea2012142ae486e1f95876cf6fc4e101052aa0908c251826aa2825",
   "blocks": [
     {
       "id": "architecture.context-packer",
@@ -234,6 +234,44 @@
       "digest": "3d4e123036c4eff7ae5c3426d8fa587a49fc84343e840fe90fdf19315719cdb5"
     },
     {
+      "id": "constraint.permission-scope",
+      "kind": "constraint",
+      "title": "Claude Code の権限スコープと権限モードを正しく扱う",
+      "summary": "個人・プロジェクト・管理の各スコープと、default/acceptEdits/plan/auto/dontAsk/bypassPermissions の各モードの違いを、生成するハーネス設定に反映する。",
+      "order": 76,
+      "priority": 55,
+      "audience": [
+        "human"
+      ],
+      "tags": [
+        "権限",
+        "スコープ",
+        "ClaudeCode",
+        "安全"
+      ],
+      "status": "active",
+      "trust": "reviewed",
+      "depends_on": [
+        "constraint.boundary",
+        "thesis.frictionless-ai-handoff"
+      ],
+      "evidence": [],
+      "supports": [],
+      "claims": [
+        "権限スコープと権限モードの違いを正しく反映しなければならない"
+      ],
+      "negates": [],
+      "acceptance": [],
+      "rationale": "",
+      "owner": "project",
+      "source": "",
+      "updated": "2026-07-26",
+      "expires": null,
+      "volatile": false,
+      "body": "Claude Code の権限体系は、単一の設定ファイルでは表現できない。生成するハーネス設定は、次の区別を正しく扱う必要がある。\n\n## 権限スコープ（誰の設定か）\n\n| スコープ | 場所 | 性質 |\n|---|---|---|\n| ユーザー | `~/.claude/settings.json` | 全プロジェクトで共通 |\n| プロジェクト（共有） | `.claude/settings.json` | チーム共有、Git 管理対象 |\n| プロジェクト（個人） | `.claude/settings.local.json` | 個人 override、Git 除外 |\n| 管理者（エンタープライズ） | OS 固定パス | 上書き不可 |\n\n`allow` / `deny` / `ask` リストはスコープ間で **マージ** される。`deny` は常に優先する（ユーザー deny がプロジェクト allow に勝つ）。\n\n## 権限モード（どの程度自動か）\n\n| モード | 挙動 | 想定用途 |\n|---|---|---|\n| `default`（Manual） | 初回は毎回確認 | 通常開発 |\n| `acceptEdits` | 編集を自動許可 | 作業中 |\n| `plan` | 読み取りのみ、編集不可 | 探索・計画 |\n| `auto` | 分類器で自動承認 | 高頻度作業 |\n| `dontAsk` | 未承認は自動拒否 | CI |\n| `bypassPermissions` | 全スキップ | 隔離コンテナ・VM のみ |\n\n`bypassPermissions` は `rm -rf /` 等のサーキットブレーカを除き、`.git` や `.claude` 等への書き込みも含めほぼ全てをスキップする。隔離環境以外で使ってはならない。\n\n## このプロジェクトが守ること\n\n1. 生成するハーネス設定は、スコープ（共有か個人か）を明示する\n2. 強制ルール（Hooks）は `deny` 相当、推奨は `ask` 相当と区別する\n3. `bypassPermissions` 向けの設定は生成しない（隔離環境専用のため）\n4. 個人設定（`settings.local.json`）は Git に含めない\n\nこれらを満たさない生成物は検証段階で不合格とする。",
+      "digest": "733ccd6217ce1417f2fe65c27ef56250eefcabb7c0b0a38e229dc1313e6650ff"
+    },
+    {
       "id": "constraint.provenance",
       "kind": "constraint",
       "title": "主張の来歴を失わない",
@@ -269,6 +307,45 @@
       "volatile": false,
       "body": "コピーされた文章が正しく見えても、誰が、いつ、何を根拠に書いたか分からなければ更新できない。\n\n各意味ブロックは安定したIDとソースパスを持つ。重要な判断には理由を、事実には根拠を、揮発情報には失効日を、手順には受け入れ条件を付ける。生成READMEにはブロックIDと内容指紋を埋め込み、ソースとの差異を検出できるようにする。\n\n来歴情報は装飾ではない。矛盾が起きたときに、どちらを再確認すべきか決めるための最小情報である。",
       "digest": "7d0c45316d9c9e1ce4dab7a67b394189cf6ac325cd4ef0732f34ea307be4f8f2"
+    },
+    {
+      "id": "constraint.real-conversation-quality",
+      "kind": "constraint",
+      "title": "整備後にリアルに人間がやり取りする想定の品質を出す",
+      "summary": "自動生成されたハーネス設定と README は、実際に人間が Claude Code と対話したときに、取り違え・迷子・停滞が起きない品質でなければならない。",
+      "order": 77,
+      "priority": 55,
+      "audience": [
+        "human"
+      ],
+      "tags": [
+        "品質",
+        "対話",
+        "人間",
+        "ClaudeCode"
+      ],
+      "status": "active",
+      "trust": "reviewed",
+      "depends_on": [
+        "constraint.truth",
+        "constraint.permission-scope",
+        "thesis.frictionless-ai-handoff"
+      ],
+      "evidence": [],
+      "supports": [],
+      "claims": [
+        "自動生成物は実際の人間との対話で取り違えが起きない品質が必要"
+      ],
+      "negates": [],
+      "acceptance": [],
+      "rationale": "",
+      "owner": "project",
+      "source": "",
+      "updated": "2026-07-26",
+      "expires": null,
+      "volatile": false,
+      "body": "検証とベンチマークを通過した生成物でも、実際の人間が Claude Code と対話したときに役立たなければ、意味を達成したとは呼ばない。\n\n## リアルな対話で起きる失敗モード\n\n1. **取り違え:**禁止事項を読み飛ばして AI が勝手に実行する\n2. **迷子:**目的がぼやけて AI が脱線する\n3. **停滞:**次の一手が分からず AI が止まるか、推測で埋める\n4. **権限の誤認:**個人設定と共有設定を混同して、チームに無断でルールが変わる\n5. **文脈の欠落:**トークン予算で前提が削られ、AI が誤判断する\n\n## 受け入れ条件\n\n生成物は次を満たす。\n\n- 目的・禁止事項・次の一手が、AI の最初の応答に反映される\n- 禁止事項は Hooks または `deny` ルールで機械的に担保される\n- 人間向け README ビューは、AI に何を渡しているかを俯瞰できる\n- 個人設定と共有設定の区別が、ファイル構造と文面の両方で明示される\n\n## 検証方法\n\nベンチマークと監査に加えて、代表ペルソナによる対話観察を記録する。観察結果は意味ブロックの `evidence` として残し、回帰検出に使う。",
+      "digest": "5e59607afe5a5627939e1eb928e6a9280c98c3a8284460fff2a2d2d8501759f8"
     },
     {
       "id": "constraint.truth",
