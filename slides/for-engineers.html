@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Claude Code Harness × Spec Kit — Engineer Edition</title>
+<style>
+  :root{
+    --bg:#0f172a; --fg:#e2e8f0; --muted:#94a3b8; --accent:#60a5fa;
+    --warm:#fbbf24; --soft:#1e293b; --card:#1e293b; --line:#334155;
+    --good:#34d399; --bad:#f87171; --code-bg:#0d1117;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:'SF Mono',Monaco,Consolas,'Hiragino Sans','Yu Gothic',sans-serif;
+    background:var(--bg); color:var(--fg); line-height:1.6;
+    font-size:16px;
+  }
+  .slide{
+    min-height:100vh; padding:48px 24px; max-width:1000px; margin:0 auto;
+    border-bottom:1px solid var(--line);
+    display:flex; flex-direction:column; justify-content:center;
+  }
+  .slide-num{
+    position:fixed; top:16px; right:20px; font-size:12px; color:var(--muted);
+    background:var(--card); padding:6px 12px; border-radius:999px;
+    border:1px solid var(--line); z-index:10;
+  }
+  h1{font-size:34px; line-height:1.25; margin-bottom:14px; letter-spacing:-.01em}
+  h2{font-size:24px; margin-bottom:16px; letter-spacing:-.01em; color:var(--accent)}
+  h3{font-size:17px; margin:16px 0 8px; color:var(--warm)}
+  p{margin-bottom:12px}
+  .lead{font-size:17px; color:var(--muted); margin-bottom:20px}
+  ul,ol{margin:0 0 14px 22px}
+  li{margin-bottom:6px}
+  code{
+    background:var(--code-bg); padding:2px 6px; border-radius:4px;
+    font-family:'SF Mono',Monaco,Consolas,monospace; font-size:13px;
+    color:#f8f8f2;
+  }
+  pre{
+    background:var(--code-bg); padding:14px; border-radius:8px;
+    overflow-x:auto; margin:12px 0; border:1px solid var(--line);
+  }
+  pre code{background:none; padding:0; font-size:13px}
+  .card{
+    background:var(--card); border:1px solid var(--line); border-radius:10px;
+    padding:18px; margin:12px 0;
+  }
+  table{width:100%; border-collapse:collapse; margin:12px 0; font-size:14px}
+  th,td{padding:8px 10px; border:1px solid var(--line); text-align:left; vertical-align:top}
+  th{background:var(--soft); color:var(--warm); font-weight:600}
+  .pill{
+    display:inline-block; padding:3px 10px; border-radius:4px;
+    font-size:12px; font-weight:600; margin:2px;
+    font-family:'SF Mono',monospace;
+  }
+  .pill.blue{background:#1e3a5f; color:#93c5fd}
+  .pill.amber{background:#78350f; color:#fcd34d}
+  .pill.green{background:#064e3b; color:#6ee7b7}
+  .pill.red{background:#7f1d1d; color:#fca5a5}
+  .grid2{display:grid; grid-template-columns:1fr 1fr; gap:12px; margin:14px 0}
+  @media(max-width:720px){.grid2{grid-template-columns:1fr}}
+  .grid3{display:grid; grid-template-columns:repeat(3,1fr); gap:10px; margin:14px 0}
+  @media(max-width:720px){.grid3{grid-template-columns:1fr}}
+  .ascii{
+    font-family:'SF Mono',monospace; font-size:13px;
+    background:var(--code-bg); padding:16px; border-radius:8px;
+    white-space:pre; overflow-x:auto; color:#a5f3a0;
+  }
+  .nav{
+    position:fixed; bottom:20px; left:50%; transform:translateX(-50%);
+    display:flex; gap:8px; background:var(--card); padding:6px;
+    border-radius:999px; border:1px solid var(--line); z-index:10;
+  }
+  .nav button{
+    border:none; background:var(--accent); color:#0f172a; width:34px; height:34px;
+    border-radius:50%; font-size:16px; cursor:pointer; font-weight:700;
+  }
+  .nav .count{align-self:center; padding:0 10px; font-size:12px; color:var(--muted); font-family:monospace}
+  .footer-note{font-size:12px; color:var(--muted); margin-top:24px; padding-top:12px; border-top:1px dashed var(--line)}
+  .warn{background:#422006; border-left:3px solid var(--warm); padding:10px 14px; border-radius:0 6px 6px 0; margin:10px 0}
+  .warn::before{content:"⚠️ "}
+  a{color:var(--accent)}
+</style>
+</head>
+<body>
+<div class="slide-num" id="counter">1 / 12</div>
+<nav class="nav">
+  <button onclick="prev()">‹</button>
+  <span class="count" id="navCount">1/12</span>
+  <button onclick="next()">›</button>
+</nav>
+
+<!-- Slide 1 -->
+<section class="slide" id="s1">
+  <span class="pill amber">ENGINEER</span>
+  <span class="pill blue">v1.0.0 / 2026-07-26</span>
+  <h1>Claude Code Harness × Spec Kit</h1>
+  <p class="lead">意味ブロックを正本として、ハーネス設定と SDD ライフサイクルを一貫生成する設計</p>
+  <div class="card">
+    <p><strong>前提知識:</strong> Claude Code / Git / TOML / Markdown / Python</p>
+    <p><strong>対象:</strong> Claude Code を業務利用するエンジニア・ハーネス保守者</p>
+    <p><strong>所要:</strong> 約15分</p>
+  </div>
+</section>
+
+<!-- Slide 2: Claude Code Primitives -->
+<section class="slide" id="s2">
+  <h2>Claude Code の7プリミティブ</h2>
+  <p class="lead">README は CLAUDE.md の一部にすぎない</p>
+  <table>
+    <thead><tr><th>プリミティブ</th><th>役割</th><th>読込タイミング</th><th>配置</th></tr></thead>
+    <tbody>
+      <tr><td><code>CLAUDE.md</code></td><td>常時効く文脈・指示</td><td>セッション毎</td><td>repo root / <code>~/.claude/</code></td></tr>
+      <tr><td><code>Skills</code></td><td>オンデマンド知識</td><td><code>/</code> or 自動</td><td><code>.claude/skills/&lt;name&gt;/SKILL.md</code></td></tr>
+      <tr><td><code>Hooks</code></td><td>必ず発火する強制ルール</td><td>ライフサイクル毎</td><td><code>.claude/settings.json</code></td></tr>
+      <tr><td><code>Subagents</code></td><td>独立 ctx で専門作業</td><td>委譲時</td><td><code>.claude/agents/&lt;name&gt;.md</code></td></tr>
+      <tr><td><code>MCP</code></td><td>外部システム接続</td><td>ツール呼出時</td><td><code>.claude/mcp.json</code></td></tr>
+      <tr><td><code>Plugins</code></td><td>上記を束ねて配布</td><td>install 時</td><td>marketplace / path</td></tr>
+      <tr><td><code>Permissions</code></td><td>許可スコープ/モード</td><td>常時</td><td>settings 群</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- Slide 3: Permission model -->
+<section class="slide" id="s3">
+  <h2>権限モデル（スコープ × モード）</h2>
+  <div class="grid2">
+    <div class="card">
+      <h3>4スコープ（誰の設定か）</h3>
+      <ul>
+        <li><code>~/.claude/settings.json</code> — user</li>
+        <li><code>.claude/settings.json</code> — project shared</li>
+        <li><code>.claude/settings.local.json</code> — project personal (gitignored)</li>
+        <li>managed — enterprise, OS path</li>
+      </ul>
+      <p class="lead" style="font-size:13px">allow/deny/ask はスコープ間で <strong>merge</strong>。deny は常に優先。</p>
+    </div>
+    <div class="card">
+      <h3>6モード（どの程度自動か）</h3>
+      <div>
+        <span class="pill blue">default</span>
+        <span class="pill blue">acceptEdits</span>
+        <span class="pill amber">plan</span>
+        <span class="pill amber">auto</span>
+        <span class="pill green">dontAsk</span>
+        <span class="pill red">bypassPermissions</span>
+      </div>
+      <p class="lead" style="font-size:13px"><code>bypassPermissions</code> は隔離環境（container/VM）のみ。<code>rm -rf /</code> 等のサーキットブレーカを除き全スキップ。</p>
+    </div>
+  </div>
+  <div class="warn">v1 では <code>settings.json</code> 系の<strong>自動生成は行わない</strong>。スコープ/モードの解説のみ提供（次段階で生成へ）。</div>
+</section>
+
+<!-- Slide 4: Spec Kit SDD -->
+<section class="slide" id="s4">
+  <h2>Spec Kit の SDD ライフサイクル</h2>
+  <p class="lead">Specification-Driven Development: 仕様が王、コードはそこから生まれる</p>
+  <div class="ascii">
+[constitution] → [specify] → [clarify] → [plan] → [checklist]
+                                                    ↓
+                            [tasks] ← [analyze]
+                                ↓
+                          [implement] → [converge]</div>
+  <table>
+    <thead><tr><th>Phase</th><th>Command</th><th>Output</th></tr></thead>
+    <tbody>
+      <tr><td>Constitution</td><td><code>/speckit.constitution</code></td><td><code>memory/constitution.md</code></td></tr>
+      <tr><td>Specify</td><td><code>/speckit.specify</code></td><td><code>specs/&lt;feature&gt;/spec.md</code></td></tr>
+      <tr><td>Clarify</td><td><code>/speckit.clarify</code></td><td>spec の diff</td></tr>
+      <tr><td>Plan</td><td><code>/speckit.plan</code></td><td><code>plan.md</code></td></tr>
+      <tr><td>Tasks</td><td><code>/speckit.tasks</code></td><td><code>tasks.md</code></td></tr>
+      <tr><td>Analyze</td><td><code>/speckit.analyze</code></td><td>整合性レポート</td></tr>
+      <tr><td>Implement</td><td><code>/speckit.implement</code></td><td>コード</td></tr>
+      <tr><td>Converge</td><td><code>/speckit.converge</code></td><td>収束確認</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- Slide 5: Meaning blocks -->
+<section class="slide" id="s5">
+  <h2>意味ブロック（正本）</h2>
+  <p class="lead">単一の真実の情報源（single source of truth）</p>
+  <pre><code>content/blocks/
+├── 001-purpose.md         # kind=purpose
+├── 002-thesis-*.md        # kind=purpose
+├── 010-scope-readers.md   # kind=scope
+├── 020-definition-*.md    # kind=definition
+├── 040-principle-*.md     # kind=principle
+├── 060-constraint-*.md    # kind=constraint
+├── 070-decision-*.md      # kind=decision
+├── 080-architecture-*.md  # kind=architecture
+├── 100-procedure-*.md     # kind=procedure
+├── 110-evidence-*.md      # kind=evidence
+└── 140-roadmap.md         # kind=roadmap</code></pre>
+  <p>各ブロックは TOML frontmatter（型付き）+ Markdown 本文。検証・監査・差分が全て機械可処理。</p>
+</section>
+
+<!-- Slide 6: Block → Spec Kit mapping -->
+<section class="slide" id="s6">
+  <h2>意味ブロック ↔ Spec Kit 対応</h2>
+  <table>
+    <thead><tr><th>Spec Kit 入力</th><th>意味ブロック種別</th><th>備考</th></tr></thead>
+    <tbody>
+      <tr><td><code>constitution.md</code></td><td><code>principle</code> / <code>constraint</code> / <code>decision</code></td><td>不変原則</td></tr>
+      <tr><td><code>spec.md</code></td><td><code>purpose</code> / <code>scope</code> / <code>non_goal</code> / <code>definition</code></td><td>機能要件</td></tr>
+      <tr><td><code>plan.md</code></td><td><code>architecture</code> / <code>procedure</code></td><td>技術計画</td></tr>
+      <tr><td><code>tasks.md</code></td><td><code>procedure</code>（具体化）</td><td>実行タスク</td></tr>
+      <tr><td>検査入力</td><td><code>evidence</code> / <code>fact</code> / <code>risk</code></td><td>analyze/converge</td></tr>
+    </tbody>
+  </table>
+  <div class="warn">意味ブロックは <strong>正本</strong>、Spec Kit は <strong>工程</strong>。競合しない。</div>
+</section>
+
+<!-- Slide 7: Pipeline -->
+<section class="slide" id="s7">
+  <h2>ビルドパイプライン</h2>
+  <div class="ascii">[content/blocks/*.md]
+        │
+        ├─→ mfr validate   (kind/status/trust 整合性)
+        ├─→ mfr audit      (多次元監査)
+        ├─→ mfr benchmark  (N-gram 検索の再現率)
+        ├─→ mfr build      (→ README.md, manifest)
+        ├─→ mfr context    (task 別に梱包)
+        ├─→ mfr diff       (スナップショット差分)
+        └─→ mfr snapshot   (完全性ハッシュ)
+
+        ↓ 次段階
+
+[constitution.md / spec.md / plan.md / tasks.md]   ← Spec Kit
+[CLAUDE.md / Skills / Hooks / Subagents / mcp.json] ← Harness</div>
+  <p class="lead">v1 は上段のみ。下段（生成）は roadmap フェーズ2以降。</p>
+</section>
+
+<!-- Slide 8: v1 scope -->
+<section class="slide" id="s8">
+  <h2>v1 の設計境界</h2>
+  <div class="grid2">
+    <div class="card" style="border-color:var(--good)">
+      <h3 style="color:var(--good)">✓ IN (v1)</h3>
+      <ul>
+        <li>意味ブロック管理</li>
+        <li>README 生成・検証・監査・ベンチマーク</li>
+        <li>コンテキスト/差分/スナップショット</li>
+        <li>自己ホスト</li>
+        <li><strong>説明資料</strong>（このスライド含む）</li>
+      </ul>
+    </div>
+    <div class="card" style="border-color:var(--bad)">
+      <h3 style="color:var(--bad)">✗ OUT (次段階)</h3>
+      <ul>
+        <li>CLAUDE.md/Skills/Hooks/Subagents/MCP の<strong>自動生成</strong></li>
+        <li><code>settings.json</code> 系の自動生成</li>
+        <li>Spec Kit CLI ラッパ</li>
+        <li>対話観察の自動化</li>
+        <li>ペルソナ全網羅検査</li>
+      </ul>
+    </div>
+  </div>
+  <div class="warn">「生成機能が範囲外」と「説明しない」は別物。概念・使い方・最小構成は v1 で提供。</div>
+</section>
+
+<!-- Slide 9: Conversation quality -->
+<section class="slide" id="s9">
+  <h2>リアルな対話品質（観察可能）</h2>
+  <p class="lead">主観ではなく、ペルソナ別典型タスクでの観察基準</p>
+  <table>
+    <thead><tr><th>ペルソナ</th><th>典型タスク</th><th>成功基準</th></tr></thead>
+    <tbody>
+      <tr><td>A: Claude Code 利用者</td><td>「目的/次にやること/禁止事項」を聞く</td><td>README の対象ブロックが最初の応答に反映</td></tr>
+      <tr><td>B: 保守者</td><td>ブロック更新 → validate → audit</td><td>根拠欠如を検証で弾ける</td></tr>
+      <tr><td>C: 初見読者</td><td>README を開く → 全体把握</td><td>AI 文脈との違いが分かる</td></tr>
+    </tbody>
+  </table>
+  <p>観察結果は <code>evidence</code> ブロックとして蓄積。<code>trust=observed</code> 必須。サンプル1で判定しない。</p>
+</section>
+
+<!-- Slide 10: Roadmap -->
+<section class="slide" id="s10">
+  <h2>ロードマップ</h2>
+  <div class="card">
+    <h3>Phase 1 (v1, this PR)</h3>
+    <p>README ビュー。Spec Kit は概念説明のみ。</p>
+  </div>
+  <div class="card">
+    <h3>Phase 2 — SDD integration</h3>
+    <p>意味ブロック → <code>constitution.md</code> / <code>spec.md</code> / <code>plan.md</code> / <code>tasks.md</code>。clarify/analyze の支援。</p>
+  </div>
+  <div class="card">
+    <h3>Phase 3 — Harness generation</h3>
+    <p>意味ブロック → CLAUDE.md / Skills / Hooks / Subagents / 権限。</p>
+  </div>
+  <div class="card">
+    <h3>Phase 4 — Plugin distribution</h3>
+    <p>ハーネス一式を Plugin として配布。</p>
+  </div>
+  <p class="lead">拡張順は機能数ではなく、観測された引き渡し摩擦を減らす順。</p>
+</section>
+
+<!-- Slide 11: Quickstart -->
+<section class="slide" id="s11">
+  <h2>クイックスタート</h2>
+  <pre><code># 1. リポジトリ取得
+git clone &lt;this-repo&gt;
+cd meaning-first-readme
+
+# 2. 検証
+export PYTHONPATH=src
+python -m meaning_first_readme doctor
+python -m meaning_first_readme validate
+
+# 3. README 生成（自己ホスト）
+python -m meaning_first_readme build --output README.md
+
+# 4. 監査とベンチマーク
+python -m meaning_first_readme audit
+python -m meaning_first_readme benchmark
+
+# 5. タスク別コンテキスト
+python -m meaning_first_readme context \
+  --task '公開前に事実・根拠・秘密情報・リリース条件を確認する' \
+  --tokens 6500 --audience ai</code></pre>
+  <p>Windows PowerShell の場合は <code>$env:PYTHONPATH='src'</code>。</p>
+</section>
+
+<!-- Slide 12: References -->
+<section class="slide" id="s12">
+  <h2>リファレンス</h2>
+  <ul>
+    <li><a href="https://code.claude.com/docs/en/permissions.md">Claude Code Permissions (公式)</a></li>
+    <li><a href="https://code.claude.com/docs/en/permission-modes">Claude Code Permission Modes</a></li>
+    <li><a href="https://github.com/github/spec-kit">GitHub Spec Kit</a> (v0.12.5)</li>
+    <li><a href="https://github.com/github/spec-kit/blob/main/spec-driven.md">SDD Methodology</a></li>
+    <li><a href="../docs/START_HERE.md">本プロジェクト入口</a></li>
+    <li><a href="../content/blocks/002-thesis-frictionless.md">思想ブロック</a></li>
+    <li><a href="../content/blocks/081-decision-spec-kit.md">Spec Kit 統合決定</a></li>
+    <li><a href="script.md">説明時の台本</a></li>
+  </ul>
+  <p class="footer-note">Meaning First README v1.0.0 / Claude Code only / 2026-07-26</p>
+</section>
+
+<script>
+  const total = 12;
+  let cur = 1;
+  function show(n){
+    cur = Math.max(1, Math.min(total, n));
+    document.getElementById('counter').textContent = cur + ' / ' + total;
+    document.getElementById('navCount').textContent = cur + '/' + total;
+    document.getElementById('s'+cur).scrollIntoView({behavior:'smooth', block:'start'});
+  }
+  function next(){ show(cur+1); }
+  function prev(){ show(cur-1); }
+  document.addEventListener('keydown', e=>{
+    if(e.key==='ArrowRight'||e.key===' ') next();
+    if(e.key==='ArrowLeft') prev();
+  });
+  window.addEventListener('scroll', ()=>{
+    const pos = window.scrollY + window.innerHeight/2;
+    for(let i=1;i<=total;i++){
+      const s = document.getElementById('s'+i);
+      if(s.offsetTop <= pos && s.offsetTop + s.offsetHeight > pos){
+        cur = i;
+        document.getElementById('counter').textContent = cur + ' / ' + total;
+        document.getElementById('navCount').textContent = cur + '/' + total;
+        break;
+      }
+    }
+  });
+</script>
+</body>
+</html>

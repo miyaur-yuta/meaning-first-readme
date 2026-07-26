@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "repository_digest": "782162c127b2bd6bd148070259b6381c58cd5e4de4055e5a1a1e5ce04d3d18aa",
+  "repository_digest": "ee14c773b707cbc86bca7575659c1799a57e1a47ceb066efae5fa41fcf3bbded",
   "blocks": [
     {
       "id": "architecture.context-packer",
@@ -423,6 +423,45 @@
       "digest": "f466e383dbc6798de1931ccfd97cd326578b7ca473f739cf170b31db032bc307"
     },
     {
+      "id": "decision.claude-code-only",
+      "kind": "decision",
+      "title": "Claude Code に限定する",
+      "summary": "他の AI ツール（Copilot/Cursor/Gemini 等）への拡張は行わず、Claude Code のみを対象とする。",
+      "order": 82,
+      "priority": 30,
+      "audience": [
+        "human"
+      ],
+      "tags": [
+        "決定",
+        "ClaudeCode",
+        "スコープ",
+        "限定"
+      ],
+      "status": "active",
+      "trust": "authoritative",
+      "depends_on": [
+        "thesis.frictionless-ai-handoff",
+        "scope.design-boundary"
+      ],
+      "evidence": [],
+      "supports": [],
+      "claims": [
+        "対象は Claude Code のみに限定する",
+        "他の AI ツールへの移植・拡張は明示的に範囲外とする"
+      ],
+      "negates": [],
+      "acceptance": [],
+      "rationale": "ユーザーの『ClaudeCodeだけでいい』という指摘通り、対象を絞ることで深度を上げ、Spec Kit との統合も Claude Code 文脈に集中できる。",
+      "owner": "project",
+      "source": "",
+      "updated": "2026-07-26",
+      "expires": null,
+      "volatile": false,
+      "body": "本プロジェクトの対象は **Claude Code のみ** に限定する。\n\n## 範囲内\n\n- Claude Code のハーネス要素（CLAUDE.md/Skills/Hooks/Subagents/MCP/Plugins/権限）\n- Claude Code における Spec Kit SDD ライフサイクル\n- Claude Code 向けの README ビュー\n\n## 範囲外（明示）\n\n- GitHub Copilot / Cursor / Gemini CLI 等の他 AI ツール\n- 他ツールへの移植ビュー\n- ツール非依存の抽象化レイヤー\n\n## なぜ絞るか\n\n対象を広げると深度が浅くなる。Claude Code に限定することで、Spec Kit 統合・権限体系・ハーネス生成を深く扱える。意味ブロック基盤自体はツール非依存だが、**出力先は Claude Code に固定**する。",
+      "digest": "a4d5b7fb7831b280de9ee76d17ceea5c913e6fa079a9fc142d324cf2b9f6f879"
+    },
+    {
       "id": "decision.markdown-toml",
       "kind": "decision",
       "title": "Markdown本文とTOML前置きを正本にする",
@@ -725,6 +764,48 @@
       "volatile": false,
       "body": "「リアルな対話」とは、生成したハーネス設定と README を実際に読み込ませた Claude Code セッションで、**代表ペルソナの典型タスク**を実施したときの振る舞いを指す。\n\n## 含むもの\n\n- ペルソナ（A/B/C）の典型タスクをセッションで再現すること\n- AI の最初の応答に目的・禁止事項・次の一手が反映されているか\n- 禁止事項が Hooks または `deny` で機械的に守られるか\n- 人間向けビューで何を渡しているか俯瞰できるか\n\n## 含まないもの\n\n- 「なんとなく自然に話せた」等の主観\n- サンプルサイズ1の印象\n- 本番環境以外での再現のない成果\n\n## 観察の記録\n\n対話観察の結果は `evidence` 種別の意味ブロックとして残す。これにより、再現性・回帰検出・根拠提示が可能になる。\n\n## なぜ定義が必要か\n\n「リアルな対話品質」を主観のまま放置すると、整備が思い込みにすり替わる。用語を固定することで、何を測るかを共通にする。",
       "digest": "e9034a4cb1695b42849df4928b4ff4ed3081e11a525b6a591464faa8f870ac84"
+    },
+    {
+      "id": "deliverable.explanation-slides",
+      "kind": "scope",
+      "title": "説明資料：HTML スライドと台本",
+      "summary": "Spec Kit と Claude Code ハーネスの仕組みを、詳しい人向け・詳しくない人向けの2種類のHTMLスライドと、説明時のスクリプト（台本）として提供する。",
+      "order": 19,
+      "priority": 30,
+      "audience": [
+        "human"
+      ],
+      "tags": [
+        "説明資料",
+        "スライド",
+        "HTML",
+        "台本",
+        "引き継ぎ"
+      ],
+      "status": "active",
+      "trust": "authoritative",
+      "depends_on": [
+        "decision.claude-code-only",
+        "decision.spec-kit-integration",
+        "guide.claude-code-primitives"
+      ],
+      "evidence": [],
+      "supports": [],
+      "claims": [
+        "Spec Kit / Claude Code ハーネスの説明資料をHTMLスライドで提供する",
+        "詳しい人向けと詳しくない人向けの2種類を用意する",
+        "説明時のスクリプト（台本）を併存させる"
+      ],
+      "negates": [],
+      "acceptance": [],
+      "rationale": "",
+      "owner": "project",
+      "source": "",
+      "updated": "2026-07-26",
+      "expires": null,
+      "volatile": false,
+      "body": "ユーザーの要望に基づき、Spec Kit と Claude Code ハーネスの仕組みを **HTML スライド** で提供する。\n\n## 提供物\n\n| 対象 | 形式 | ファイル |\n|---|---|---|\n| 詳しい人（エンジニア・Claude Code 利用経験者） | HTML スライド | `slides/for-engineers.html` |\n| 詳しくない人（非エンジニア・初学者） | HTML スライド | `slides/for-beginners.html` |\n| 台本（説明時のスクリプト） | Markdown | `slides/script.md` |\n\n## 2種類の違い\n\n### 詳しい人向け\n- Claude Code / Spec Kit の前提知識を仮定\n- アーキテクチャ・ライフサイクル・権限体系を深く\n- コード例・ファイル配置・移行手順を含む\n\n### 詳しくない人向け\n- AI エージェント・ハーネスの前提から解説\n- 専門用語は避け、比喩と図解を多用\n- 「何が嬉しいか」「何が変わるか」に集中\n\n## HTML スライドの要件\n\n- 単一の自己完結型 HTML ファイル\n- 図解・構造・視覚表現を限界まで活用\n- `context-to-html` スキルの基準に準拠\n- レスポンシブ対応（スマホ・PC 両方で見える）\n\n## 台本の要件\n\n- 各スライドに対応する話す内容\n- 想定質問と回答例\n- 所要時間の目安",
+      "digest": "b85b1a4369d7c9df448effbc59e428c3e4558594336aeb96f7a1c116082ba288"
     },
     {
       "id": "evidence.retrieval-benchmark",

@@ -9,13 +9,13 @@
 
 | 項目 | 値 |
 |---|---:|
-| 有効な意味ブロック | 49 |
-| 推定ソーストークン | 17,772 |
+| 有効な意味ブロック | 51 |
+| 推定ソーストークン | 18,598 |
 | 最新ソース更新日 | 2026-07-26 |
-| リポジトリ指紋 | `782162c127b2bd6bd148` |
+| リポジトリ指紋 | `ee14c773b707cbc86bca` |
 | 生成規約 | `型付き意味ブロックから生成。README.md は直接編集しない。` |
 
-<!-- mfr:manifest {"active_blocks":49,"block_ids":["thesis.frictionless-ai-handoff","purpose.meaning","scope.entry","scope.design-boundary","scope.personas","scope.explanation-vs-generation","scope.readers","scope.artifact","definition.real-conversation","non_goal.length","non_goal.omniscience","definition.meaning","definition.context-contract","principle.progressive-disclosure","principle.typed-claims","principle.fail-closed","assumption.readme-interface","constraint.truth","constraint.boundary","constraint.provenance","constraint.update-safety","constraint.permission-scope","constraint.real-conversation-quality","decision.markdown-toml","decision.observation-format","decision.no-single-score","decision.spec-kit-integration","decision.self-hosting","architecture.pipeline","guide.claude-code-primitives","architecture.semantic-graph","guide.spec-kit","architecture.context-packer","procedure.author","procedure.review","procedure.build","procedure.context","procedure.release","evidence.self-host-build","evidence.retrieval-benchmark","risk.prompt-injection","risk.context-overflow","risk.stale-truth","example.quickstart","example.typed-block","glossary.core","roadmap.v1","faq.longest","changelog.v1"],"estimated_source_tokens":17772,"latest_source_update":"2026-07-26","project":"Meaning First README","repository_digest":"782162c127b2bd6bd148070259b6381c58cd5e4de4055e5a1a1e5ce04d3d18aa","schema_version":1} -->
+<!-- mfr:manifest {"active_blocks":51,"block_ids":["thesis.frictionless-ai-handoff","purpose.meaning","scope.entry","scope.design-boundary","scope.personas","scope.explanation-vs-generation","deliverable.explanation-slides","scope.readers","scope.artifact","definition.real-conversation","non_goal.length","non_goal.omniscience","definition.meaning","definition.context-contract","principle.progressive-disclosure","principle.typed-claims","principle.fail-closed","assumption.readme-interface","constraint.truth","constraint.boundary","constraint.provenance","constraint.update-safety","constraint.permission-scope","constraint.real-conversation-quality","decision.markdown-toml","decision.observation-format","decision.no-single-score","decision.spec-kit-integration","decision.claude-code-only","decision.self-hosting","architecture.pipeline","guide.claude-code-primitives","architecture.semantic-graph","guide.spec-kit","architecture.context-packer","procedure.author","procedure.review","procedure.build","procedure.context","procedure.release","evidence.self-host-build","evidence.retrieval-benchmark","risk.prompt-injection","risk.context-overflow","risk.stale-truth","example.quickstart","example.typed-block","glossary.core","roadmap.v1","faq.longest","changelog.v1"],"estimated_source_tokens":18598,"latest_source_update":"2026-07-26","project":"Meaning First README","repository_digest":"ee14c773b707cbc86bca7575659c1799a57e1a47ceb066efae5fa41fcf3bbded","schema_version":1} -->
 
 ## 目次
 
@@ -27,6 +27,7 @@
   - [v1 の設計境界：作り出さず、範囲を固定する](#v1 の設計境界：作り出さず、範囲を固定する)
   - [中心ペルソナの典型タスク](#中心ペルソナの典型タスク)
   - [「生成しない」と「説明しない」は別物](#「生成しない」と「説明しない」は別物)
+  - [説明資料：HTML スライドと台本](#説明資料：HTML スライドと台本)
   - [対象読者と利用主体](#対象読者と利用主体)
   - [成果物の範囲](#成果物の範囲)
 - [非目的](#非目的)
@@ -54,6 +55,7 @@
   - [対話観察の記録フォーマット](#対話観察の記録フォーマット)
   - [「意味スコア」一個で合否を決めない](#「意味スコア」一個で合否を決めない)
   - [Spec Kit との関係：意味ブロックを Constitution/Spec に接続](#Spec Kit との関係：意味ブロックを Constitution/Spec に接続)
+  - [Claude Code に限定する](#Claude Code に限定する)
   - [プロジェクト自身のREADMEを自身で生成する](#プロジェクト自身のREADMEを自身で生成する)
 - [構造](#構造)
   - [意味を壊さないビルドパイプライン](#意味を壊さないビルドパイプライン)
@@ -317,6 +319,50 @@ python -m meaning_first_readme validate
 これらは `roadmap` と連動して整備する。
 
 <!-- /mfr:block scope.explanation-vs-generation -->
+
+<!-- mfr:block {"digest":"b85b1a4369d7c9df","id":"deliverable.explanation-slides","kind":"scope","priority":30,"status":"active"} -->
+### 説明資料：HTML スライドと台本
+
+> Spec Kit と Claude Code ハーネスの仕組みを、詳しい人向け・詳しくない人向けの2種類のHTMLスライドと、説明時のスクリプト（台本）として提供する。
+
+<sub>`deliverable.explanation-slides` · 種別: `scope` · 優先度: `30` · 信頼区分: `authoritative` · 対象: `human` · 更新: `2026-07-26` · 依存: `decision.claude-code-only`, `decision.spec-kit-integration`, `guide.claude-code-primitives`</sub>
+
+ユーザーの要望に基づき、Spec Kit と Claude Code ハーネスの仕組みを **HTML スライド** で提供する。
+
+## 提供物
+
+| 対象 | 形式 | ファイル |
+|---|---|---|
+| 詳しい人（エンジニア・Claude Code 利用経験者） | HTML スライド | `slides/for-engineers.html` |
+| 詳しくない人（非エンジニア・初学者） | HTML スライド | `slides/for-beginners.html` |
+| 台本（説明時のスクリプト） | Markdown | `slides/script.md` |
+
+## 2種類の違い
+
+### 詳しい人向け
+- Claude Code / Spec Kit の前提知識を仮定
+- アーキテクチャ・ライフサイクル・権限体系を深く
+- コード例・ファイル配置・移行手順を含む
+
+### 詳しくない人向け
+- AI エージェント・ハーネスの前提から解説
+- 専門用語は避け、比喩と図解を多用
+- 「何が嬉しいか」「何が変わるか」に集中
+
+## HTML スライドの要件
+
+- 単一の自己完結型 HTML ファイル
+- 図解・構造・視覚表現を限界まで活用
+- `context-to-html` スキルの基準に準拠
+- レスポンシブ対応（スマホ・PC 両方で見える）
+
+## 台本の要件
+
+- 各スライドに対応する話す内容
+- 想定質問と回答例
+- 所要時間の目安
+
+<!-- /mfr:block deliverable.explanation-slides -->
 
 <!-- mfr:block {"digest":"840ab5128fe8bae0","id":"scope.readers","kind":"scope","priority":95,"status":"active"} -->
 ### 対象読者と利用主体
@@ -879,6 +925,35 @@ Spec Kit 自体の説明は `guide.spec-kit`（別ブロック）に譲る。
 **判断理由:** ユーザーの『まず要件定義しない？Spec Kit 入れて』という指摘通り、意味ブロック単体では要件定義の工程順序がなく、Spec Kit がその欠けを埋める。意味ブロックは『正本』、Spec Kit は『工程』。
 
 <!-- /mfr:block decision.spec-kit-integration -->
+
+<!-- mfr:block {"digest":"a4d5b7fb7831b280","id":"decision.claude-code-only","kind":"decision","priority":30,"status":"active"} -->
+### Claude Code に限定する
+
+> 他の AI ツール（Copilot/Cursor/Gemini 等）への拡張は行わず、Claude Code のみを対象とする。
+
+<sub>`decision.claude-code-only` · 種別: `decision` · 優先度: `30` · 信頼区分: `authoritative` · 対象: `human` · 更新: `2026-07-26` · 依存: `thesis.frictionless-ai-handoff`, `scope.design-boundary`</sub>
+
+本プロジェクトの対象は **Claude Code のみ** に限定する。
+
+## 範囲内
+
+- Claude Code のハーネス要素（CLAUDE.md/Skills/Hooks/Subagents/MCP/Plugins/権限）
+- Claude Code における Spec Kit SDD ライフサイクル
+- Claude Code 向けの README ビュー
+
+## 範囲外（明示）
+
+- GitHub Copilot / Cursor / Gemini CLI 等の他 AI ツール
+- 他ツールへの移植ビュー
+- ツール非依存の抽象化レイヤー
+
+## なぜ絞るか
+
+対象を広げると深度が浅くなる。Claude Code に限定することで、Spec Kit 統合・権限体系・ハーネス生成を深く扱える。意味ブロック基盤自体はツール非依存だが、**出力先は Claude Code に固定**する。
+
+**判断理由:** ユーザーの『ClaudeCodeだけでいい』という指摘通り、対象を絞ることで深度を上げ、Spec Kit との統合も Claude Code 文脈に集中できる。
+
+<!-- /mfr:block decision.claude-code-only -->
 
 <!-- mfr:block {"digest":"abae090eca438c2f","id":"decision.self-hosting","kind":"decision","priority":86,"status":"active"} -->
 ### プロジェクト自身のREADMEを自身で生成する
@@ -1602,7 +1677,7 @@ IDは表示順ではなく概念へ結び付ける。本文を移動してもID�
 ```json
 {
   "schema_version": 1,
-  "repository_digest": "782162c127b2bd6bd148070259b6381c58cd5e4de4055e5a1a1e5ce04d3d18aa",
+  "repository_digest": "ee14c773b707cbc86bca7575659c1799a57e1a47ceb066efae5fa41fcf3bbded",
   "blocks": [
     {
       "id": "thesis.frictionless-ai-handoff",
@@ -1828,6 +1903,47 @@ IDは表示順ではなく概念へ結び付ける。本文を移動してもID�
       "expires": null,
       "volatile": false,
       "digest": "bc655661c53530e489311a68e7236bdb87c851b1248ac8eeb7189c6ad88f0ca7"
+    },
+    {
+      "id": "deliverable.explanation-slides",
+      "kind": "scope",
+      "title": "説明資料：HTML スライドと台本",
+      "summary": "Spec Kit と Claude Code ハーネスの仕組みを、詳しい人向け・詳しくない人向けの2種類のHTMLスライドと、説明時のスクリプト（台本）として提供する。",
+      "order": 19,
+      "priority": 30,
+      "audience": [
+        "human"
+      ],
+      "tags": [
+        "説明資料",
+        "スライド",
+        "HTML",
+        "台本",
+        "引き継ぎ"
+      ],
+      "status": "active",
+      "trust": "authoritative",
+      "depends_on": [
+        "decision.claude-code-only",
+        "decision.spec-kit-integration",
+        "guide.claude-code-primitives"
+      ],
+      "evidence": [],
+      "supports": [],
+      "claims": [
+        "Spec Kit / Claude Code ハーネスの説明資料をHTMLスライドで提供する",
+        "詳しい人向けと詳しくない人向けの2種類を用意する",
+        "説明時のスクリプト（台本）を併存させる"
+      ],
+      "negates": [],
+      "acceptance": [],
+      "rationale": "",
+      "owner": "project",
+      "source": "",
+      "updated": "2026-07-26",
+      "expires": null,
+      "volatile": false,
+      "digest": "b85b1a4369d7c9df448effbc59e428c3e4558594336aeb96f7a1c116082ba288"
     },
     {
       "id": "scope.readers",
@@ -2599,6 +2715,44 @@ IDは表示順ではなく概念へ結び付ける。本文を移動してもID�
       "expires": null,
       "volatile": false,
       "digest": "c3341e190ffee5fa8ca4a5ecb17aeb9156af0bf3b03bb456db240ed509591ae3"
+    },
+    {
+      "id": "decision.claude-code-only",
+      "kind": "decision",
+      "title": "Claude Code に限定する",
+      "summary": "他の AI ツール（Copilot/Cursor/Gemini 等）への拡張は行わず、Claude Code のみを対象とする。",
+      "order": 82,
+      "priority": 30,
+      "audience": [
+        "human"
+      ],
+      "tags": [
+        "決定",
+        "ClaudeCode",
+        "スコープ",
+        "限定"
+      ],
+      "status": "active",
+      "trust": "authoritative",
+      "depends_on": [
+        "thesis.frictionless-ai-handoff",
+        "scope.design-boundary"
+      ],
+      "evidence": [],
+      "supports": [],
+      "claims": [
+        "対象は Claude Code のみに限定する",
+        "他の AI ツールへの移植・拡張は明示的に範囲外とする"
+      ],
+      "negates": [],
+      "acceptance": [],
+      "rationale": "ユーザーの『ClaudeCodeだけでいい』という指摘通り、対象を絞ることで深度を上げ、Spec Kit との統合も Claude Code 文脈に集中できる。",
+      "owner": "project",
+      "source": "",
+      "updated": "2026-07-26",
+      "expires": null,
+      "volatile": false,
+      "digest": "a4d5b7fb7831b280de9ee76d17ceea5c913e6fa079a9fc142d324cf2b9f6f879"
     },
     {
       "id": "decision.self-hosting",
