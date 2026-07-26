@@ -1,32 +1,38 @@
-# PR: Build Meaning First README v1 from a clean design
+# PR: Meaning First README v1
 
-## Purpose
+## 1行で言うと
 
-READMEの成功条件を文字数から判断再現性へ移し、人間とAIが同じ目的・境界・根拠・次の行動を共有できる基盤を新規構築する。
+READMEの成功条件を「長さ」から「意味の再現」へ移す、依存ゼロの意味ブロック・コンパイラ基盤。
 
-## What changed
+## レビュー経路（この順だけ見れば足りる）
 
-- 型付きMarkdown/TOML意味ブロック。
-- 決定論的なREADME自己ホスト生成。
-- 参照、循環、根拠、期限、矛盾、重複の検証。
-- トークン予算付きタスク文脈コンパイラ。
-- 外部未信頼データの隔離。
-- 単一スコアを使わない品質監査。
-- タスク別検索ベンチマーク。
-- 意味スナップショットと差分。
-- 標準ライブラリのみのCLI。
-- テスト、CI、セキュリティ方針、執筆・公開手順。
+1. `docs/START_HERE.md`
+2. `content/blocks/001-purpose.md`
+3. `release/VALIDATION_REPORT.md`
+4. CI の `meaning-quality` が green か
 
-## Validation
+詳細ファイル全部を最初から読む必要はない。
 
-検証結果は`release/VALIDATION_REPORT.md`と`build/`に保存する。
+## 何が入っているか
 
-## Known limitations
+- 型付き意味ブロック → 決定論的 README 生成
+- 検証 / 監査 / タスク文脈 / ベンチマーク / 意味差分
+- 標準ライブラリのみの CLI（`python -m meaning_first_readme`）
 
-- 日本語検索は依存ゼロの2文字・3文字特徴であり、形態素解析や埋め込みほど暗黙的な同義語に強くない。
-- プロンプトインジェクション検査は補助であり、利用側の信頼境界と権限規則を置き換えない。
-- 外部URLの実在性や鮮度は、ネットワークを使わない基準実装では確認しない。
+## 検証の見方
 
-## Final approval boundary
+| 見たいこと | 場所 |
+|---|---|
+| ゲート合否 | `release/VALIDATION_REPORT.md` |
+| 生成物 | `README.md`, `build/` |
+| 変更意図 | この PR 本文の Summary |
 
-このブランチ、コミット、PR本文は承認前に準備できる。リモート送信とPR作成は、権限を持つ人間が明示的に「出す」と指示した後にのみ行う。
+## 既知の限界
+
+- 日本語検索は N-gram（同義語に弱い）
+- 注入検査は補助（信頼境界の代替ではない）
+- 外部 URL 到達性は未検証
+
+## 公開境界
+
+Draft のまま整備・検証してよい。Ready / merge は人間の明示承認後。

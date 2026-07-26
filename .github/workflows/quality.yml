@@ -21,11 +21,16 @@ jobs:
       - name: Validate, build, audit, benchmark, and test
         env:
           PYTHONPATH: src
-        run: ./scripts/quality.sh
+        run: bash scripts/quality.sh
       - name: Verify generated artifacts are committed
         run: git diff --exit-code -- README.md build/
       - name: Build wheel
         if: matrix.python-version == '3.13'
         env:
           PYTHONPATH: src
-        run: make package
+        run: |
+          rm -rf dist src/meaning_first_readme.egg-info
+          python -m pip wheel . --no-deps --no-build-isolation -w dist
+          python -m pip install --no-deps dist/*.whl
+          python -m meaning_first_readme --project content/project.toml validate
+

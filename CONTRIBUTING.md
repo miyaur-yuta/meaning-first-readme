@@ -1,5 +1,7 @@
 # Contributing
 
+初めて触る人は先に [`docs/START_HERE.md`](docs/START_HERE.md) を読んでください。
+
 このリポジトリでは、文章量ではなく**意味の変化**をレビューします。`README.md`は生成物です。直接編集せず、`content/blocks/*.md`を変更してください。
 
 ## 変更の最小単位
