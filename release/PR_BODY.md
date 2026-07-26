@@ -24,10 +24,12 @@ README を「正しく書く」ための道具ではない。README を含む **
 **作る:** 意味ブロック管理、README 生成・検証・監査・ベンチマーク、コンテキスト/差分/スナップショット、自己ホスト
 
 **作らない（明示的に範囲外）:**
-- CLAUDE.md / Skills / Hooks / Subagents / MCP 設定の生成
-- 権限設定（`settings.json` 系）の生成
+- CLAUDE.md / Skills / Hooks / Subagents / MCP 設定の**自動生成機能**
+- 権限設定（`settings.json` 系）の**自動生成機能**
 - 対話観察の自動化パイプライン
 - ペルソナ全網羅検査
+
+> **注:** 生成機能が範囲外でも、概念・使い方・最小構成の**説明**は提供します（[`scope.explanation-vs-generation`](https://github.com/miyaur-yuta/meaning-first-readme/blob/release/v1.0.0/content/blocks/018-scope-explanation-vs-generation.md) / [`guide.claude-code-primitives`](https://github.com/miyaur-yuta/meaning-first-readme/blob/release/v1.0.0/content/blocks/090-guide-primitives.md)）。
 
 ---
 
