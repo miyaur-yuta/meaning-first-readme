@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "repository_digest": "ee14c773b707cbc86bca7575659c1799a57e1a47ceb066efae5fa41fcf3bbded",
+  "repository_digest": "55b62377e2f4e74faba7753fdd8f521b7003fe297a9045eb79ce9e7c3c36e38d",
   "blocks": [
     {
       "id": "architecture.context-packer",
@@ -1825,8 +1825,8 @@
       "updated": "2026-07-26",
       "expires": null,
       "volatile": false,
-      "body": "ひとことで言うと: Claude Code ハーネス（CLAUDE.md, Skills, Hooks, Subagents, MCP）への引き渡し摩擦を、意味ブロックから限界まで減らすツール。v1 は README ビューのみ。\n\nレビューや初見で、最初に全部の章を読む必要はない。\n\n1. 入口: [`docs/START_HERE.md`](docs/START_HERE.md)\n2. 目的の正本: [`content/blocks/001-purpose.md`](content/blocks/001-purpose.md)\n3. 思想: [`content/blocks/002-thesis-frictionless.md`](content/blocks/002-thesis-frictionless.md)\n4. 検証結果: [`release/VALIDATION_REPORT.md`](release/VALIDATION_REPORT.md)\n\nローカル確認は次の3コマンドで足りる。\n\n```bash\nexport PYTHONPATH=src\npython -m meaning_first_readme doctor\npython -m meaning_first_readme validate\n```\n\n`README.md` は生成物なので直接編集しない。変更は `content/blocks/` に入れる。",
-      "digest": "937a7eab0dff28c1bb5b97993a854020fc694ed446bb63881dc1a37134c55fc5"
+      "body": "ひとことで言うと: Claude Code ハーネス（CLAUDE.md, Skills, Hooks, Subagents, MCP）への引き渡し摩擦を、意味ブロックから限界まで減らすツール。v1 は README ビューのみ。\n\nレビューや初見で、最初に全部の章を読む必要はない。\n\n1. 入口: [`docs/START_HERE.md`](docs/START_HERE.md)\n2. 目的の正本: [`content/blocks/001-purpose.md`](content/blocks/001-purpose.md)\n3. 思想: [`content/blocks/002-thesis-frictionless.md`](content/blocks/002-thesis-frictionless.md)\n4. 検証結果: [`release/VALIDATION_REPORT.md`](release/VALIDATION_REPORT.md)\n5. 説明資料（HTML スライド + 台本）: [`slides/`](slides/)\n   - 詳しくない人向け: [`slides/for-beginners.html`](slides/for-beginners.html)\n   - 詳しい人向け: [`slides/for-engineers.html`](slides/for-engineers.html)\n   - 説明台本: [`slides/script.md`](slides/script.md)\n\nローカル確認は次の3コマンドで足りる。\n\n```bash\nexport PYTHONPATH=src\npython -m meaning_first_readme doctor\npython -m meaning_first_readme validate\n```\n\n`README.md` は生成物なので直接編集しない。変更は `content/blocks/` に入れる。",
+      "digest": "c1c5a96c9efa6b14167043d05c7c1e7bd0729ea19d92f14ec60a7c6c7ec672d1"
     },
     {
       "id": "scope.explanation-vs-generation",
