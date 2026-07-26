@@ -162,66 +162,66 @@ def command_doctor(args: argparse.Namespace) -> int:
 def make_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(
         prog="mfr",
-        description="Compile and verify README files whose success criterion is preserved meaning.",
+        description="意味を壊さない README を生成・検証する。長いことより、判断を取り違えないことが成功条件。",
     )
     parser.add_argument(
         "--project",
         default="content/project.toml",
-        help="path to project.toml (default: content/project.toml)",
+        help="project.toml のパス（既定: content/project.toml）",
     )
     sub = parser.add_subparsers(dest="command", required=True)
 
-    build = sub.add_parser("build", help="compile the canonical README")
+    build = sub.add_parser("build", help="正本の README を生成する")
     build.add_argument("--output", default="README.md")
     build.add_argument("--manifest", default="build/manifest.json")
-    build.add_argument("--allow-invalid", action="store_true")
+    build.add_argument("--allow-invalid", action="store_true", help="検証エラーがあっても生成を続ける")
     build.set_defaults(func=command_build)
 
-    validate = sub.add_parser("validate", help="run structural and semantic validation")
-    validate.add_argument("--json", action="store_true")
+    validate = sub.add_parser("validate", help="構造と意味の検証を行う")
+    validate.add_argument("--json", action="store_true", help="結果を JSON で出す")
     validate.set_defaults(func=command_validate)
 
-    context = sub.add_parser("context", help="compile task-specific context within a token budget")
-    context.add_argument("--task", required=True)
-    context.add_argument("--tokens", type=int, default=8000)
-    context.add_argument("--audience", choices=("human", "ai"), default="ai")
-    context.add_argument("--output")
+    context = sub.add_parser("context", help="トークン予算内でタスク向け文脈を組み立てる")
+    context.add_argument("--task", required=True, help="今やりたいこと（検索クエリ）")
+    context.add_argument("--tokens", type=int, default=8000, help="トークン予算")
+    context.add_argument("--audience", choices=("human", "ai"), default="ai", help="想定読者")
+    context.add_argument("--output", help="出力ファイル（省略時は標準出力）")
     context.set_defaults(func=command_context)
 
-    audit = sub.add_parser("audit", help="evaluate non-gamified quality dimensions and gates")
+    audit = sub.add_parser("audit", help="単一スコアにしない品質監査を行う")
     audit.add_argument("--format", choices=("json", "markdown"), default="markdown")
-    audit.add_argument("--output")
+    audit.add_argument("--output", help="出力ファイル")
     audit.set_defaults(func=command_audit)
 
-    benchmark = sub.add_parser("benchmark", help="measure context retrieval against expected blocks")
-    benchmark.add_argument("--cases", default="benchmarks/tasks.json")
+    benchmark = sub.add_parser("benchmark", help="期待ブロックを拾えるか検索ベンチを測る")
+    benchmark.add_argument("--cases", default="benchmarks/tasks.json", help="ベンチケース JSON")
     benchmark.add_argument("--format", choices=("json", "markdown"), default="markdown")
-    benchmark.add_argument("--output")
+    benchmark.add_argument("--output", help="出力ファイル")
     benchmark.set_defaults(func=command_benchmark)
 
-    snapshot = sub.add_parser("snapshot", help="write a semantic snapshot")
+    snapshot = sub.add_parser("snapshot", help="意味スナップショットを書き出す")
     snapshot.add_argument("--output", default="build/snapshot.json")
     snapshot.set_defaults(func=command_snapshot)
 
-    diff = sub.add_parser("diff", help="compare semantic snapshots")
-    diff.add_argument("left")
-    diff.add_argument("right")
+    diff = sub.add_parser("diff", help="意味スナップショットを比較する")
+    diff.add_argument("left", help="比較元スナップショット")
+    diff.add_argument("right", help="比較先スナップショット")
     diff.add_argument("--format", choices=("json", "markdown"), default="markdown")
-    diff.add_argument("--fail-on-change", action="store_true")
+    diff.add_argument("--fail-on-change", action="store_true", help="差分があれば終了コード 1")
     diff.set_defaults(func=command_diff)
 
-    explain = sub.add_parser("explain", help="show a block and its graph neighborhood")
-    explain.add_argument("block_id")
+    explain = sub.add_parser("explain", help="ブロックとその依存関係を表示する")
+    explain.add_argument("block_id", help="ブロック ID")
     explain.set_defaults(func=command_explain)
 
-    query = sub.add_parser("query", help="rank blocks for a task without compiling context")
-    query.add_argument("text")
+    query = sub.add_parser("query", help="文脈生成せずに関連ブロックを順位付けする")
+    query.add_argument("text", help="検索テキスト")
     query.add_argument("--audience", choices=("human", "ai"), default="ai")
-    query.add_argument("--limit", type=int, default=10)
-    query.add_argument("--verbose", action="store_true")
+    query.add_argument("--limit", type=int, default=10, help="表示件数")
+    query.add_argument("--verbose", action="store_true", help="スコア理由も出す")
     query.set_defaults(func=command_query)
 
-    doctor = sub.add_parser("doctor", help="inspect the repository and runtime")
+    doctor = sub.add_parser("doctor", help="実行環境とリポジトリを点検する")
     doctor.set_defaults(func=command_doctor)
     return parser
 
