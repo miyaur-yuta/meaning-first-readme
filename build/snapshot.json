@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "repository_digest": "d1aad522ef29a020249840a114d332d00f1bd6e782553ef6bd6fc6f1cb310a9f",
+  "repository_digest": "c6ba7333546e442fdaab9d46fcac5546be741b0f2774af964b067f1b063603ff",
   "blocks": [
     {
       "id": "architecture.context-packer",
@@ -494,6 +494,45 @@
       "volatile": false,
       "body": "監査は次の次元を独立して報告する。\n\n- 必須構造が揃っているか。\n- 事実と判断が根拠へ接続されているか。\n- 手順に受け入れ条件があるか。\n- 揮発情報が有効期限内か。\n- 目的から意味グラフ全体へ到達できるか。\n- 曖昧な保留語、参照切れ、矛盾、重複がないか。\n- タスク別文脈が期待ブロックを回収できるか。\n\n総合点は表示しない。どの次元が失敗したかを直接修正できる出力を優先する。",
       "digest": "362c0b708471634338e1fc0024bbc9f8324c93c0f3377fdfed66d8c1cab9ce91"
+    },
+    {
+      "id": "decision.observation-format",
+      "kind": "decision",
+      "title": "対話観察の記録フォーマット",
+      "summary": "ペルソナ別典型タスクの対話観察を evidence ブロックとして残すための標準フォーマットを定める。",
+      "order": 80,
+      "priority": 58,
+      "audience": [
+        "human"
+      ],
+      "tags": [
+        "観察",
+        "evidence",
+        "フォーマット",
+        "決定"
+      ],
+      "status": "active",
+      "trust": "reviewed",
+      "depends_on": [
+        "scope.personas",
+        "definition.real-conversation",
+        "constraint.real-conversation-quality"
+      ],
+      "evidence": [],
+      "supports": [],
+      "claims": [
+        "対話観察は標準フォーマットで evidence ブロックに記録する"
+      ],
+      "negates": [],
+      "acceptance": [],
+      "rationale": "フォーマットが固定されていないと観察の蓄積と比較ができず、回帰検出が主観にすり替わる。",
+      "owner": "project",
+      "source": "",
+      "updated": "2026-07-26",
+      "expires": null,
+      "volatile": false,
+      "body": "「リアルな対話品質」を回帰検出可能にするため、対話観察は `evidence` 種別の意味ブロックとして記録する。フォーマットを固定することで、蓄積と比較を可能にする。\n\n## フロントマター\n\n```toml\n+++\nid = \"evidence.observation.<連番>-<persona>\"\nkind = \"evidence\"\ntitle = \"対話観察：<ペルソナ> / <タスク>\"\nsummary = \"1行で結果。成功か失敗かを含む。\"\norder = <連番>\npriority = 40\naudience = [\"human\"]\ntags = [\"観察\", \"evidence\", \"<persona>\"]\nstatus = \"active\"\ntrust = \"observed\"\ndepends_on = [\"scope.personas\", \"<関連ブロック>\"]\nclaims = [\"<観察から導かれる主張>\"]\nowner = \"project\"\nupdated = \"<YYYY-MM-DD>\"\n+++\n```\n\n## 本文\n\n本文は次の4セクションを含む。\n\n### 条件\n- 日時、Claude Code バージョン、モデル、対象コミット\n\n### セッション記録\n- プロンプトと応答の要点（全文ではなく要点で良い）\n- 目的・禁止事項・次の一手が反映されたか\n\n### 結果\n- 成功基準（`scope.personas` で定義）に対する合否\n- 失敗時は失敗モード（`constraint.real-conversation-quality` 参照）を明示\n\n### 次の改善\n- 失敗した場合、どのブロックを変えれば再発を防げるか\n- 成功した場合、再現性を上げるためのメモ\n\n## 運用ルール\n\n- サンプルサイズ1で判定しない（少なくとも2回の観察で傾向を扱う）\n- 主観表現（「良かった」「自然だった」）は避け、観察事実を書く\n- `trust=\"observed\"` を必ず付ける（事実であることの明示）\n- 失敗観察も等しく残す（隠さない）\n\nこのフォーマットは v1 の範囲外（観察自動化）に属するが、手動観察から使えるように v1 で導入する。",
+      "digest": "e419f662b491a96f0babf73f5455ae8b1fcbfa0f330c4d40f53cf5f487d5093d"
     },
     {
       "id": "decision.self-hosting",

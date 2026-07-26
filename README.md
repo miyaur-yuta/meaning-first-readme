@@ -9,13 +9,13 @@
 
 | 項目 | 値 |
 |---|---:|
-| 有効な意味ブロック | 44 |
-| 推定ソーストークン | 13,963 |
+| 有効な意味ブロック | 45 |
+| 推定ソーストークン | 14,565 |
 | 最新ソース更新日 | 2026-07-26 |
-| リポジトリ指紋 | `d1aad522ef29a0202498` |
+| リポジトリ指紋 | `c6ba7333546e442fdaab` |
 | 生成規約 | `型付き意味ブロックから生成。README.md は直接編集しない。` |
 
-<!-- mfr:manifest {"active_blocks":44,"block_ids":["thesis.frictionless-ai-handoff","purpose.meaning","scope.entry","scope.design-boundary","scope.personas","scope.readers","scope.artifact","definition.real-conversation","non_goal.length","non_goal.omniscience","definition.meaning","definition.context-contract","principle.progressive-disclosure","principle.typed-claims","principle.fail-closed","assumption.readme-interface","constraint.truth","constraint.boundary","constraint.provenance","constraint.update-safety","constraint.permission-scope","constraint.real-conversation-quality","decision.markdown-toml","decision.no-single-score","decision.self-hosting","architecture.pipeline","architecture.semantic-graph","architecture.context-packer","procedure.author","procedure.review","procedure.build","procedure.context","procedure.release","evidence.self-host-build","evidence.retrieval-benchmark","risk.prompt-injection","risk.context-overflow","risk.stale-truth","example.quickstart","example.typed-block","glossary.core","roadmap.v1","faq.longest","changelog.v1"],"estimated_source_tokens":13963,"latest_source_update":"2026-07-26","project":"Meaning First README","repository_digest":"d1aad522ef29a020249840a114d332d00f1bd6e782553ef6bd6fc6f1cb310a9f","schema_version":1} -->
+<!-- mfr:manifest {"active_blocks":45,"block_ids":["thesis.frictionless-ai-handoff","purpose.meaning","scope.entry","scope.design-boundary","scope.personas","scope.readers","scope.artifact","definition.real-conversation","non_goal.length","non_goal.omniscience","definition.meaning","definition.context-contract","principle.progressive-disclosure","principle.typed-claims","principle.fail-closed","assumption.readme-interface","constraint.truth","constraint.boundary","constraint.provenance","constraint.update-safety","constraint.permission-scope","constraint.real-conversation-quality","decision.markdown-toml","decision.observation-format","decision.no-single-score","decision.self-hosting","architecture.pipeline","architecture.semantic-graph","architecture.context-packer","procedure.author","procedure.review","procedure.build","procedure.context","procedure.release","evidence.self-host-build","evidence.retrieval-benchmark","risk.prompt-injection","risk.context-overflow","risk.stale-truth","example.quickstart","example.typed-block","glossary.core","roadmap.v1","faq.longest","changelog.v1"],"estimated_source_tokens":14565,"latest_source_update":"2026-07-26","project":"Meaning First README","repository_digest":"c6ba7333546e442fdaab9d46fcac5546be741b0f2774af964b067f1b063603ff","schema_version":1} -->
 
 ## 目次
 
@@ -50,6 +50,7 @@
   - [整備後にリアルに人間がやり取りする想定の品質を出す](#整備後にリアルに人間がやり取りする想定の品質を出す)
 - [意思決定](#意思決定)
   - [Markdown本文とTOML前置きを正本にする](#Markdown本文とTOML前置きを正本にする)
+  - [対話観察の記録フォーマット](#対話観察の記録フォーマット)
   - [「意味スコア」一個で合否を決めない](#「意味スコア」一個で合否を決めない)
   - [プロジェクト自身のREADMEを自身で生成する](#プロジェクト自身のREADMEを自身で生成する)
 - [構造](#構造)
@@ -688,6 +689,68 @@ Claude Code の権限体系は、単一の設定ファイルでは表現でき�
 
 <!-- /mfr:block decision.markdown-toml -->
 
+<!-- mfr:block {"digest":"e419f662b491a96f","id":"decision.observation-format","kind":"decision","priority":58,"status":"active"} -->
+### 対話観察の記録フォーマット
+
+> ペルソナ別典型タスクの対話観察を evidence ブロックとして残すための標準フォーマットを定める。
+
+<sub>`decision.observation-format` · 種別: `decision` · 優先度: `58` · 信頼区分: `reviewed` · 対象: `human` · 更新: `2026-07-26` · 依存: `scope.personas`, `definition.real-conversation`, `constraint.real-conversation-quality`</sub>
+
+「リアルな対話品質」を回帰検出可能にするため、対話観察は `evidence` 種別の意味ブロックとして記録する。フォーマットを固定することで、蓄積と比較を可能にする。
+
+## フロントマター
+
+```toml
++++
+id = "evidence.observation.<連番>-<persona>"
+kind = "evidence"
+title = "対話観察：<ペルソナ> / <タスク>"
+summary = "1行で結果。成功か失敗かを含む。"
+order = <連番>
+priority = 40
+audience = ["human"]
+tags = ["観察", "evidence", "<persona>"]
+status = "active"
+trust = "observed"
+depends_on = ["scope.personas", "<関連ブロック>"]
+claims = ["<観察から導かれる主張>"]
+owner = "project"
+updated = "<YYYY-MM-DD>"
++++
+```
+
+## 本文
+
+本文は次の4セクションを含む。
+
+### 条件
+- 日時、Claude Code バージョン、モデル、対象コミット
+
+### セッション記録
+- プロンプトと応答の要点（全文ではなく要点で良い）
+- 目的・禁止事項・次の一手が反映されたか
+
+### 結果
+- 成功基準（`scope.personas` で定義）に対する合否
+- 失敗時は失敗モード（`constraint.real-conversation-quality` 参照）を明示
+
+### 次の改善
+- 失敗した場合、どのブロックを変えれば再発を防げるか
+- 成功した場合、再現性を上げるためのメモ
+
+## 運用ルール
+
+- サンプルサイズ1で判定しない（少なくとも2回の観察で傾向を扱う）
+- 主観表現（「良かった」「自然だった」）は避け、観察事実を書く
+- `trust="observed"` を必ず付ける（事実であることの明示）
+- 失敗観察も等しく残す（隠さない）
+
+このフォーマットは v1 の範囲外（観察自動化）に属するが、手動観察から使えるように v1 で導入する。
+
+**判断理由:** フォーマットが固定されていないと観察の蓄積と比較ができず、回帰検出が主観にすり替わる。
+
+<!-- /mfr:block decision.observation-format -->
+
 <!-- mfr:block {"digest":"362c0b7084716343","id":"decision.no-single-score","kind":"decision","priority":91,"status":"active"} -->
 ### 「意味スコア」一個で合否を決めない
 
@@ -1199,7 +1262,7 @@ IDは表示順ではなく概念へ結び付ける。本文を移動してもID�
 ```json
 {
   "schema_version": 1,
-  "repository_digest": "d1aad522ef29a020249840a114d332d00f1bd6e782553ef6bd6fc6f1cb310a9f",
+  "repository_digest": "c6ba7333546e442fdaab9d46fcac5546be741b0f2774af964b067f1b063603ff",
   "blocks": [
     {
       "id": "thesis.frictionless-ai-handoff",
@@ -2044,6 +2107,44 @@ IDは表示順ではなく概念へ結び付ける。本文を移動してもID�
       "expires": null,
       "volatile": false,
       "digest": "07ffabc5c471ac4458015a64793ee6ce0d40a5c21aba08057beddcebd89a8cbe"
+    },
+    {
+      "id": "decision.observation-format",
+      "kind": "decision",
+      "title": "対話観察の記録フォーマット",
+      "summary": "ペルソナ別典型タスクの対話観察を evidence ブロックとして残すための標準フォーマットを定める。",
+      "order": 80,
+      "priority": 58,
+      "audience": [
+        "human"
+      ],
+      "tags": [
+        "観察",
+        "evidence",
+        "フォーマット",
+        "決定"
+      ],
+      "status": "active",
+      "trust": "reviewed",
+      "depends_on": [
+        "scope.personas",
+        "definition.real-conversation",
+        "constraint.real-conversation-quality"
+      ],
+      "evidence": [],
+      "supports": [],
+      "claims": [
+        "対話観察は標準フォーマットで evidence ブロックに記録する"
+      ],
+      "negates": [],
+      "acceptance": [],
+      "rationale": "フォーマットが固定されていないと観察の蓄積と比較ができず、回帰検出が主観にすり替わる。",
+      "owner": "project",
+      "source": "",
+      "updated": "2026-07-26",
+      "expires": null,
+      "volatile": false,
+      "digest": "e419f662b491a96f0babf73f5455ae8b1fcbfa0f330c4d40f53cf5f487d5093d"
     },
     {
       "id": "decision.no-single-score",
