@@ -10,12 +10,12 @@
 | 項目 | 値 |
 |---|---:|
 | 有効な意味ブロック | 51 |
-| 推定ソーストークン | 18,598 |
+| 推定ソーストークン | 18,678 |
 | 最新ソース更新日 | 2026-07-26 |
-| リポジトリ指紋 | `ee14c773b707cbc86bca` |
+| リポジトリ指紋 | `55b62377e2f4e74faba7` |
 | 生成規約 | `型付き意味ブロックから生成。README.md は直接編集しない。` |
 
-<!-- mfr:manifest {"active_blocks":51,"block_ids":["thesis.frictionless-ai-handoff","purpose.meaning","scope.entry","scope.design-boundary","scope.personas","scope.explanation-vs-generation","deliverable.explanation-slides","scope.readers","scope.artifact","definition.real-conversation","non_goal.length","non_goal.omniscience","definition.meaning","definition.context-contract","principle.progressive-disclosure","principle.typed-claims","principle.fail-closed","assumption.readme-interface","constraint.truth","constraint.boundary","constraint.provenance","constraint.update-safety","constraint.permission-scope","constraint.real-conversation-quality","decision.markdown-toml","decision.observation-format","decision.no-single-score","decision.spec-kit-integration","decision.claude-code-only","decision.self-hosting","architecture.pipeline","guide.claude-code-primitives","architecture.semantic-graph","guide.spec-kit","architecture.context-packer","procedure.author","procedure.review","procedure.build","procedure.context","procedure.release","evidence.self-host-build","evidence.retrieval-benchmark","risk.prompt-injection","risk.context-overflow","risk.stale-truth","example.quickstart","example.typed-block","glossary.core","roadmap.v1","faq.longest","changelog.v1"],"estimated_source_tokens":18598,"latest_source_update":"2026-07-26","project":"Meaning First README","repository_digest":"ee14c773b707cbc86bca7575659c1799a57e1a47ceb066efae5fa41fcf3bbded","schema_version":1} -->
+<!-- mfr:manifest {"active_blocks":51,"block_ids":["thesis.frictionless-ai-handoff","purpose.meaning","scope.entry","scope.design-boundary","scope.personas","scope.explanation-vs-generation","deliverable.explanation-slides","scope.readers","scope.artifact","definition.real-conversation","non_goal.length","non_goal.omniscience","definition.meaning","definition.context-contract","principle.progressive-disclosure","principle.typed-claims","principle.fail-closed","assumption.readme-interface","constraint.truth","constraint.boundary","constraint.provenance","constraint.update-safety","constraint.permission-scope","constraint.real-conversation-quality","decision.markdown-toml","decision.observation-format","decision.no-single-score","decision.spec-kit-integration","decision.claude-code-only","decision.self-hosting","architecture.pipeline","guide.claude-code-primitives","architecture.semantic-graph","guide.spec-kit","architecture.context-packer","procedure.author","procedure.review","procedure.build","procedure.context","procedure.release","evidence.self-host-build","evidence.retrieval-benchmark","risk.prompt-injection","risk.context-overflow","risk.stale-truth","example.quickstart","example.typed-block","glossary.core","roadmap.v1","faq.longest","changelog.v1"],"estimated_source_tokens":18678,"latest_source_update":"2026-07-26","project":"Meaning First README","repository_digest":"55b62377e2f4e74faba7753fdd8f521b7003fe297a9045eb79ce9e7c3c36e38d","schema_version":1} -->
 
 ## 目次
 
@@ -167,7 +167,7 @@ README は **CLAUDE.md の一部** にすぎない。「README を整備する�
 
 ## 対象範囲
 
-<!-- mfr:block {"digest":"937a7eab0dff28c1","id":"scope.entry","kind":"scope","priority":60,"status":"active"} -->
+<!-- mfr:block {"digest":"c1c5a96c9efa6b14","id":"scope.entry","kind":"scope","priority":60,"status":"active"} -->
 ### 最初の30秒でやること
 
 > 全体を読む前に、ひとこと説明と最短コマンドだけ通す。
@@ -182,6 +182,10 @@ README は **CLAUDE.md の一部** にすぎない。「README を整備する�
 2. 目的の正本: [`content/blocks/001-purpose.md`](content/blocks/001-purpose.md)
 3. 思想: [`content/blocks/002-thesis-frictionless.md`](content/blocks/002-thesis-frictionless.md)
 4. 検証結果: [`release/VALIDATION_REPORT.md`](release/VALIDATION_REPORT.md)
+5. 説明資料（HTML スライド + 台本）: [`slides/`](slides/)
+   - 詳しくない人向け: [`slides/for-beginners.html`](slides/for-beginners.html)
+   - 詳しい人向け: [`slides/for-engineers.html`](slides/for-engineers.html)
+   - 説明台本: [`slides/script.md`](slides/script.md)
 
 ローカル確認は次の3コマンドで足りる。
 
@@ -1677,7 +1681,7 @@ IDは表示順ではなく概念へ結び付ける。本文を移動してもID�
 ```json
 {
   "schema_version": 1,
-  "repository_digest": "ee14c773b707cbc86bca7575659c1799a57e1a47ceb066efae5fa41fcf3bbded",
+  "repository_digest": "55b62377e2f4e74faba7753fdd8f521b7003fe297a9045eb79ce9e7c3c36e38d",
   "blocks": [
     {
       "id": "thesis.frictionless-ai-handoff",
@@ -1790,7 +1794,7 @@ IDは表示順ではなく概念へ結び付ける。本文を移動してもID�
       "updated": "2026-07-26",
       "expires": null,
       "volatile": false,
-      "digest": "937a7eab0dff28c1bb5b97993a854020fc694ed446bb63881dc1a37134c55fc5"
+      "digest": "c1c5a96c9efa6b14167043d05c7c1e7bd0729ea19d92f14ec60a7c6c7ec672d1"
     },
     {
       "id": "scope.design-boundary",

@@ -22,6 +22,10 @@ updated = "2026-07-26"
 2. 目的の正本: [`content/blocks/001-purpose.md`](content/blocks/001-purpose.md)
 3. 思想: [`content/blocks/002-thesis-frictionless.md`](content/blocks/002-thesis-frictionless.md)
 4. 検証結果: [`release/VALIDATION_REPORT.md`](release/VALIDATION_REPORT.md)
+5. 説明資料（HTML スライド + 台本）: [`slides/`](slides/)
+   - 詳しくない人向け: [`slides/for-beginners.html`](slides/for-beginners.html)
+   - 詳しい人向け: [`slides/for-engineers.html`](slides/for-engineers.html)
+   - 説明台本: [`slides/script.md`](slides/script.md)
 
 ローカル確認は次の3コマンドで足りる。
 
