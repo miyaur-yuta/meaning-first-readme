@@ -68,3 +68,17 @@ Windows で `make` が無い場合も、上で十分です。
 4. 必要なら生成物 `README.md` と `build/`
 
 詳細は `docs/architecture.md` と `docs/authoring-guide.md`。
+
+## 説明会用スライド
+
+| 対象 | ファイル | 所要 |
+|---|---|---|
+| 初学者（非エンジニア） | [`slides/for-beginners.html`](../slides/for-beginners.html) | 10分 |
+| エンジニア | [`slides/for-engineers.html`](../slides/for-engineers.html) | 15分 |
+| 台本（説明時のスクリプト） | [`slides/script.md`](../slides/script.md) | — |
+
+初学者向けは比喩多用、エンジニア向けは7プリミティブ・権限モデル・SDD ライフサイクルを深く扱います。
+
+## Spec Kit との関係（要件定義ファースト）
+
+[GitHub Spec Kit](https://github.com/github/spec-kit) の SDD を採用。意味ブロックは**正本**、Spec Kit は**工程**。詳細は [`content/blocks/081-decision-spec-kit.md`](../content/blocks/081-decision-spec-kit.md)。

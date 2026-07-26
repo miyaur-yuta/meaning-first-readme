@@ -9,14 +9,16 @@
 1. ⭐ [`docs/START_HERE.md`](https://github.com/miyaur-yuta/meaning-first-readme/blob/release/v1.0.0/docs/START_HERE.md) — 入口
 2. 🎯 [`content/blocks/002-thesis-frictionless.md`](https://github.com/miyaur-yuta/meaning-first-readme/blob/release/v1.0.0/content/blocks/002-thesis-frictionless.md) — 思想
 3. 📋 [`content/blocks/081-decision-spec-kit.md`](https://github.com/miyaur-yuta/meaning-first-readme/blob/release/v1.0.0/content/blocks/081-decision-spec-kit.md) — Spec Kit 統合
-4. 🔒 [`content/blocks/064-constraint-permission-scope.md`](https://github.com/miyaur-yuta/meaning-first-readme/blob/release/v1.0.0/content/blocks/064-constraint-permission-scope.md) — 権限
-5. ✅ [`release/VALIDATION_REPORT.md`](https://github.com/miyaur-yuta/meaning-first-readme/blob/release/v1.0.0/release/VALIDATION_REPORT.md) — 検証結果
+4. 🎨 [`slides/for-beginners.html`](https://github.com/miyaur-yuta/meaning-first-readme/blob/release/v1.0.0/slides/for-beginners.html) — 初学者向けスライド
+5. 🛠 [`slides/for-engineers.html`](https://github.com/miyaur-yuta/meaning-first-readme/blob/release/v1.0.0/slides/for-engineers.html) — エンジニア向けスライド
+6. 📝 [`slides/script.md`](https://github.com/miyaur-yuta/meaning-first-readme/blob/release/v1.0.0/slides/script.md) — 説明時の台本
+7. ✅ [`release/VALIDATION_REPORT.md`](https://github.com/miyaur-yuta/meaning-first-readme/blob/release/v1.0.0/release/VALIDATION_REPORT.md) — 検証結果
 
 ---
 
 ## 一言で言うと
 
-README を「正しく書く」ための道具ではない。**意味ブロックを正本とし、Spec Kit の SDD ライフサイクルで Claude Code ハーネスへの引き渡し摩擦を限界まで減らす**。
+README を「正しく書く」ための道具ではない。**意味ブロックを正本とし、Spec Kit の SDD ライフサイクルで Claude Code ハーネスへの引き渡し摩擦を限界まで減らす**。<strong>Claude Code 限定</strong>。
 
 ## Spec Kit との関係（要件定義ファースト）
 
@@ -30,6 +32,14 @@ README を「正しく書く」ための道具ではない。**意味ブロッ�
 | `tasks.md` | `procedure`（具体化） |
 
 詳細は [`decision.spec-kit-integration`](https://github.com/miyaur-yuta/meaning-first-readme/blob/release/v1.0.0/content/blocks/081-decision-spec-kit.md) と [`guide.spec-kit`](https://github.com/miyaur-yuta/meaning-first-readme/blob/release/v1.0.0/content/blocks/091-guide-spec-kit.md)。
+
+## 説明資料（HTML スライド）
+
+| 対象 | ファイル | 所要 |
+|---|---|---|
+| 初学者 | [`slides/for-beginners.html`](https://github.com/miyaur-yuta/meaning-first-readme/blob/release/v1.0.0/slides/for-beginners.html) | 10分 |
+| エンジニア | [`slides/for-engineers.html`](https://github.com/miyaur-yuta/meaning-first-readme/blob/release/v1.0.0/slides/for-engineers.html) | 15分 |
+| 台本 | [`slides/script.md`](https://github.com/miyaur-yuta/meaning-first-readme/blob/release/v1.0.0/slides/script.md) | — |
 
 ## v1 の範囲（正直に）
 
