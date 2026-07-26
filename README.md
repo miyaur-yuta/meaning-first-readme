@@ -9,13 +9,13 @@
 
 | 項目 | 値 |
 |---|---:|
-| 有効な意味ブロック | 43 |
-| 推定ソーストークン | 13,439 |
+| 有効な意味ブロック | 44 |
+| 推定ソーストークン | 13,963 |
 | 最新ソース更新日 | 2026-07-26 |
-| リポジトリ指紋 | `2c88f02bed6ce6e29f14` |
+| リポジトリ指紋 | `d1aad522ef29a0202498` |
 | 生成規約 | `型付き意味ブロックから生成。README.md は直接編集しない。` |
 
-<!-- mfr:manifest {"active_blocks":43,"block_ids":["thesis.frictionless-ai-handoff","purpose.meaning","scope.entry","scope.design-boundary","scope.readers","scope.artifact","definition.real-conversation","non_goal.length","non_goal.omniscience","definition.meaning","definition.context-contract","principle.progressive-disclosure","principle.typed-claims","principle.fail-closed","assumption.readme-interface","constraint.truth","constraint.boundary","constraint.provenance","constraint.update-safety","constraint.permission-scope","constraint.real-conversation-quality","decision.markdown-toml","decision.no-single-score","decision.self-hosting","architecture.pipeline","architecture.semantic-graph","architecture.context-packer","procedure.author","procedure.review","procedure.build","procedure.context","procedure.release","evidence.self-host-build","evidence.retrieval-benchmark","risk.prompt-injection","risk.context-overflow","risk.stale-truth","example.quickstart","example.typed-block","glossary.core","roadmap.v1","faq.longest","changelog.v1"],"estimated_source_tokens":13439,"latest_source_update":"2026-07-26","project":"Meaning First README","repository_digest":"2c88f02bed6ce6e29f148352dfea6b0559ab9cae5dfed4e5a774bbda664fd342","schema_version":1} -->
+<!-- mfr:manifest {"active_blocks":44,"block_ids":["thesis.frictionless-ai-handoff","purpose.meaning","scope.entry","scope.design-boundary","scope.personas","scope.readers","scope.artifact","definition.real-conversation","non_goal.length","non_goal.omniscience","definition.meaning","definition.context-contract","principle.progressive-disclosure","principle.typed-claims","principle.fail-closed","assumption.readme-interface","constraint.truth","constraint.boundary","constraint.provenance","constraint.update-safety","constraint.permission-scope","constraint.real-conversation-quality","decision.markdown-toml","decision.no-single-score","decision.self-hosting","architecture.pipeline","architecture.semantic-graph","architecture.context-packer","procedure.author","procedure.review","procedure.build","procedure.context","procedure.release","evidence.self-host-build","evidence.retrieval-benchmark","risk.prompt-injection","risk.context-overflow","risk.stale-truth","example.quickstart","example.typed-block","glossary.core","roadmap.v1","faq.longest","changelog.v1"],"estimated_source_tokens":13963,"latest_source_update":"2026-07-26","project":"Meaning First README","repository_digest":"d1aad522ef29a020249840a114d332d00f1bd6e782553ef6bd6fc6f1cb310a9f","schema_version":1} -->
 
 ## 目次
 
@@ -25,6 +25,7 @@
 - [対象範囲](#対象範囲)
   - [最初の30秒でやること](#最初の30秒でやること)
   - [v1 の設計境界：作り出さず、範囲を固定する](#v1 の設計境界：作り出さず、範囲を固定する)
+  - [中心ペルソナの典型タスク](#中心ペルソナの典型タスク)
   - [対象読者と利用主体](#対象読者と利用主体)
   - [成果物の範囲](#成果物の範囲)
 - [非目的](#非目的)
@@ -219,6 +220,54 @@ python -m meaning_first_readme validate
 「作ってみたけど設計は後」は、取り違えの温床になる。v1 では範囲を明示し、範囲外のものは「未設計」として可視化する。
 
 <!-- /mfr:block scope.design-boundary -->
+
+<!-- mfr:block {"digest":"93495ec95dcd3128","id":"scope.personas","kind":"scope","priority":58,"status":"active"} -->
+### 中心ペルソナの典型タスク
+
+> ペルソナA/B/C の典型タスクを明記し、対話観察の再現性を担保する。
+
+<sub>`scope.personas` · 種別: `scope` · 優先度: `58` · 信頼区分: `reviewed` · 対象: `human` · 更新: `2026-07-26` · 依存: `thesis.frictionless-ai-handoff`, `definition.real-conversation`</sub>
+
+「リアルな対話品質」を観察可能にするため、中心ペルソナの典型タスクを固定する。
+
+## ペルソナA：Claude Code を使い始めた人
+
+**状況:** 初めてリポジトリを Claude Code で開く。
+
+**典型タスク:**
+1. 「このプロジェクトの目的は？」と聞く
+2. 「次に何をすべき？」と聞く
+3. 「やってはいけないことは？」と聞く
+
+**成功基準:** いずれも README の目的・次の一手・禁止事項が最初の応答に反映される。
+
+## ペルソナB：ハーネス設定を保守する人
+
+**状況:** 既存の意味ブロックを更新する。
+
+**典型タスク:**
+1. 変更したいブロックの根拠（`evidence`/`depends_on`）を確認する
+2. 変更後 `mfr validate` を走らせる
+3. `mfr audit` で整合性を確認する
+
+**成功基準:** 根拠が欠けている変更は検証で弾かれ、怖くなく更新できる。
+
+## ペルソナC：初見でリポジトリを見る人
+
+**状況:** GitHub で README を開く。
+
+**典型タスク:**
+1. 目次から関心セクションへ飛ぶ
+2. AI に何を渡しているか把握する
+3. 必要なら `docs/START_HERE.md` から深掘りする
+
+**成功基準:** 人間向けビューで全体を俯瞰でき、AI 文脈との違いが分かる。
+
+## 観察の記録
+
+各タスクの実施結果は `evidence` 種別ブロックとして残し、回帰検出に使う。サンプルサイズ1の印象は採用しない。
+
+<!-- /mfr:block scope.personas -->
 
 <!-- mfr:block {"digest":"840ab5128fe8bae0","id":"scope.readers","kind":"scope","priority":95,"status":"active"} -->
 ### 対象読者と利用主体
@@ -1150,7 +1199,7 @@ IDは表示順ではなく概念へ結び付ける。本文を移動してもID�
 ```json
 {
   "schema_version": 1,
-  "repository_digest": "2c88f02bed6ce6e29f148352dfea6b0559ab9cae5dfed4e5a774bbda664fd342",
+  "repository_digest": "d1aad522ef29a020249840a114d332d00f1bd6e782553ef6bd6fc6f1cb310a9f",
   "blocks": [
     {
       "id": "thesis.frictionless-ai-handoff",
@@ -1303,6 +1352,42 @@ IDは表示順ではなく概念へ結び付ける。本文を移動してもID�
       "expires": null,
       "volatile": false,
       "digest": "70e5d184eb60b37af48a540902997cb52c687b96e648c60d192ec417f29dd6b4"
+    },
+    {
+      "id": "scope.personas",
+      "kind": "scope",
+      "title": "中心ペルソナの典型タスク",
+      "summary": "ペルソナA/B/C の典型タスクを明記し、対話観察の再現性を担保する。",
+      "order": 17,
+      "priority": 58,
+      "audience": [
+        "human"
+      ],
+      "tags": [
+        "ペルソナ",
+        "典型タスク",
+        "対話観察"
+      ],
+      "status": "active",
+      "trust": "reviewed",
+      "depends_on": [
+        "thesis.frictionless-ai-handoff",
+        "definition.real-conversation"
+      ],
+      "evidence": [],
+      "supports": [],
+      "claims": [
+        "代表ペルソナの典型タスクは観察の再現に必要"
+      ],
+      "negates": [],
+      "acceptance": [],
+      "rationale": "",
+      "owner": "project",
+      "source": "",
+      "updated": "2026-07-26",
+      "expires": null,
+      "volatile": false,
+      "digest": "93495ec95dcd3128b4bb5456c13cd5e4a2d55c310b79a6c51861bb783c6e2dc8"
     },
     {
       "id": "scope.readers",

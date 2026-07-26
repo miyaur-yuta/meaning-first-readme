@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "repository_digest": "2c88f02bed6ce6e29f148352dfea6b0559ab9cae5dfed4e5a774bbda664fd342",
+  "repository_digest": "d1aad522ef29a020249840a114d332d00f1bd6e782553ef6bd6fc6f1cb310a9f",
   "blocks": [
     {
       "id": "architecture.context-packer",
@@ -1578,6 +1578,43 @@
       "volatile": false,
       "body": "ひとことで言うと: Claude Code ハーネス（CLAUDE.md, Skills, Hooks, Subagents, MCP）への引き渡し摩擦を、意味ブロックから限界まで減らすツール。v1 は README ビューのみ。\n\nレビューや初見で、最初に全部の章を読む必要はない。\n\n1. 入口: [`docs/START_HERE.md`](docs/START_HERE.md)\n2. 目的の正本: [`content/blocks/001-purpose.md`](content/blocks/001-purpose.md)\n3. 思想: [`content/blocks/002-thesis-frictionless.md`](content/blocks/002-thesis-frictionless.md)\n4. 検証結果: [`release/VALIDATION_REPORT.md`](release/VALIDATION_REPORT.md)\n\nローカル確認は次の3コマンドで足りる。\n\n```bash\nexport PYTHONPATH=src\npython -m meaning_first_readme doctor\npython -m meaning_first_readme validate\n```\n\n`README.md` は生成物なので直接編集しない。変更は `content/blocks/` に入れる。",
       "digest": "937a7eab0dff28c1bb5b97993a854020fc694ed446bb63881dc1a37134c55fc5"
+    },
+    {
+      "id": "scope.personas",
+      "kind": "scope",
+      "title": "中心ペルソナの典型タスク",
+      "summary": "ペルソナA/B/C の典型タスクを明記し、対話観察の再現性を担保する。",
+      "order": 17,
+      "priority": 58,
+      "audience": [
+        "human"
+      ],
+      "tags": [
+        "ペルソナ",
+        "典型タスク",
+        "対話観察"
+      ],
+      "status": "active",
+      "trust": "reviewed",
+      "depends_on": [
+        "thesis.frictionless-ai-handoff",
+        "definition.real-conversation"
+      ],
+      "evidence": [],
+      "supports": [],
+      "claims": [
+        "代表ペルソナの典型タスクは観察の再現に必要"
+      ],
+      "negates": [],
+      "acceptance": [],
+      "rationale": "",
+      "owner": "project",
+      "source": "",
+      "updated": "2026-07-26",
+      "expires": null,
+      "volatile": false,
+      "body": "「リアルな対話品質」を観察可能にするため、中心ペルソナの典型タスクを固定する。\n\n## ペルソナA：Claude Code を使い始めた人\n\n**状況:** 初めてリポジトリを Claude Code で開く。\n\n**典型タスク:**\n1. 「このプロジェクトの目的は？」と聞く\n2. 「次に何をすべき？」と聞く\n3. 「やってはいけないことは？」と聞く\n\n**成功基準:** いずれも README の目的・次の一手・禁止事項が最初の応答に反映される。\n\n## ペルソナB：ハーネス設定を保守する人\n\n**状況:** 既存の意味ブロックを更新する。\n\n**典型タスク:**\n1. 変更したいブロックの根拠（`evidence`/`depends_on`）を確認する\n2. 変更後 `mfr validate` を走らせる\n3. `mfr audit` で整合性を確認する\n\n**成功基準:** 根拠が欠けている変更は検証で弾かれ、怖くなく更新できる。\n\n## ペルソナC：初見でリポジトリを見る人\n\n**状況:** GitHub で README を開く。\n\n**典型タスク:**\n1. 目次から関心セクションへ飛ぶ\n2. AI に何を渡しているか把握する\n3. 必要なら `docs/START_HERE.md` から深掘りする\n\n**成功基準:** 人間向けビューで全体を俯瞰でき、AI 文脈との違いが分かる。\n\n## 観察の記録\n\n各タスクの実施結果は `evidence` 種別ブロックとして残し、回帰検出に使う。サンプルサイズ1の印象は採用しない。",
+      "digest": "93495ec95dcd3128b4bb5456c13cd5e4a2d55c310b79a6c51861bb783c6e2dc8"
     },
     {
       "id": "scope.readers",
