@@ -9,17 +9,18 @@
 
 | 項目 | 値 |
 |---|---:|
-| 有効な意味ブロック | 38 |
-| 推定ソーストークン | 10,531 |
+| 有効な意味ブロック | 39 |
+| 推定ソーストークン | 11,153 |
 | 最新ソース更新日 | 2026-07-26 |
-| リポジトリ指紋 | `6e079d52ab693877761f` |
+| リポジトリ指紋 | `14a9fea736e659335789` |
 | 生成規約 | `型付き意味ブロックから生成。README.md は直接編集しない。` |
 
-<!-- mfr:manifest {"active_blocks":38,"block_ids":["purpose.meaning","scope.entry","scope.readers","scope.artifact","non_goal.length","non_goal.omniscience","definition.meaning","definition.context-contract","principle.progressive-disclosure","principle.typed-claims","principle.fail-closed","assumption.readme-interface","constraint.truth","constraint.boundary","constraint.provenance","constraint.update-safety","decision.markdown-toml","decision.no-single-score","decision.self-hosting","architecture.pipeline","architecture.semantic-graph","architecture.context-packer","procedure.author","procedure.review","procedure.build","procedure.context","procedure.release","evidence.self-host-build","evidence.retrieval-benchmark","risk.prompt-injection","risk.context-overflow","risk.stale-truth","example.quickstart","example.typed-block","glossary.core","roadmap.v1","faq.longest","changelog.v1"],"estimated_source_tokens":10531,"latest_source_update":"2026-07-26","project":"Meaning First README","repository_digest":"6e079d52ab693877761ff1d1a32c830718e87dc5de12f37cea9d1c61faf8e088","schema_version":1} -->
+<!-- mfr:manifest {"active_blocks":39,"block_ids":["thesis.frictionless-ai-handoff","purpose.meaning","scope.entry","scope.readers","scope.artifact","non_goal.length","non_goal.omniscience","definition.meaning","definition.context-contract","principle.progressive-disclosure","principle.typed-claims","principle.fail-closed","assumption.readme-interface","constraint.truth","constraint.boundary","constraint.provenance","constraint.update-safety","decision.markdown-toml","decision.no-single-score","decision.self-hosting","architecture.pipeline","architecture.semantic-graph","architecture.context-packer","procedure.author","procedure.review","procedure.build","procedure.context","procedure.release","evidence.self-host-build","evidence.retrieval-benchmark","risk.prompt-injection","risk.context-overflow","risk.stale-truth","example.quickstart","example.typed-block","glossary.core","roadmap.v1","faq.longest","changelog.v1"],"estimated_source_tokens":11153,"latest_source_update":"2026-07-26","project":"Meaning First README","repository_digest":"14a9fea736e6593357890ccecaa6f4f01c72faf2e3ab13218dfe15ff408881e3","schema_version":1} -->
 
 ## 目次
 
 - [目的](#目的)
+  - [思想：AIコーディング環境への引き渡し摩擦を限界まで減らす](#思想：AIコーディング環境への引き渡し摩擦を限界まで減らす)
   - [目的は「意味を達成すること」](#目的は「意味を達成すること」)
 - [対象範囲](#対象範囲)
   - [最初の30秒でやること](#最初の30秒でやること)
@@ -76,6 +77,41 @@
   - [初号機の変更記録](#初号機の変更記録)
 
 ## 目的
+
+<!-- mfr:block {"digest":"fd2d4e825e91155a","id":"thesis.frictionless-ai-handoff","kind":"purpose","priority":70,"status":"active"} -->
+### 思想：AIコーディング環境への引き渡し摩擦を限界まで減らす
+
+> README を「正しく書く」ことではなく、ClaudeCode/Cursor 等へリポジトリを渡す摩擦を限界まで減らすことを中心思想とする。
+
+<sub>`thesis.frictionless-ai-handoff` · 種別: `purpose` · 優先度: `70` · 信頼区分: `reviewed` · 対象: `human` · 更新: `2026-07-26` · 依存: `purpose.meaning`</sub>
+
+このプロジェクトの思想は、「README を正しく書く」ことではなく、**AIコーディング環境（ClaudeCode, Cursor, その他）へリポジトリを渡す摩擦を限界まで減らす**ことにある。
+
+## 中心ペルソナ
+
+### ペルソナA：ClaudeCode/Cursor を使い始めた人（中心）
+- **苦痛:** AI にリポジトリを渡すたびに README が古い・長い・矛盾し、AI が迷子になる
+- **解く:** タスクに必要な文脈だけを取り出して AI に渡せる。README 全体を食わせなくてよい
+
+### ペルソナB：README を保守する人
+- **苦痛:** 「これ消していい？ 根拠どこ？ 誰の判断？」が分からず更新が怖い
+- **解く:** 意味ブロックに根拠・依存・来歴を強制し、怖くなく更新できる
+
+### ペルソナC：初見でリポジトリを見る人
+- **苦痛:** 長い README から目的と禁止事項を探すのがつらい
+- **解く:** 「目的・禁止・次手」だけの短縮版を機械的に作れる
+
+## 成功の測り方
+
+成果物の価値は、「機能の数」ではなく、**対象ペルソナの摩擦がどれだけ減ったか**で測る。ベンチマークと監査は、この摩擦削減が退歩していないことを回帰検出するための仕組みである。
+
+## この思想が意味しないこと
+
+- 全員が ClaudeCode/Cursor を使うことを前提にしない。人間単独読者も同一ソースから扱う。
+- README を廃止するわけではない。README を「AI に渡しやすい構造」として再編成する。
+- 他ツールの置き換えを主張しない。摩擦が減る部分だけ共存する。
+
+<!-- /mfr:block thesis.frictionless-ai-handoff -->
 
 <!-- mfr:block {"digest":"bff1a52f6a221242","id":"purpose.meaning","kind":"purpose","priority":100,"status":"active"} -->
 ### 目的は「意味を達成すること」
@@ -948,8 +984,48 @@ IDは表示順ではなく概念へ結び付ける。本文を移動してもID�
 ```json
 {
   "schema_version": 1,
-  "repository_digest": "6e079d52ab693877761ff1d1a32c830718e87dc5de12f37cea9d1c61faf8e088",
+  "repository_digest": "14a9fea736e6593357890ccecaa6f4f01c72faf2e3ab13218dfe15ff408881e3",
   "blocks": [
+    {
+      "id": "thesis.frictionless-ai-handoff",
+      "kind": "purpose",
+      "title": "思想：AIコーディング環境への引き渡し摩擦を限界まで減らす",
+      "summary": "README を「正しく書く」ことではなく、ClaudeCode/Cursor 等へリポジトリを渡す摩擦を限界まで減らすことを中心思想とする。",
+      "order": 9,
+      "priority": 70,
+      "audience": [
+        "human"
+      ],
+      "tags": [
+        "思想",
+        "AI",
+        "ClaudeCode",
+        "Cursor",
+        "引き渡し",
+        "摩擦",
+        "ペルソナ"
+      ],
+      "status": "active",
+      "trust": "reviewed",
+      "depends_on": [
+        "purpose.meaning"
+      ],
+      "evidence": [],
+      "supports": [],
+      "claims": [
+        "中心ペルソナは ClaudeCode/Cursor 利用者である",
+        "成果物の価値は摩擦削減量で測る"
+      ],
+      "negates": [],
+      "acceptance": [],
+      "rationale": "",
+      "owner": "project",
+      "source": "",
+      "updated": "2026-07-26",
+      "expires": null,
+      "volatile": false,
+      "digest": "fd2d4e825e91155a3d8c2ae6441e581da26ac213fa6590781b78921edc36c2e8"
+    },
     {
       "id": "purpose.meaning",
       "kind": "purpose",

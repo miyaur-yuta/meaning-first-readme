@@ -1,25 +1,25 @@
 # Meaning First README v1
 
-## ひとことで言うと
+## 思想（ここが一番大事）
 
-README を「正しく伝わる構造データ」として管理し、人間にも AI にも取り違えが起きないようにするツール。
+**AIコーディング環境（ClaudeCode, Cursor 等）にリポジトリを渡す摩擦を、限界まで減らす。**
 
----
+README を「正しく書く」ための道具ではない。README を **AI に渡しやすい構造** に再編成し、人間にも AI にも取り違えが起きないようにする。
 
-## 「README生成器」って何が嬉しいの？（具体例）
+### 誰の、どんな苦痛を消すか
 
-| 状況 | これがないと | これがあると |
+| ペルソナ | 苦痛 | これが解くこと |
 |---|---|---|
-| リリース前確認 | 全文を AI に食わせて迷子 | 必要ブロックだけ渡して確実 |
-| 新メンバー | 長い README を全部読ませる | 目的・禁止・次手だけ取り出す |
-| README 更新 | 根拠が分からず怖い | 参照・根拠・未確認情報を自動検証 |
+| ClaudeCode/Cursor 利用者 | README が古い/長い/矛盾で AI が迷子 | タスク別に必要文脈だけ渡す |
+| README 保守者 | 「消していい？根拠どこ？」が分からない | 根拠・依存・来歴を強制 |
+| 初見読者 | 長い README から目的を探すのがつらい | 短縮版を機械生成 |
 
 ---
 
 ## ここだけ見ればOK（所要30秒）
 
 1. ⭐ [`docs/START_HERE.md`](https://github.com/miyaur-yuta/meaning-first-readme/blob/release/v1.0.0/docs/START_HERE.md)
-2. 🎯 [`content/blocks/001-purpose.md`](https://github.com/miyaur-yuta/meaning-first-readme/blob/release/v1.0.0/content/blocks/001-purpose.md)
+2. 🎯 [`content/blocks/002-thesis-frictionless.md`](https://github.com/miyaur-yuta/meaning-first-readme/blob/release/v1.0.0/content/blocks/002-thesis-frictionless.md) — 思想
 3. ✅ [`release/VALIDATION_REPORT.md`](https://github.com/miyaur-yuta/meaning-first-readme/blob/release/v1.0.0/release/VALIDATION_REPORT.md)
 
 CI: 🟢 3.11 / 3.12 / 3.13 通過済み
@@ -32,6 +32,16 @@ CI: 🟢 3.11 / 3.12 / 3.13 通過済み
 - 参照・根拠・未確認情報・重複・期限を **自動検証**
 - AI に渡すときは **タスク別に必要な文脈だけ** 取り出す（トークン節約）
 - 追加ライブラリなし（Python 標準ライブラリのみ）
+
+### 具体例：リリース前の AI 最終確認
+
+```bash
+python -m meaning_first_readme context \
+  --task '公開前に事実、根拠、秘密情報、リリース条件を確認する' \
+  --tokens 6500 --audience ai
+```
+
+全文を AI に食わせず、必要ブロックだけ渡す。
 
 ---
 

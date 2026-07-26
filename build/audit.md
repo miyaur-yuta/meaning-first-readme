@@ -18,10 +18,10 @@
 
 ### structure
 
-- **active_blocks:** `38`
+- **active_blocks:** `39`
 - **kinds:** `['architecture', 'assumption', 'changelog', 'constraint', 'decision', 'definition', 'evidence', 'example', 'faq', 'glossary', 'non_goal', 'principle', 'procedure', 'purpose', 'risk', 'roadmap', 'scope']`
 - **required_kinds_present:** `True`
-- **estimated_tokens:** `10531`
+- **estimated_tokens:** `11153`
 
 ### traceability
 
@@ -45,8 +45,8 @@
 
 ### connectivity
 
-- **purpose_roots:** `['purpose.meaning']`
-- **reachable_blocks:** `38`
+- **purpose_roots:** `['purpose.meaning', 'thesis.frictionless-ai-handoff']`
+- **reachable_blocks:** `39`
 - **orphan_blocks:** `[]`
 - **ratio:** `1.0`
 
