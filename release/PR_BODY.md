@@ -35,11 +35,13 @@ README を「正しく書く」ための道具ではない。**意味ブロッ�
 
 ## 説明資料（HTML スライド）
 
-| 対象 | ファイル | 所要 |
-|---|---|---|
-| 初学者 | [`slides/for-beginners.html`](https://github.com/miyaur-yuta/meaning-first-readme/blob/release/v1.0.0/slides/for-beginners.html) | 10分 |
-| エンジニア | [`slides/for-engineers.html`](https://github.com/miyaur-yuta/meaning-first-readme/blob/release/v1.0.0/slides/for-engineers.html) | 15分 |
-| 台本 | [`slides/script.md`](https://github.com/miyaur-yuta/meaning-first-readme/blob/release/v1.0.0/slides/script.md) | — |
+| 対象 | ソース | 直接表示 | 所要 |
+|---|---|---|---|
+| 初学者 | [`slides/for-beginners.html`](https://github.com/miyaur-yuta/meaning-first-readme/blob/release/v1.0.0/slides/for-beginners.html) | [▶ 開く](https://htmlpreview.github.io/?https://raw.githubusercontent.com/miyaur-yuta/meaning-first-readme/release/v1.0.0/slides/for-beginners.html) | 10分 |
+| エンジニア | [`slides/for-engineers.html`](https://github.com/miyaur-yuta/meaning-first-readme/blob/release/v1.0.0/slides/for-engineers.html) | [▶ 開く](https://htmlpreview.github.io/?https://raw.githubusercontent.com/miyaur-yuta/meaning-first-readme/release/v1.0.0/slides/for-engineers.html) | 15分 |
+| 台本 | [`slides/script.md`](https://github.com/miyaur-yuta/meaning-first-readme/blob/release/v1.0.0/slides/script.md) | — | — |
+
+> 💡 **スマホで見る時:** 「▶ 開く」リンクをタップすると、ブラウザでスライドがそのまま再生されます。矢印ボタンまたはスワイプで遷移。
 
 ## v1 の範囲（正直に）
 
