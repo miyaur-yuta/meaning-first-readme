@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "repository_digest": "4173a17428bd9386b70b05236e59b20b0e9aa78dfe8d5b6ce6ec5d1cbf6cc756",
+  "repository_digest": "6e079d52ab693877761ff1d1a32c830718e87dc5de12f37cea9d1c61faf8e088",
   "blocks": [
     {
       "id": "architecture.context-packer",
@@ -606,6 +606,45 @@
       "volatile": false,
       "body": "再現手順は`procedure.build`に定義されている。ビルドはブロックを安定した`order`とIDで並べ、本文とメタデータからSHA-256指紋を生成する。\n\n検証可能な観測点は次の通りである。\n\n- 同じ入力でREADMEの本文とリポジトリ指紋が一致する。\n- ブロック本文または意味メタデータを変更すると、対応する指紋が変わる。\n- 生成済みREADMEを手で変更すると、再生成後のGit差分で検出できる。\n- マニフェストから全ブロックID、依存、根拠、状態を復元できる。\n\nこの証跡は「READMEが常に正しい」ことではなく、入力と生成物の対応を再現できることを支える。",
       "digest": "f6c1db9cf2d386c071b521d7e5fef9582e56a68bac44506751aed113b08e3c97"
+    },
+    {
+      "id": "example.quickstart",
+      "kind": "example",
+      "title": "クイックスタート：3つの使い方",
+      "summary": "リリース前確認、新メンバーオンボーディング、README更新検証という3つの典型ユースケースをコマンド付きで示す。",
+      "order": 125,
+      "priority": 78,
+      "audience": [
+        "both"
+      ],
+      "tags": [
+        "例",
+        "クイックスタート",
+        "使い方",
+        "ユースケース",
+        "コマンド"
+      ],
+      "status": "active",
+      "trust": "reviewed",
+      "depends_on": [
+        "purpose.meaning",
+        "scope.artifact",
+        "procedure.build",
+        "procedure.context"
+      ],
+      "evidence": [],
+      "supports": [],
+      "claims": [],
+      "negates": [],
+      "acceptance": [],
+      "rationale": "",
+      "owner": "project",
+      "source": "",
+      "updated": "2026-07-26",
+      "expires": null,
+      "volatile": false,
+      "body": "このツールは「長いREADMEを書く道具」ではなく、README を **意味の部品** として管理し、人間にも AI にも取り違えが起きないようにする。典型ユースケースを3つ示す。\n\n### 1. リリース前の最終確認（AI に渡す文脈を絞る）\n\n```bash\nexport PYTHONPATH=src\npython -m meaning_first_readme context \\\n  --task '公開前に事実、根拠、秘密情報、リリース条件を確認する' \\\n  --tokens 6500 \\\n  --audience ai \\\n  --output build/release-context.md\n```\n\n全文を食わせるのではなく、必要ブロックだけを取り出して AI に渡す。トークンを節約しつつ、見落としを防ぐ。\n\n### 2. 新メンバーのオンボーディング（人間向け短縮版）\n\n```bash\npython -m meaning_first_readme context \\\n  --task '初見の人が目的と禁止事項を把握する' \\\n  --tokens 3000 \\\n  --audience human \\\n  --output build/onboarding.md\n```\n\n全部読ませず、目的・禁止事項・次の一手だけを渡す。\n\n### 3. README 更新時の自動検証\n\n```bash\npython -m meaning_first_readme validate\npython -m meaning_first_readme build\ngit diff README.md build/\n```\n\n参照先が消えていないか、未確認情報が事実として混ざっていないか、期限切れがないかを機械が検証する。\n\n---\n\nいずれも `make` が無い環境では `python -m meaning_first_readme ...` で動く。追加ライブラリは不要。",
+      "digest": "43358d7623878ae7cb7ad27329816b2277d8fe82e141f8dec5a7b01ada3b7308"
     },
     {
       "id": "example.typed-block",

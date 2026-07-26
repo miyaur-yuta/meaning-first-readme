@@ -9,13 +9,13 @@
 
 | 項目 | 値 |
 |---|---:|
-| 有効な意味ブロック | 37 |
-| 推定ソーストークン | 10,050 |
+| 有効な意味ブロック | 38 |
+| 推定ソーストークン | 10,531 |
 | 最新ソース更新日 | 2026-07-26 |
-| リポジトリ指紋 | `4173a17428bd9386b70b` |
+| リポジトリ指紋 | `6e079d52ab693877761f` |
 | 生成規約 | `型付き意味ブロックから生成。README.md は直接編集しない。` |
 
-<!-- mfr:manifest {"active_blocks":37,"block_ids":["purpose.meaning","scope.entry","scope.readers","scope.artifact","non_goal.length","non_goal.omniscience","definition.meaning","definition.context-contract","principle.progressive-disclosure","principle.typed-claims","principle.fail-closed","assumption.readme-interface","constraint.truth","constraint.boundary","constraint.provenance","constraint.update-safety","decision.markdown-toml","decision.no-single-score","decision.self-hosting","architecture.pipeline","architecture.semantic-graph","architecture.context-packer","procedure.author","procedure.review","procedure.build","procedure.context","procedure.release","evidence.self-host-build","evidence.retrieval-benchmark","risk.prompt-injection","risk.context-overflow","risk.stale-truth","example.typed-block","glossary.core","roadmap.v1","faq.longest","changelog.v1"],"estimated_source_tokens":10050,"latest_source_update":"2026-07-26","project":"Meaning First README","repository_digest":"4173a17428bd9386b70b05236e59b20b0e9aa78dfe8d5b6ce6ec5d1cbf6cc756","schema_version":1} -->
+<!-- mfr:manifest {"active_blocks":38,"block_ids":["purpose.meaning","scope.entry","scope.readers","scope.artifact","non_goal.length","non_goal.omniscience","definition.meaning","definition.context-contract","principle.progressive-disclosure","principle.typed-claims","principle.fail-closed","assumption.readme-interface","constraint.truth","constraint.boundary","constraint.provenance","constraint.update-safety","decision.markdown-toml","decision.no-single-score","decision.self-hosting","architecture.pipeline","architecture.semantic-graph","architecture.context-packer","procedure.author","procedure.review","procedure.build","procedure.context","procedure.release","evidence.self-host-build","evidence.retrieval-benchmark","risk.prompt-injection","risk.context-overflow","risk.stale-truth","example.quickstart","example.typed-block","glossary.core","roadmap.v1","faq.longest","changelog.v1"],"estimated_source_tokens":10531,"latest_source_update":"2026-07-26","project":"Meaning First README","repository_digest":"6e079d52ab693877761ff1d1a32c830718e87dc5de12f37cea9d1c61faf8e088","schema_version":1} -->
 
 ## 目次
 
@@ -64,6 +64,7 @@
   - [長文化による文脈飽和](#長文化による文脈飽和)
   - [古い情報が有効な事実として残る](#古い情報が有効な事実として残る)
 - [例](#例)
+  - [クイックスタート：3つの使い方](#クイックスタート：3つの使い方)
   - [型付き意味ブロックの最小例](#型付き意味ブロックの最小例)
 - [用語](#用語)
   - [主要用語](#主要用語)
@@ -779,6 +780,56 @@ python -m meaning_first_readme context   --task "公開前に事実、根拠、�
 
 ## 例
 
+<!-- mfr:block {"digest":"43358d7623878ae7","id":"example.quickstart","kind":"example","priority":78,"status":"active"} -->
+### クイックスタート：3つの使い方
+
+> リリース前確認、新メンバーオンボーディング、README更新検証という3つの典型ユースケースをコマンド付きで示す。
+
+<sub>`example.quickstart` · 種別: `example` · 優先度: `78` · 信頼区分: `reviewed` · 対象: `both` · 更新: `2026-07-26` · 依存: `purpose.meaning`, `scope.artifact`, `procedure.build`, `procedure.context`</sub>
+
+このツールは「長いREADMEを書く道具」ではなく、README を **意味の部品** として管理し、人間にも AI にも取り違えが起きないようにする。典型ユースケースを3つ示す。
+
+### 1. リリース前の最終確認（AI に渡す文脈を絞る）
+
+```bash
+export PYTHONPATH=src
+python -m meaning_first_readme context \
+  --task '公開前に事実、根拠、秘密情報、リリース条件を確認する' \
+  --tokens 6500 \
+  --audience ai \
+  --output build/release-context.md
+```
+
+全文を食わせるのではなく、必要ブロックだけを取り出して AI に渡す。トークンを節約しつつ、見落としを防ぐ。
+
+### 2. 新メンバーのオンボーディング（人間向け短縮版）
+
+```bash
+python -m meaning_first_readme context \
+  --task '初見の人が目的と禁止事項を把握する' \
+  --tokens 3000 \
+  --audience human \
+  --output build/onboarding.md
+```
+
+全部読ませず、目的・禁止事項・次の一手だけを渡す。
+
+### 3. README 更新時の自動検証
+
+```bash
+python -m meaning_first_readme validate
+python -m meaning_first_readme build
+git diff README.md build/
+```
+
+参照先が消えていないか、未確認情報が事実として混ざっていないか、期限切れがないかを機械が検証する。
+
+---
+
+いずれも `make` が無い環境では `python -m meaning_first_readme ...` で動く。追加ライブラリは不要。
+
+<!-- /mfr:block example.quickstart -->
+
 <!-- mfr:block {"digest":"f5223e8d742adca4","id":"example.typed-block","kind":"example","priority":62,"status":"active"} -->
 ### 型付き意味ブロックの最小例
 
@@ -897,7 +948,7 @@ IDは表示順ではなく概念へ結び付ける。本文を移動してもID�
 ```json
 {
   "schema_version": 1,
-  "repository_digest": "4173a17428bd9386b70b05236e59b20b0e9aa78dfe8d5b6ce6ec5d1cbf6cc756",
+  "repository_digest": "6e079d52ab693877761ff1d1a32c830718e87dc5de12f37cea9d1c61faf8e088",
   "blocks": [
     {
       "id": "purpose.meaning",
@@ -2102,6 +2153,44 @@ IDは表示順ではなく概念へ結び付ける。本文を移動してもID�
       "expires": null,
       "volatile": false,
       "digest": "aeee373f1d6fd2597e56959a47720241f8fbcbc259a6fdda77f7b98c9bdcc761"
+    },
+    {
+      "id": "example.quickstart",
+      "kind": "example",
+      "title": "クイックスタート：3つの使い方",
+      "summary": "リリース前確認、新メンバーオンボーディング、README更新検証という3つの典型ユースケースをコマンド付きで示す。",
+      "order": 125,
+      "priority": 78,
+      "audience": [
+        "both"
+      ],
+      "tags": [
+        "例",
+        "クイックスタート",
+        "使い方",
+        "ユースケース",
+        "コマンド"
+      ],
+      "status": "active",
+      "trust": "reviewed",
+      "depends_on": [
+        "purpose.meaning",
+        "scope.artifact",
+        "procedure.build",
+        "procedure.context"
+      ],
+      "evidence": [],
+      "supports": [],
+      "claims": [],
+      "negates": [],
+      "acceptance": [],
+      "rationale": "",
+      "owner": "project",
+      "source": "",
+      "updated": "2026-07-26",
+      "expires": null,
+      "volatile": false,
+      "digest": "43358d7623878ae7cb7ad27329816b2277d8fe82e141f8dec5a7b01ada3b7308"
     },
     {
       "id": "example.typed-block",
