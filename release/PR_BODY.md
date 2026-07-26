@@ -8,14 +8,28 @@
 
 1. ⭐ [`docs/START_HERE.md`](https://github.com/miyaur-yuta/meaning-first-readme/blob/release/v1.0.0/docs/START_HERE.md) — 入口
 2. 🎯 [`content/blocks/002-thesis-frictionless.md`](https://github.com/miyaur-yuta/meaning-first-readme/blob/release/v1.0.0/content/blocks/002-thesis-frictionless.md) — 思想
-3. 🔒 [`content/blocks/064-constraint-permission-scope.md`](https://github.com/miyaur-yuta/meaning-first-readme/blob/release/v1.0.0/content/blocks/064-constraint-permission-scope.md) — 権限
-4. ✅ [`release/VALIDATION_REPORT.md`](https://github.com/miyaur-yuta/meaning-first-readme/blob/release/v1.0.0/release/VALIDATION_REPORT.md) — 検証結果
+3. 📋 [`content/blocks/081-decision-spec-kit.md`](https://github.com/miyaur-yuta/meaning-first-readme/blob/release/v1.0.0/content/blocks/081-decision-spec-kit.md) — Spec Kit 統合
+4. 🔒 [`content/blocks/064-constraint-permission-scope.md`](https://github.com/miyaur-yuta/meaning-first-readme/blob/release/v1.0.0/content/blocks/064-constraint-permission-scope.md) — 権限
+5. ✅ [`release/VALIDATION_REPORT.md`](https://github.com/miyaur-yuta/meaning-first-readme/blob/release/v1.0.0/release/VALIDATION_REPORT.md) — 検証結果
 
 ---
 
 ## 一言で言うと
 
-README を「正しく書く」ための道具ではない。README を含む **Claude Code ハーネス設定全体** を、意味ブロックから一貫して生成・検証する体制を目指す。
+README を「正しく書く」ための道具ではない。**意味ブロックを正本とし、Spec Kit の SDD ライフサイクルで Claude Code ハーネスへの引き渡し摩擦を限界まで減らす**。
+
+## Spec Kit との関係（要件定義ファースト）
+
+[GitHub Spec Kit](https://github.com/github/spec-kit) の SDD（constitution → spec → clarify → plan → tasks → implement → converge）を採用。意味ブロックは**正本**、Spec Kit は**工程**。
+
+| Spec Kit 入力 | 意味ブロック層 |
+|---|---|
+| `constitution.md` | `principle` / `constraint` |
+| `spec.md` | `purpose` / `scope` / `non_goal` / `definition` |
+| `plan.md` | `architecture` / `procedure` |
+| `tasks.md` | `procedure`（具体化） |
+
+詳細は [`decision.spec-kit-integration`](https://github.com/miyaur-yuta/meaning-first-readme/blob/release/v1.0.0/content/blocks/081-decision-spec-kit.md) と [`guide.spec-kit`](https://github.com/miyaur-yuta/meaning-first-readme/blob/release/v1.0.0/content/blocks/091-guide-spec-kit.md)。
 
 ## v1 の範囲（正直に）
 

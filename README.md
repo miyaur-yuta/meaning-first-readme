@@ -9,13 +9,13 @@
 
 | 項目 | 値 |
 |---|---:|
-| 有効な意味ブロック | 47 |
-| 推定ソーストークン | 16,200 |
+| 有効な意味ブロック | 49 |
+| 推定ソーストークン | 17,772 |
 | 最新ソース更新日 | 2026-07-26 |
-| リポジトリ指紋 | `0d91ad9885cc05801c84` |
+| リポジトリ指紋 | `782162c127b2bd6bd148` |
 | 生成規約 | `型付き意味ブロックから生成。README.md は直接編集しない。` |
 
-<!-- mfr:manifest {"active_blocks":47,"block_ids":["thesis.frictionless-ai-handoff","purpose.meaning","scope.entry","scope.design-boundary","scope.personas","scope.explanation-vs-generation","scope.readers","scope.artifact","definition.real-conversation","non_goal.length","non_goal.omniscience","definition.meaning","definition.context-contract","principle.progressive-disclosure","principle.typed-claims","principle.fail-closed","assumption.readme-interface","constraint.truth","constraint.boundary","constraint.provenance","constraint.update-safety","constraint.permission-scope","constraint.real-conversation-quality","decision.markdown-toml","decision.observation-format","decision.no-single-score","decision.self-hosting","architecture.pipeline","guide.claude-code-primitives","architecture.semantic-graph","architecture.context-packer","procedure.author","procedure.review","procedure.build","procedure.context","procedure.release","evidence.self-host-build","evidence.retrieval-benchmark","risk.prompt-injection","risk.context-overflow","risk.stale-truth","example.quickstart","example.typed-block","glossary.core","roadmap.v1","faq.longest","changelog.v1"],"estimated_source_tokens":16200,"latest_source_update":"2026-07-26","project":"Meaning First README","repository_digest":"0d91ad9885cc05801c84efbb2c06d8db0a961ed9a49dc3b1b1634cb197f65398","schema_version":1} -->
+<!-- mfr:manifest {"active_blocks":49,"block_ids":["thesis.frictionless-ai-handoff","purpose.meaning","scope.entry","scope.design-boundary","scope.personas","scope.explanation-vs-generation","scope.readers","scope.artifact","definition.real-conversation","non_goal.length","non_goal.omniscience","definition.meaning","definition.context-contract","principle.progressive-disclosure","principle.typed-claims","principle.fail-closed","assumption.readme-interface","constraint.truth","constraint.boundary","constraint.provenance","constraint.update-safety","constraint.permission-scope","constraint.real-conversation-quality","decision.markdown-toml","decision.observation-format","decision.no-single-score","decision.spec-kit-integration","decision.self-hosting","architecture.pipeline","guide.claude-code-primitives","architecture.semantic-graph","guide.spec-kit","architecture.context-packer","procedure.author","procedure.review","procedure.build","procedure.context","procedure.release","evidence.self-host-build","evidence.retrieval-benchmark","risk.prompt-injection","risk.context-overflow","risk.stale-truth","example.quickstart","example.typed-block","glossary.core","roadmap.v1","faq.longest","changelog.v1"],"estimated_source_tokens":17772,"latest_source_update":"2026-07-26","project":"Meaning First README","repository_digest":"782162c127b2bd6bd148070259b6381c58cd5e4de4055e5a1a1e5ce04d3d18aa","schema_version":1} -->
 
 ## 目次
 
@@ -53,6 +53,7 @@
   - [Markdown本文とTOML前置きを正本にする](#Markdown本文とTOML前置きを正本にする)
   - [対話観察の記録フォーマット](#対話観察の記録フォーマット)
   - [「意味スコア」一個で合否を決めない](#「意味スコア」一個で合否を決めない)
+  - [Spec Kit との関係：意味ブロックを Constitution/Spec に接続](#Spec Kit との関係：意味ブロックを Constitution/Spec に接続)
   - [プロジェクト自身のREADMEを自身で生成する](#プロジェクト自身のREADMEを自身で生成する)
 - [構造](#構造)
   - [意味を壊さないビルドパイプライン](#意味を壊さないビルドパイプライン)
@@ -60,6 +61,7 @@
   - [トークン予算付き文脈コンパイラ](#トークン予算付き文脈コンパイラ)
 - [手順](#手順)
   - [Claude Code ハーネス要素：概念・使い方・最小構成](#Claude Code ハーネス要素：概念・使い方・最小構成)
+  - [Spec Kit：概念・使い方・最小構成](#Spec Kit：概念・使い方・最小構成)
   - [意味ブロックを追加する手順](#意味ブロックを追加する手順)
   - [意味変更をレビューする手順](#意味変更をレビューする手順)
   - [ローカルでビルドと検証を実行する](#ローカルでビルドと検証を実行する)
@@ -820,6 +822,64 @@ updated = "<YYYY-MM-DD>"
 
 <!-- /mfr:block decision.no-single-score -->
 
+<!-- mfr:block {"digest":"c3341e190ffee5fa","id":"decision.spec-kit-integration","kind":"decision","priority":60,"status":"active"} -->
+### Spec Kit との関係：意味ブロックを Constitution/Spec に接続
+
+> GitHub Spec Kit の SDD ライフサイクル（constitution/spec/clarify/plan/tasks/implement/converge）と意味ブロックを接続し、要件定義ファーストで運用する。
+
+<sub>`decision.spec-kit-integration` · 種別: `decision` · 優先度: `60` · 信頼区分: `authoritative` · 対象: `human` · 更新: `2026-07-26` · 依存: `thesis.frictionless-ai-handoff`, `scope.explanation-vs-generation`, `guide.claude-code-primitives`</sub>
+
+GitHub Spec Kit（2026-07 時点 v0.12.5）の SDD ライフサイクルを採用し、本プロジェクトの意味ブロック層と接続する。
+
+## Spec Kit とは
+
+GitHub 製のオープンソース CLI・プロンプト群。自然言語の仕様書を一次産物とし、コードをそこから生成する「Spec-Driven Development」を Claude Code / Copilot / Cursor 等で実施するためのフレームワーク。
+
+## SDD の9フェーズ
+
+| フェーズ | コマンド | 役割 |
+|---|---|---|
+| Constitution | `/speckit.constitution` | プロジェクト原則・ガバナンス |
+| Specify | `/speckit.specify` | 機能要件・ユーザーストーリー |
+| Clarify | `/speckit.clarify` | 曖昧さ解消 |
+| Plan | `/speckit.plan` | 技術アーキ・スタック |
+| Checklist | `/speckit.checklist` | 仕様の完全性検証 |
+| Tasks | `/speckit.tasks` | 実行可能なタスク分解 |
+| Analyze | `/speckit.analyze` | 全アーティファクトの整合性検査 |
+| Implement | `/speckit.implement` | コード生成 |
+| Converge | `/speckit.converge` | 仕様・計画との収束確認 |
+
+## 意味ブロックとの対応
+
+| Spec Kit 入力 | 意味ブロック層 |
+|---|---|
+| `memory/constitution.md` | `principle` / `constraint` / `decision` |
+| `spec.md` | `purpose` / `scope` / `non_goal` / `definition` |
+| `plan.md` | `architecture` / `procedure` |
+| `tasks.md` | `procedure`（具体化） |
+| 検査入力 | `evidence` / `risk` / `fact` |
+
+意味ブロックは**正本（single source of truth）**、Spec Kit は**工程（lifecycle）**。両者は競合せず、意味ブロックから Spec Kit の各 Markdown を生成し、Spec Kit が AI と協調して実装に落とす。
+
+## 運用フロー
+
+1. **ヒアリング（認知負荷低）:** 人間が要点だけ伝える
+2. **意味ブロック化:** AI がヒアリング結果を `purpose`/`scope`/`non_goal`/`definition` に構造化
+3. **Constitution/Spec 生成:** 意味ブロックから Spec Kit の Markdown を生成
+4. **Clarify/Plan/Tasks:** Spec Kit のフェーズを順に進める
+5. **Implement/Converge:** コード生成と収束検証
+
+## v1 の範囲
+
+- **作る:** 意味ブロック → Spec Kit Markdown の**生成ガイド**（説明資料）
+- **作らない:** 自動生成機能・Spec Kit CLI のラッパー（次段階）
+
+Spec Kit 自体の説明は `guide.spec-kit`（別ブロック）に譲る。
+
+**判断理由:** ユーザーの『まず要件定義しない？Spec Kit 入れて』という指摘通り、意味ブロック単体では要件定義の工程順序がなく、Spec Kit がその欠けを埋める。意味ブロックは『正本』、Spec Kit は『工程』。
+
+<!-- /mfr:block decision.spec-kit-integration -->
+
 <!-- mfr:block {"digest":"abae090eca438c2f","id":"decision.self-hosting","kind":"decision","priority":86,"status":"active"} -->
 ### プロジェクト自身のREADMEを自身で生成する
 
@@ -1044,6 +1104,99 @@ tools: [Read, Grep]
 - [ ] このプロジェクトとの関係が明記されている
 
 <!-- /mfr:block guide.claude-code-primitives -->
+
+<!-- mfr:block {"digest":"f36a9efc6373fa3d","id":"guide.spec-kit","kind":"procedure","priority":60,"status":"active"} -->
+### Spec Kit：概念・使い方・最小構成
+
+> GitHub Spec Kit の概念・CLI・最小構成を整理する。本プロジェクトの意味ブロックを前段として接続するための引き継ぎ資料。
+
+<sub>`guide.spec-kit` · 種別: `procedure` · 優先度: `60` · 信頼区分: `reviewed` · 対象: `human` · 更新: `2026-07-26` · 依存: `decision.spec-kit-integration`, `thesis.frictionless-ai-handoff`</sub>
+
+GitHub Spec Kit（v0.12.5, 2026-07）の概念・使い方・最小構成を整理する。
+
+## 概念
+
+Spec Kit は GitHub 製のオープンソース CLI・プロンプト群。自然言語の仕様書を一次産物とする **Spec-Driven Development（SDD）** を、Claude Code / Copilot / Cursor / Gemini 等の AI エージェントで実施するためのフレームワーク。
+
+従来の「コードが王」ではなく、**「仕様が王、コードは仕様から生成される」** という転倒。
+
+## 使い方
+
+### インストール
+
+```bash
+uv tool install specify-cli
+# または pipx install specify-cli
+```
+
+### 初期化
+
+```bash
+specify init <project-name>
+cd <project-name>
+```
+
+### 主要コマンド
+
+```bash
+/speckit.constitution   # プロジェクト原則を定義
+/speckit.specify        # 機能要件・ユーザーストーリー
+/speckit.clarify        # 曖昧さをAIが質問して解消
+/speckit.plan           # 技術アーキ・スタック決定
+/speckit.checklist      # 仕様の完全性検証
+/speckit.tasks          # 実行可能タスクに分解
+/speckit.analyze        # 全アーティファクトの整合性検査
+/speckit.implement      # コード生成
+/speckit.converge       # 仕様・計画との収束確認
+```
+
+## 最小構成
+
+Spec Kit が生成する主要 Markdown：
+
+```
+project/
+├── memory/
+│   └── constitution.md   # プロジェクト原則（不変）
+├── specs/
+│   └── <feature>/
+│       ├── spec.md       # 機能要件
+│       ├── plan.md       # 技術計画
+│       └── tasks.md      # タスク分解
+└── .speckit/
+    └── config.yml        # 設定
+```
+
+## このプロジェクトとの関係
+
+本プロジェクト（Meaning First README）の**意味ブロックは Spec Kit の前段**：
+
+- `principle` / `constraint` → `constitution.md`
+- `purpose` / `scope` / `non_goal` / `definition` → `spec.md`
+- `architecture` / `procedure` → `plan.md` / `tasks.md`
+- `evidence` / `risk` / `fact` → 検査入力
+
+詳細は [`decision.spec-kit-integration`](081-decision-spec-kit.md) を参照。
+
+## 認知負荷の低い運用
+
+ユーザーの要望「認知負荷の低いヒアリングを一度やって、AI エージェントが走り続ける」は次のフローで実現する：
+
+1. 人間が要点を伝える（認知負荷低）
+2. AI が意味ブロックに構造化
+3. Spec Kit の Markdown を生成
+4. Spec Kit のフェーズを AI が自動進行
+5. 人間は要所で承認のみ
+
+このフローの具体化は次段階の実装課題。
+
+**受け入れ条件**
+
+- [ ] Spec Kit の位置付けと9フェーズをカバーしている
+- [ ] インストールから最初の spec までの手順がある
+- [ ] このプロジェクトとの関係が明記されている
+
+<!-- /mfr:block guide.spec-kit -->
 
 <!-- mfr:block {"digest":"3f53e70c676c9e70","id":"procedure.author","kind":"procedure","priority":82,"status":"active"} -->
 ### 意味ブロックを追加する手順
@@ -1449,7 +1602,7 @@ IDは表示順ではなく概念へ結び付ける。本文を移動してもID�
 ```json
 {
   "schema_version": 1,
-  "repository_digest": "0d91ad9885cc05801c84efbb2c06d8db0a961ed9a49dc3b1b1634cb197f65398",
+  "repository_digest": "782162c127b2bd6bd148070259b6381c58cd5e4de4055e5a1a1e5ce04d3d18aa",
   "blocks": [
     {
       "id": "thesis.frictionless-ai-handoff",
@@ -2407,6 +2560,47 @@ IDは表示順ではなく概念へ結び付ける。本文を移動してもID�
       "digest": "362c0b708471634338e1fc0024bbc9f8324c93c0f3377fdfed66d8c1cab9ce91"
     },
     {
+      "id": "decision.spec-kit-integration",
+      "kind": "decision",
+      "title": "Spec Kit との関係：意味ブロックを Constitution/Spec に接続",
+      "summary": "GitHub Spec Kit の SDD ライフサイクル（constitution/spec/clarify/plan/tasks/implement/converge）と意味ブロックを接続し、要件定義ファーストで運用する。",
+      "order": 81,
+      "priority": 60,
+      "audience": [
+        "human"
+      ],
+      "tags": [
+        "SpecKit",
+        "SDD",
+        "要件定義",
+        "ClaudeCode",
+        "決定"
+      ],
+      "status": "active",
+      "trust": "authoritative",
+      "depends_on": [
+        "thesis.frictionless-ai-handoff",
+        "scope.explanation-vs-generation",
+        "guide.claude-code-primitives"
+      ],
+      "evidence": [],
+      "supports": [],
+      "claims": [
+        "Spec Kit の SDD ライフサイクルを採用し、意味ブロックをその前段・入力として使う",
+        "constitution.md は意味ブロックの principle/constraint 層から生成する",
+        "spec.md は purpose/scope/non_goal 層から生成する"
+      ],
+      "negates": [],
+      "acceptance": [],
+      "rationale": "ユーザーの『まず要件定義しない？Spec Kit 入れて』という指摘通り、意味ブロック単体では要件定義の工程順序がなく、Spec Kit がその欠けを埋める。意味ブロックは『正本』、Spec Kit は『工程』。",
+      "owner": "project",
+      "source": "",
+      "updated": "2026-07-26",
+      "expires": null,
+      "volatile": false,
+      "digest": "c3341e190ffee5fa8ca4a5ecb17aeb9156af0bf3b03bb456db240ed509591ae3"
+    },
+    {
       "id": "decision.self-hosting",
       "kind": "decision",
       "title": "プロジェクト自身のREADMEを自身で生成する",
@@ -2561,6 +2755,48 @@ IDは表示順ではなく概念へ結び付ける。本文を移動してもID�
       "expires": null,
       "volatile": false,
       "digest": "9de156c5b3cac4a8b44e647341c5983136e0372435a8f9242da67a9ec4bc8dde"
+    },
+    {
+      "id": "guide.spec-kit",
+      "kind": "procedure",
+      "title": "Spec Kit：概念・使い方・最小構成",
+      "summary": "GitHub Spec Kit の概念・CLI・最小構成を整理する。本プロジェクトの意味ブロックを前段として接続するための引き継ぎ資料。",
+      "order": 91,
+      "priority": 60,
+      "audience": [
+        "human"
+      ],
+      "tags": [
+        "ガイド",
+        "SpecKit",
+        "SDD",
+        "使い方",
+        "最小構成"
+      ],
+      "status": "active",
+      "trust": "reviewed",
+      "depends_on": [
+        "decision.spec-kit-integration",
+        "thesis.frictionless-ai-handoff"
+      ],
+      "evidence": [],
+      "supports": [],
+      "claims": [
+        "Spec Kit の概念と最小構成を文書化する"
+      ],
+      "negates": [],
+      "acceptance": [
+        "Spec Kit の位置付けと9フェーズをカバーしている",
+        "インストールから最初の spec までの手順がある",
+        "このプロジェクトとの関係が明記されている"
+      ],
+      "rationale": "",
+      "owner": "project",
+      "source": "",
+      "updated": "2026-07-26",
+      "expires": null,
+      "volatile": false,
+      "digest": "f36a9efc6373fa3d669e4ab429427ab6fd9863d6a24b8557eb1d75f815919bfb"
     },
     {
       "id": "architecture.context-packer",

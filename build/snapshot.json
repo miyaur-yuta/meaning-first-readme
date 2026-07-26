@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "repository_digest": "0d91ad9885cc05801c84efbb2c06d8db0a961ed9a49dc3b1b1634cb197f65398",
+  "repository_digest": "782162c127b2bd6bd148070259b6381c58cd5e4de4055e5a1a1e5ce04d3d18aa",
   "blocks": [
     {
       "id": "architecture.context-packer",
@@ -573,6 +573,48 @@
       "digest": "abae090eca438c2f2aedf57653e64d346e4633d5d08df549896587856b24e054"
     },
     {
+      "id": "decision.spec-kit-integration",
+      "kind": "decision",
+      "title": "Spec Kit との関係：意味ブロックを Constitution/Spec に接続",
+      "summary": "GitHub Spec Kit の SDD ライフサイクル（constitution/spec/clarify/plan/tasks/implement/converge）と意味ブロックを接続し、要件定義ファーストで運用する。",
+      "order": 81,
+      "priority": 60,
+      "audience": [
+        "human"
+      ],
+      "tags": [
+        "SpecKit",
+        "SDD",
+        "要件定義",
+        "ClaudeCode",
+        "決定"
+      ],
+      "status": "active",
+      "trust": "authoritative",
+      "depends_on": [
+        "thesis.frictionless-ai-handoff",
+        "scope.explanation-vs-generation",
+        "guide.claude-code-primitives"
+      ],
+      "evidence": [],
+      "supports": [],
+      "claims": [
+        "Spec Kit の SDD ライフサイクルを採用し、意味ブロックをその前段・入力として使う",
+        "constitution.md は意味ブロックの principle/constraint 層から生成する",
+        "spec.md は purpose/scope/non_goal 層から生成する"
+      ],
+      "negates": [],
+      "acceptance": [],
+      "rationale": "ユーザーの『まず要件定義しない？Spec Kit 入れて』という指摘通り、意味ブロック単体では要件定義の工程順序がなく、Spec Kit がその欠けを埋める。意味ブロックは『正本』、Spec Kit は『工程』。",
+      "owner": "project",
+      "source": "",
+      "updated": "2026-07-26",
+      "expires": null,
+      "volatile": false,
+      "body": "GitHub Spec Kit（2026-07 時点 v0.12.5）の SDD ライフサイクルを採用し、本プロジェクトの意味ブロック層と接続する。\n\n## Spec Kit とは\n\nGitHub 製のオープンソース CLI・プロンプト群。自然言語の仕様書を一次産物とし、コードをそこから生成する「Spec-Driven Development」を Claude Code / Copilot / Cursor 等で実施するためのフレームワーク。\n\n## SDD の9フェーズ\n\n| フェーズ | コマンド | 役割 |\n|---|---|---|\n| Constitution | `/speckit.constitution` | プロジェクト原則・ガバナンス |\n| Specify | `/speckit.specify` | 機能要件・ユーザーストーリー |\n| Clarify | `/speckit.clarify` | 曖昧さ解消 |\n| Plan | `/speckit.plan` | 技術アーキ・スタック |\n| Checklist | `/speckit.checklist` | 仕様の完全性検証 |\n| Tasks | `/speckit.tasks` | 実行可能なタスク分解 |\n| Analyze | `/speckit.analyze` | 全アーティファクトの整合性検査 |\n| Implement | `/speckit.implement` | コード生成 |\n| Converge | `/speckit.converge` | 仕様・計画との収束確認 |\n\n## 意味ブロックとの対応\n\n| Spec Kit 入力 | 意味ブロック層 |\n|---|---|\n| `memory/constitution.md` | `principle` / `constraint` / `decision` |\n| `spec.md` | `purpose` / `scope` / `non_goal` / `definition` |\n| `plan.md` | `architecture` / `procedure` |\n| `tasks.md` | `procedure`（具体化） |\n| 検査入力 | `evidence` / `risk` / `fact` |\n\n意味ブロックは**正本（single source of truth）**、Spec Kit は**工程（lifecycle）**。両者は競合せず、意味ブロックから Spec Kit の各 Markdown を生成し、Spec Kit が AI と協調して実装に落とす。\n\n## 運用フロー\n\n1. **ヒアリング（認知負荷低）:** 人間が要点だけ伝える\n2. **意味ブロック化:** AI がヒアリング結果を `purpose`/`scope`/`non_goal`/`definition` に構造化\n3. **Constitution/Spec 生成:** 意味ブロックから Spec Kit の Markdown を生成\n4. **Clarify/Plan/Tasks:** Spec Kit のフェーズを順に進める\n5. **Implement/Converge:** コード生成と収束検証\n\n## v1 の範囲\n\n- **作る:** 意味ブロック → Spec Kit Markdown の**生成ガイド**（説明資料）\n- **作らない:** 自動生成機能・Spec Kit CLI のラッパー（次段階）\n\nSpec Kit 自体の説明は `guide.spec-kit`（別ブロック）に譲る。",
+      "digest": "c3341e190ffee5fa8ca4a5ecb17aeb9156af0bf3b03bb456db240ed509591ae3"
+    },
+    {
       "id": "definition.context-contract",
       "kind": "definition",
       "title": "文脈契約",
@@ -957,6 +999,49 @@
       "volatile": false,
       "body": "Claude Code のハーネス要素について、概念・使い方・最小構成を整理する。v1 では自動生成しないが、読者・保守者・引き継ぎ担当が全体を把握するために必要な資産。\n\n## CLAUDE.md / Rules\n\n**概念:** セッションで常に読み込まれる文脈・指示。プロジェクトの「常に効く前提」を書く。\n\n**使い方:** リポジトリルートに `CLAUDE.md` を置く。グローバルは `~/.claude/CLAUDE.md`。\n\n**最小構成:**\n\n```markdown\n# CLAUDE.md\n\n## 目的\n<プロジェクトの目的を1行で>\n\n## 禁止事項\n- <やってはいけないこと>\n\n## 次の一手\n- <現在の優先タスク>\n```\n\n**このプロジェクトとの関係:** v1 の README は、CLAUDE.md に相当する情報を人間向けビューで出力する。\n\n## Skills\n\n**概念:** オンデマンドで読み込まれる知識・ワークフロー。`/` コマンドや自動判定で発動。\n\n**使い方:** `.claude/skills/<name>/SKILL.md` に配置。\n\n**最小構成:**\n\n```markdown\n---\nname: <skill-name>\ndescription: 何をするスキルか\n---\n\n# スキル本文\n<手順・知識>\n```\n\n**このプロジェクトとの関係:** 次段階で意味ブロックから Skill 定義を生成する。\n\n## Hooks\n\n**概念:** ライフサイクルイベントで必ず発火する強制ルール。`deny` 相当。\n\n**使い方:** `.claude/settings.json` の `hooks` セクションに定義。\n\n**最小構成:**\n\n```json\n{\n  \"hooks\": {\n    \"PreToolUse\": [\n      {\n        \"matcher\": \"Bash\",\n        \"hooks\": [{\"type\": \"command\", \"command\": \"echo 'check'\"}]\n      }\n    ]\n  }\n}\n```\n\n**このプロジェクトとの関係:** 次段階で「禁止事項」ブロックから Hooks を生成する。\n\n## Subagents\n\n**概念:** 独立コンテキストで専門作業を行うエージェント。\n\n**使い方:** `.claude/agents/<name>.md` に定義。\n\n**最小構成:**\n\n```markdown\n---\nname: <agent-name>\ndescription: 何をさせるエージェントか\ntools: [Read, Grep]\n---\n\n# エージェント指示\n<役割・手順>\n```\n\n**このプロジェクトとの関係:** 次段階で「手順」ブロックから Subagent 定義を生成する。\n\n## MCP\n\n**概念:** 外部システム接続。ファイルシステム・DB・API 等をツールとして暴露。\n\n**使い方:** `.claude/mcp.json`（プロジェクト）または `~/.claude.json`（ユーザー）に定義。\n\n**最小構成:**\n\n```json\n{\n  \"mcpServers\": {\n    \"filesystem\": {\n      \"command\": \"npx\",\n      \"args\": [\"-y\", \"@modelcontextprotocol/server-filesystem\", \"/path\"]\n    }\n  }\n}\n```\n\n**このプロジェクトとの関係:** 次段階で外部連携設定を意味ブロックから生成する。\n\n## Plugins\n\n**概念:** 上記を束ねて配布する単位。\n\n**使い方:** マーケットプレイスまたはローカルパスからインストール。\n\n**このプロジェクトとの関係:** 最終段階でハーネス設定一式を Plugin として配布可能にする。\n\n## 権限\n\n**概念:** 誰の設定か（スコープ）、どの程度自動か（モード）。\n\n**詳細:** `constraint.permission-scope` を参照。\n\n**このプロジェクトとの関係:** v1 では解説のみ。次段階でスコープ別に権限設定を生成する。",
       "digest": "1a91027470e8f3fd91c229e7b1a9b5b45ba27a52bc3a2646cfbf947061b2d05a"
+    },
+    {
+      "id": "guide.spec-kit",
+      "kind": "procedure",
+      "title": "Spec Kit：概念・使い方・最小構成",
+      "summary": "GitHub Spec Kit の概念・CLI・最小構成を整理する。本プロジェクトの意味ブロックを前段として接続するための引き継ぎ資料。",
+      "order": 91,
+      "priority": 60,
+      "audience": [
+        "human"
+      ],
+      "tags": [
+        "ガイド",
+        "SpecKit",
+        "SDD",
+        "使い方",
+        "最小構成"
+      ],
+      "status": "active",
+      "trust": "reviewed",
+      "depends_on": [
+        "decision.spec-kit-integration",
+        "thesis.frictionless-ai-handoff"
+      ],
+      "evidence": [],
+      "supports": [],
+      "claims": [
+        "Spec Kit の概念と最小構成を文書化する"
+      ],
+      "negates": [],
+      "acceptance": [
+        "Spec Kit の位置付けと9フェーズをカバーしている",
+        "インストールから最初の spec までの手順がある",
+        "このプロジェクトとの関係が明記されている"
+      ],
+      "rationale": "",
+      "owner": "project",
+      "source": "",
+      "updated": "2026-07-26",
+      "expires": null,
+      "volatile": false,
+      "body": "GitHub Spec Kit（v0.12.5, 2026-07）の概念・使い方・最小構成を整理する。\n\n## 概念\n\nSpec Kit は GitHub 製のオープンソース CLI・プロンプト群。自然言語の仕様書を一次産物とする **Spec-Driven Development（SDD）** を、Claude Code / Copilot / Cursor / Gemini 等の AI エージェントで実施するためのフレームワーク。\n\n従来の「コードが王」ではなく、**「仕様が王、コードは仕様から生成される」** という転倒。\n\n## 使い方\n\n### インストール\n\n```bash\nuv tool install specify-cli\n# または pipx install specify-cli\n```\n\n### 初期化\n\n```bash\nspecify init <project-name>\ncd <project-name>\n```\n\n### 主要コマンド\n\n```bash\n/speckit.constitution   # プロジェクト原則を定義\n/speckit.specify        # 機能要件・ユーザーストーリー\n/speckit.clarify        # 曖昧さをAIが質問して解消\n/speckit.plan           # 技術アーキ・スタック決定\n/speckit.checklist      # 仕様の完全性検証\n/speckit.tasks          # 実行可能タスクに分解\n/speckit.analyze        # 全アーティファクトの整合性検査\n/speckit.implement      # コード生成\n/speckit.converge       # 仕様・計画との収束確認\n```\n\n## 最小構成\n\nSpec Kit が生成する主要 Markdown：\n\n```\nproject/\n├── memory/\n│   └── constitution.md   # プロジェクト原則（不変）\n├── specs/\n│   └── <feature>/\n│       ├── spec.md       # 機能要件\n│       ├── plan.md       # 技術計画\n│       └── tasks.md      # タスク分解\n└── .speckit/\n    └── config.yml        # 設定\n```\n\n## このプロジェクトとの関係\n\n本プロジェクト（Meaning First README）の**意味ブロックは Spec Kit の前段**：\n\n- `principle` / `constraint` → `constitution.md`\n- `purpose` / `scope` / `non_goal` / `definition` → `spec.md`\n- `architecture` / `procedure` → `plan.md` / `tasks.md`\n- `evidence` / `risk` / `fact` → 検査入力\n\n詳細は [`decision.spec-kit-integration`](081-decision-spec-kit.md) を参照。\n\n## 認知負荷の低い運用\n\nユーザーの要望「認知負荷の低いヒアリングを一度やって、AI エージェントが走り続ける」は次のフローで実現する：\n\n1. 人間が要点を伝える（認知負荷低）\n2. AI が意味ブロックに構造化\n3. Spec Kit の Markdown を生成\n4. Spec Kit のフェーズを AI が自動進行\n5. 人間は要所で承認のみ\n\nこのフローの具体化は次段階の実装課題。",
+      "digest": "f36a9efc6373fa3d669e4ab429427ab6fd9863d6a24b8557eb1d75f815919bfb"
     },
     {
       "id": "non_goal.length",
