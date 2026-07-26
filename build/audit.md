@@ -18,10 +18,10 @@
 
 ### structure
 
-- **active_blocks:** `45`
+- **active_blocks:** `47`
 - **kinds:** `['architecture', 'assumption', 'changelog', 'constraint', 'decision', 'definition', 'evidence', 'example', 'faq', 'glossary', 'non_goal', 'principle', 'procedure', 'purpose', 'risk', 'roadmap', 'scope']`
 - **required_kinds_present:** `True`
-- **estimated_tokens:** `14565`
+- **estimated_tokens:** `16200`
 
 ### traceability
 
@@ -33,8 +33,8 @@
 
 ### actionability
 
-- **procedures:** `5`
-- **procedures_with_acceptance:** `5`
+- **procedures:** `6`
+- **procedures_with_acceptance:** `6`
 - **ratio:** `1.0`
 
 ### freshness
@@ -46,7 +46,7 @@
 ### connectivity
 
 - **purpose_roots:** `['purpose.meaning', 'thesis.frictionless-ai-handoff']`
-- **reachable_blocks:** `45`
+- **reachable_blocks:** `47`
 - **orphan_blocks:** `[]`
 - **ratio:** `1.0`
 
@@ -54,4 +54,4 @@
 
 - **ambiguous_occurrences:** `0`
 - **ambiguous_per_1000_words:** `0.0`
-- **authoritative_blocks:** `6`
+- **authoritative_blocks:** `7`

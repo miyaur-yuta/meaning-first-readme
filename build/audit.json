@@ -2,7 +2,7 @@
   "passed": true,
   "dimensions": {
     "structure": {
-      "active_blocks": 45,
+      "active_blocks": 47,
       "kinds": [
         "architecture",
         "assumption",
@@ -23,7 +23,7 @@
         "scope"
       ],
       "required_kinds_present": true,
-      "estimated_tokens": 14565
+      "estimated_tokens": 16200
     },
     "traceability": {
       "eligible_blocks": 4,
@@ -33,8 +33,8 @@
       "evidence_with_backlinks": 2
     },
     "actionability": {
-      "procedures": 5,
-      "procedures_with_acceptance": 5,
+      "procedures": 6,
+      "procedures_with_acceptance": 6,
       "ratio": 1.0
     },
     "freshness": {
@@ -47,14 +47,14 @@
         "purpose.meaning",
         "thesis.frictionless-ai-handoff"
       ],
-      "reachable_blocks": 45,
+      "reachable_blocks": 47,
       "orphan_blocks": [],
       "ratio": 1.0
     },
     "clarity": {
       "ambiguous_occurrences": 0,
       "ambiguous_per_1000_words": 0.0,
-      "authoritative_blocks": 6
+      "authoritative_blocks": 7
     }
   },
   "gates": {

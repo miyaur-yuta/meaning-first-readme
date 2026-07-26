@@ -9,13 +9,13 @@
 
 | 項目 | 値 |
 |---|---:|
-| 有効な意味ブロック | 45 |
-| 推定ソーストークン | 14,565 |
+| 有効な意味ブロック | 47 |
+| 推定ソーストークン | 16,200 |
 | 最新ソース更新日 | 2026-07-26 |
-| リポジトリ指紋 | `c6ba7333546e442fdaab` |
+| リポジトリ指紋 | `0d91ad9885cc05801c84` |
 | 生成規約 | `型付き意味ブロックから生成。README.md は直接編集しない。` |
 
-<!-- mfr:manifest {"active_blocks":45,"block_ids":["thesis.frictionless-ai-handoff","purpose.meaning","scope.entry","scope.design-boundary","scope.personas","scope.readers","scope.artifact","definition.real-conversation","non_goal.length","non_goal.omniscience","definition.meaning","definition.context-contract","principle.progressive-disclosure","principle.typed-claims","principle.fail-closed","assumption.readme-interface","constraint.truth","constraint.boundary","constraint.provenance","constraint.update-safety","constraint.permission-scope","constraint.real-conversation-quality","decision.markdown-toml","decision.observation-format","decision.no-single-score","decision.self-hosting","architecture.pipeline","architecture.semantic-graph","architecture.context-packer","procedure.author","procedure.review","procedure.build","procedure.context","procedure.release","evidence.self-host-build","evidence.retrieval-benchmark","risk.prompt-injection","risk.context-overflow","risk.stale-truth","example.quickstart","example.typed-block","glossary.core","roadmap.v1","faq.longest","changelog.v1"],"estimated_source_tokens":14565,"latest_source_update":"2026-07-26","project":"Meaning First README","repository_digest":"c6ba7333546e442fdaab9d46fcac5546be741b0f2774af964b067f1b063603ff","schema_version":1} -->
+<!-- mfr:manifest {"active_blocks":47,"block_ids":["thesis.frictionless-ai-handoff","purpose.meaning","scope.entry","scope.design-boundary","scope.personas","scope.explanation-vs-generation","scope.readers","scope.artifact","definition.real-conversation","non_goal.length","non_goal.omniscience","definition.meaning","definition.context-contract","principle.progressive-disclosure","principle.typed-claims","principle.fail-closed","assumption.readme-interface","constraint.truth","constraint.boundary","constraint.provenance","constraint.update-safety","constraint.permission-scope","constraint.real-conversation-quality","decision.markdown-toml","decision.observation-format","decision.no-single-score","decision.self-hosting","architecture.pipeline","guide.claude-code-primitives","architecture.semantic-graph","architecture.context-packer","procedure.author","procedure.review","procedure.build","procedure.context","procedure.release","evidence.self-host-build","evidence.retrieval-benchmark","risk.prompt-injection","risk.context-overflow","risk.stale-truth","example.quickstart","example.typed-block","glossary.core","roadmap.v1","faq.longest","changelog.v1"],"estimated_source_tokens":16200,"latest_source_update":"2026-07-26","project":"Meaning First README","repository_digest":"0d91ad9885cc05801c84efbb2c06d8db0a961ed9a49dc3b1b1634cb197f65398","schema_version":1} -->
 
 ## 目次
 
@@ -26,6 +26,7 @@
   - [最初の30秒でやること](#最初の30秒でやること)
   - [v1 の設計境界：作り出さず、範囲を固定する](#v1 の設計境界：作り出さず、範囲を固定する)
   - [中心ペルソナの典型タスク](#中心ペルソナの典型タスク)
+  - [「生成しない」と「説明しない」は別物](#「生成しない」と「説明しない」は別物)
   - [対象読者と利用主体](#対象読者と利用主体)
   - [成果物の範囲](#成果物の範囲)
 - [非目的](#非目的)
@@ -58,6 +59,7 @@
   - [意味グラフ](#意味グラフ)
   - [トークン予算付き文脈コンパイラ](#トークン予算付き文脈コンパイラ)
 - [手順](#手順)
+  - [Claude Code ハーネス要素：概念・使い方・最小構成](#Claude Code ハーネス要素：概念・使い方・最小構成)
   - [意味ブロックを追加する手順](#意味ブロックを追加する手順)
   - [意味変更をレビューする手順](#意味変更をレビューする手順)
   - [ローカルでビルドと検証を実行する](#ローカルでビルドと検証を実行する)
@@ -269,6 +271,50 @@ python -m meaning_first_readme validate
 各タスクの実施結果は `evidence` 種別ブロックとして残し、回帰検出に使う。サンプルサイズ1の印象は採用しない。
 
 <!-- /mfr:block scope.personas -->
+
+<!-- mfr:block {"digest":"bc655661c53530e4","id":"scope.explanation-vs-generation","kind":"scope","priority":65,"status":"active"} -->
+### 「生成しない」と「説明しない」は別物
+
+> v1 では各ハーネス要素（CLAUDE.md/Skills/Hooks/Subagents/MCP）の自動生成はしないが、概念・使い方・引き継ぎ資料は提供する。
+
+<sub>`scope.explanation-vs-generation` · 種別: `scope` · 優先度: `65` · 信頼区分: `authoritative` · 対象: `human` · 更新: `2026-07-26` · 依存: `scope.design-boundary`, `thesis.frictionless-ai-handoff`</sub>
+
+「v1 では作らない」と「v1 では説明しない」を混同しない。自動生成機能が範囲外でも、読者が対象を理解するための説明は必須である。
+
+## 区別
+
+| 対象 | v1 の位置付け |
+|---|---|
+| CLAUDE.md / Skills / Hooks / Subagents / MCP の**自動生成機能** | 範囲外（次段階） |
+| それぞれの**概念・役割・使い方の説明** | 範囲内（この README/ドキュメント群に含む） |
+| 権限設定の**自動生成機能** | 範囲外（次段階） |
+| 権限スコープとモードの**解説** | 範囲内（`constraint.permission-scope` 参照） |
+
+## なぜ区別するか
+
+ハーネス要素を「範囲外」とだけ書くと、読者は「このプロジェクトは Claude Code の何も分かっていない」と誤解する。目的は **生成自動化を後回しにすること** であって、**読者を放置すること** ではない。
+
+## v1 で提供する説明資産
+
+- Claude Code の7プリミティブと役割（`thesis.frictionless-ai-handoff`）
+- 権限スコープとモード（`constraint.permission-scope`）
+- ペルソナと典型タスク（`scope.personas`）
+- 対話観察フォーマット（`decision.observation-format`）
+- このプロジェクトが v1 で扱う範囲（`scope.design-boundary`）
+
+これらにより、読者は「何が自動化され、何が手動か」を含めて全体を理解できる。
+
+## 引き継ぎ資料
+
+次段階で各種生成機能を追加する前提で、v1 の時点で次を整備する。
+
+- 各ハーネス要素の「現在の状態」と「理想状態」の差分
+- 次段階で生成する際の出力イメージ
+- 手動で設定する場合の最小構成例
+
+これらは `roadmap` と連動して整備する。
+
+<!-- /mfr:block scope.explanation-vs-generation -->
 
 <!-- mfr:block {"digest":"840ab5128fe8bae0","id":"scope.readers","kind":"scope","priority":95,"status":"active"} -->
 ### 対象読者と利用主体
@@ -858,6 +904,147 @@ Markdownの見出し順だけでは、どの判断がどの前提に依存する
 
 ## 手順
 
+<!-- mfr:block {"digest":"1a91027470e8f3fd","id":"guide.claude-code-primitives","kind":"procedure","priority":60,"status":"active"} -->
+### Claude Code ハーネス要素：概念・使い方・最小構成
+
+> Claude Code の7プリミティブ（CLAUDE.md/Skills/Hooks/Subagents/MCP/Plugins/権限）について、概念・使い方・最小構成を整理する。
+
+<sub>`guide.claude-code-primitives` · 種別: `procedure` · 優先度: `60` · 信頼区分: `reviewed` · 対象: `human` · 更新: `2026-07-26` · 依存: `thesis.frictionless-ai-handoff`, `constraint.permission-scope`, `scope.explanation-vs-generation`</sub>
+
+Claude Code のハーネス要素について、概念・使い方・最小構成を整理する。v1 では自動生成しないが、読者・保守者・引き継ぎ担当が全体を把握するために必要な資産。
+
+## CLAUDE.md / Rules
+
+**概念:** セッションで常に読み込まれる文脈・指示。プロジェクトの「常に効く前提」を書く。
+
+**使い方:** リポジトリルートに `CLAUDE.md` を置く。グローバルは `~/.claude/CLAUDE.md`。
+
+**最小構成:**
+
+```markdown
+# CLAUDE.md
+
+## 目的
+<プロジェクトの目的を1行で>
+
+## 禁止事項
+- <やってはいけないこと>
+
+## 次の一手
+- <現在の優先タスク>
+```
+
+**このプロジェクトとの関係:** v1 の README は、CLAUDE.md に相当する情報を人間向けビューで出力する。
+
+## Skills
+
+**概念:** オンデマンドで読み込まれる知識・ワークフロー。`/` コマンドや自動判定で発動。
+
+**使い方:** `.claude/skills/<name>/SKILL.md` に配置。
+
+**最小構成:**
+
+```markdown
+---
+name: <skill-name>
+description: 何をするスキルか
+---
+
+# スキル本文
+<手順・知識>
+```
+
+**このプロジェクトとの関係:** 次段階で意味ブロックから Skill 定義を生成する。
+
+## Hooks
+
+**概念:** ライフサイクルイベントで必ず発火する強制ルール。`deny` 相当。
+
+**使い方:** `.claude/settings.json` の `hooks` セクションに定義。
+
+**最小構成:**
+
+```json
+{
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "Bash",
+        "hooks": [{"type": "command", "command": "echo 'check'"}]
+      }
+    ]
+  }
+}
+```
+
+**このプロジェクトとの関係:** 次段階で「禁止事項」ブロックから Hooks を生成する。
+
+## Subagents
+
+**概念:** 独立コンテキストで専門作業を行うエージェント。
+
+**使い方:** `.claude/agents/<name>.md` に定義。
+
+**最小構成:**
+
+```markdown
+---
+name: <agent-name>
+description: 何をさせるエージェントか
+tools: [Read, Grep]
+---
+
+# エージェント指示
+<役割・手順>
+```
+
+**このプロジェクトとの関係:** 次段階で「手順」ブロックから Subagent 定義を生成する。
+
+## MCP
+
+**概念:** 外部システム接続。ファイルシステム・DB・API 等をツールとして暴露。
+
+**使い方:** `.claude/mcp.json`（プロジェクト）または `~/.claude.json`（ユーザー）に定義。
+
+**最小構成:**
+
+```json
+{
+  "mcpServers": {
+    "filesystem": {
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-filesystem", "/path"]
+    }
+  }
+}
+```
+
+**このプロジェクトとの関係:** 次段階で外部連携設定を意味ブロックから生成する。
+
+## Plugins
+
+**概念:** 上記を束ねて配布する単位。
+
+**使い方:** マーケットプレイスまたはローカルパスからインストール。
+
+**このプロジェクトとの関係:** 最終段階でハーネス設定一式を Plugin として配布可能にする。
+
+## 権限
+
+**概念:** 誰の設定か（スコープ）、どの程度自動か（モード）。
+
+**詳細:** `constraint.permission-scope` を参照。
+
+**このプロジェクトとの関係:** v1 では解説のみ。次段階でスコープ別に権限設定を生成する。
+
+**受け入れ条件**
+
+- [ ] CLAUDE.md/Skills/Hooks/Subagents/MCP/Plugins/権限の7要素すべてをカバーしている
+- [ ] 各要素に概念・使い方・最小構成の3点が揃っている
+- [ ] このプロジェクトとの関係が明記されている
+
+<!-- /mfr:block guide.claude-code-primitives -->
+
 <!-- mfr:block {"digest":"3f53e70c676c9e70","id":"procedure.author","kind":"procedure","priority":82,"status":"active"} -->
 ### 意味ブロックを追加する手順
 
@@ -1262,7 +1449,7 @@ IDは表示順ではなく概念へ結び付ける。本文を移動してもID�
 ```json
 {
   "schema_version": 1,
-  "repository_digest": "c6ba7333546e442fdaab9d46fcac5546be741b0f2774af964b067f1b063603ff",
+  "repository_digest": "0d91ad9885cc05801c84efbb2c06d8db0a961ed9a49dc3b1b1634cb197f65398",
   "blocks": [
     {
       "id": "thesis.frictionless-ai-handoff",
@@ -1451,6 +1638,43 @@ IDは表示順ではなく概念へ結び付ける。本文を移動してもID�
       "expires": null,
       "volatile": false,
       "digest": "93495ec95dcd3128b4bb5456c13cd5e4a2d55c310b79a6c51861bb783c6e2dc8"
+    },
+    {
+      "id": "scope.explanation-vs-generation",
+      "kind": "scope",
+      "title": "「生成しない」と「説明しない」は別物",
+      "summary": "v1 では各ハーネス要素（CLAUDE.md/Skills/Hooks/Subagents/MCP）の自動生成はしないが、概念・使い方・引き継ぎ資料は提供する。",
+      "order": 18,
+      "priority": 65,
+      "audience": [
+        "human"
+      ],
+      "tags": [
+        "スコープ",
+        "説明",
+        "引き継ぎ",
+        "区別"
+      ],
+      "status": "active",
+      "trust": "authoritative",
+      "depends_on": [
+        "scope.design-boundary",
+        "thesis.frictionless-ai-handoff"
+      ],
+      "evidence": [],
+      "supports": [],
+      "claims": [
+        "生成機能が範囲外でも、概念・使い方の説明は範囲内"
+      ],
+      "negates": [],
+      "acceptance": [],
+      "rationale": "",
+      "owner": "project",
+      "source": "",
+      "updated": "2026-07-26",
+      "expires": null,
+      "volatile": false,
+      "digest": "bc655661c53530e489311a68e7236bdb87c851b1248ac8eeb7189c6ad88f0ca7"
     },
     {
       "id": "scope.readers",
@@ -2255,6 +2479,49 @@ IDは表示順ではなく概念へ結び付ける。本文を移動してもID�
       "expires": null,
       "volatile": false,
       "digest": "62a246eb917c86ddc79b510f796c9becccf1c78d17dd37882b9e72db6b3cf4bf"
+    },
+    {
+      "id": "guide.claude-code-primitives",
+      "kind": "procedure",
+      "title": "Claude Code ハーネス要素：概念・使い方・最小構成",
+      "summary": "Claude Code の7プリミティブ（CLAUDE.md/Skills/Hooks/Subagents/MCP/Plugins/権限）について、概念・使い方・最小構成を整理する。",
+      "order": 90,
+      "priority": 60,
+      "audience": [
+        "human"
+      ],
+      "tags": [
+        "ガイド",
+        "ClaudeCode",
+        "ハーネス",
+        "使い方",
+        "最小構成"
+      ],
+      "status": "active",
+      "trust": "reviewed",
+      "depends_on": [
+        "thesis.frictionless-ai-handoff",
+        "constraint.permission-scope",
+        "scope.explanation-vs-generation"
+      ],
+      "evidence": [],
+      "supports": [],
+      "claims": [
+        "各ハーネス要素の概念と最小構成を文書化する"
+      ],
+      "negates": [],
+      "acceptance": [
+        "CLAUDE.md/Skills/Hooks/Subagents/MCP/Plugins/権限の7要素すべてをカバーしている",
+        "各要素に概念・使い方・最小構成の3点が揃っている",
+        "このプロジェクトとの関係が明記されている"
+      ],
+      "rationale": "",
+      "owner": "project",
+      "source": "",
+      "updated": "2026-07-26",
+      "expires": null,
+      "volatile": false,
+      "digest": "1a91027470e8f3fd91c229e7b1a9b5b45ba27a52bc3a2646cfbf947061b2d05a"
     },
     {
       "id": "architecture.semantic-graph",

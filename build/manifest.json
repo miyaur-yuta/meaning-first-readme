@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "repository_digest": "c6ba7333546e442fdaab9d46fcac5546be741b0f2774af964b067f1b063603ff",
+  "repository_digest": "0d91ad9885cc05801c84efbb2c06d8db0a961ed9a49dc3b1b1634cb197f65398",
   "blocks": [
     {
       "id": "architecture.context-packer",
@@ -915,6 +915,50 @@
       "digest": "9b07b6548611fb14467fa2575044630eabf260255f5e855a7d56d3a70daea8da"
     },
     {
+      "id": "guide.claude-code-primitives",
+      "kind": "procedure",
+      "title": "Claude Code ハーネス要素：概念・使い方・最小構成",
+      "summary": "Claude Code の7プリミティブ（CLAUDE.md/Skills/Hooks/Subagents/MCP/Plugins/権限）について、概念・使い方・最小構成を整理する。",
+      "order": 90,
+      "priority": 60,
+      "audience": [
+        "human"
+      ],
+      "tags": [
+        "ガイド",
+        "ClaudeCode",
+        "ハーネス",
+        "使い方",
+        "最小構成"
+      ],
+      "status": "active",
+      "trust": "reviewed",
+      "depends_on": [
+        "thesis.frictionless-ai-handoff",
+        "constraint.permission-scope",
+        "scope.explanation-vs-generation"
+      ],
+      "evidence": [],
+      "supports": [],
+      "claims": [
+        "各ハーネス要素の概念と最小構成を文書化する"
+      ],
+      "negates": [],
+      "acceptance": [
+        "CLAUDE.md/Skills/Hooks/Subagents/MCP/Plugins/権限の7要素すべてをカバーしている",
+        "各要素に概念・使い方・最小構成の3点が揃っている",
+        "このプロジェクトとの関係が明記されている"
+      ],
+      "rationale": "",
+      "owner": "project",
+      "source": "",
+      "updated": "2026-07-26",
+      "expires": null,
+      "volatile": false,
+      "body": "Claude Code のハーネス要素について、概念・使い方・最小構成を整理する。v1 では自動生成しないが、読者・保守者・引き継ぎ担当が全体を把握するために必要な資産。\n\n## CLAUDE.md / Rules\n\n**概念:** セッションで常に読み込まれる文脈・指示。プロジェクトの「常に効く前提」を書く。\n\n**使い方:** リポジトリルートに `CLAUDE.md` を置く。グローバルは `~/.claude/CLAUDE.md`。\n\n**最小構成:**\n\n```markdown\n# CLAUDE.md\n\n## 目的\n<プロジェクトの目的を1行で>\n\n## 禁止事項\n- <やってはいけないこと>\n\n## 次の一手\n- <現在の優先タスク>\n```\n\n**このプロジェクトとの関係:** v1 の README は、CLAUDE.md に相当する情報を人間向けビューで出力する。\n\n## Skills\n\n**概念:** オンデマンドで読み込まれる知識・ワークフロー。`/` コマンドや自動判定で発動。\n\n**使い方:** `.claude/skills/<name>/SKILL.md` に配置。\n\n**最小構成:**\n\n```markdown\n---\nname: <skill-name>\ndescription: 何をするスキルか\n---\n\n# スキル本文\n<手順・知識>\n```\n\n**このプロジェクトとの関係:** 次段階で意味ブロックから Skill 定義を生成する。\n\n## Hooks\n\n**概念:** ライフサイクルイベントで必ず発火する強制ルール。`deny` 相当。\n\n**使い方:** `.claude/settings.json` の `hooks` セクションに定義。\n\n**最小構成:**\n\n```json\n{\n  \"hooks\": {\n    \"PreToolUse\": [\n      {\n        \"matcher\": \"Bash\",\n        \"hooks\": [{\"type\": \"command\", \"command\": \"echo 'check'\"}]\n      }\n    ]\n  }\n}\n```\n\n**このプロジェクトとの関係:** 次段階で「禁止事項」ブロックから Hooks を生成する。\n\n## Subagents\n\n**概念:** 独立コンテキストで専門作業を行うエージェント。\n\n**使い方:** `.claude/agents/<name>.md` に定義。\n\n**最小構成:**\n\n```markdown\n---\nname: <agent-name>\ndescription: 何をさせるエージェントか\ntools: [Read, Grep]\n---\n\n# エージェント指示\n<役割・手順>\n```\n\n**このプロジェクトとの関係:** 次段階で「手順」ブロックから Subagent 定義を生成する。\n\n## MCP\n\n**概念:** 外部システム接続。ファイルシステム・DB・API 等をツールとして暴露。\n\n**使い方:** `.claude/mcp.json`（プロジェクト）または `~/.claude.json`（ユーザー）に定義。\n\n**最小構成:**\n\n```json\n{\n  \"mcpServers\": {\n    \"filesystem\": {\n      \"command\": \"npx\",\n      \"args\": [\"-y\", \"@modelcontextprotocol/server-filesystem\", \"/path\"]\n    }\n  }\n}\n```\n\n**このプロジェクトとの関係:** 次段階で外部連携設定を意味ブロックから生成する。\n\n## Plugins\n\n**概念:** 上記を束ねて配布する単位。\n\n**使い方:** マーケットプレイスまたはローカルパスからインストール。\n\n**このプロジェクトとの関係:** 最終段階でハーネス設定一式を Plugin として配布可能にする。\n\n## 権限\n\n**概念:** 誰の設定か（スコープ）、どの程度自動か（モード）。\n\n**詳細:** `constraint.permission-scope` を参照。\n\n**このプロジェクトとの関係:** v1 では解説のみ。次段階でスコープ別に権限設定を生成する。",
+      "digest": "1a91027470e8f3fd91c229e7b1a9b5b45ba27a52bc3a2646cfbf947061b2d05a"
+    },
+    {
       "id": "non_goal.length",
       "kind": "non_goal",
       "title": "長さは目的ではない",
@@ -1617,6 +1661,44 @@
       "volatile": false,
       "body": "ひとことで言うと: Claude Code ハーネス（CLAUDE.md, Skills, Hooks, Subagents, MCP）への引き渡し摩擦を、意味ブロックから限界まで減らすツール。v1 は README ビューのみ。\n\nレビューや初見で、最初に全部の章を読む必要はない。\n\n1. 入口: [`docs/START_HERE.md`](docs/START_HERE.md)\n2. 目的の正本: [`content/blocks/001-purpose.md`](content/blocks/001-purpose.md)\n3. 思想: [`content/blocks/002-thesis-frictionless.md`](content/blocks/002-thesis-frictionless.md)\n4. 検証結果: [`release/VALIDATION_REPORT.md`](release/VALIDATION_REPORT.md)\n\nローカル確認は次の3コマンドで足りる。\n\n```bash\nexport PYTHONPATH=src\npython -m meaning_first_readme doctor\npython -m meaning_first_readme validate\n```\n\n`README.md` は生成物なので直接編集しない。変更は `content/blocks/` に入れる。",
       "digest": "937a7eab0dff28c1bb5b97993a854020fc694ed446bb63881dc1a37134c55fc5"
+    },
+    {
+      "id": "scope.explanation-vs-generation",
+      "kind": "scope",
+      "title": "「生成しない」と「説明しない」は別物",
+      "summary": "v1 では各ハーネス要素（CLAUDE.md/Skills/Hooks/Subagents/MCP）の自動生成はしないが、概念・使い方・引き継ぎ資料は提供する。",
+      "order": 18,
+      "priority": 65,
+      "audience": [
+        "human"
+      ],
+      "tags": [
+        "スコープ",
+        "説明",
+        "引き継ぎ",
+        "区別"
+      ],
+      "status": "active",
+      "trust": "authoritative",
+      "depends_on": [
+        "scope.design-boundary",
+        "thesis.frictionless-ai-handoff"
+      ],
+      "evidence": [],
+      "supports": [],
+      "claims": [
+        "生成機能が範囲外でも、概念・使い方の説明は範囲内"
+      ],
+      "negates": [],
+      "acceptance": [],
+      "rationale": "",
+      "owner": "project",
+      "source": "",
+      "updated": "2026-07-26",
+      "expires": null,
+      "volatile": false,
+      "body": "「v1 では作らない」と「v1 では説明しない」を混同しない。自動生成機能が範囲外でも、読者が対象を理解するための説明は必須である。\n\n## 区別\n\n| 対象 | v1 の位置付け |\n|---|---|\n| CLAUDE.md / Skills / Hooks / Subagents / MCP の**自動生成機能** | 範囲外（次段階） |\n| それぞれの**概念・役割・使い方の説明** | 範囲内（この README/ドキュメント群に含む） |\n| 権限設定の**自動生成機能** | 範囲外（次段階） |\n| 権限スコープとモードの**解説** | 範囲内（`constraint.permission-scope` 参照） |\n\n## なぜ区別するか\n\nハーネス要素を「範囲外」とだけ書くと、読者は「このプロジェクトは Claude Code の何も分かっていない」と誤解する。目的は **生成自動化を後回しにすること** であって、**読者を放置すること** ではない。\n\n## v1 で提供する説明資産\n\n- Claude Code の7プリミティブと役割（`thesis.frictionless-ai-handoff`）\n- 権限スコープとモード（`constraint.permission-scope`）\n- ペルソナと典型タスク（`scope.personas`）\n- 対話観察フォーマット（`decision.observation-format`）\n- このプロジェクトが v1 で扱う範囲（`scope.design-boundary`）\n\nこれらにより、読者は「何が自動化され、何が手動か」を含めて全体を理解できる。\n\n## 引き継ぎ資料\n\n次段階で各種生成機能を追加する前提で、v1 の時点で次を整備する。\n\n- 各ハーネス要素の「現在の状態」と「理想状態」の差分\n- 次段階で生成する際の出力イメージ\n- 手動で設定する場合の最小構成例\n\nこれらは `roadmap` と連動して整備する。",
+      "digest": "bc655661c53530e489311a68e7236bdb87c851b1248ac8eeb7189c6ad88f0ca7"
     },
     {
       "id": "scope.personas",
