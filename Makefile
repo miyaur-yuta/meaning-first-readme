@@ -49,7 +49,8 @@ performance:
 
 package:
 	rm -rf dist src/meaning_first_readme.egg-info
-	$(PYTHON) -m pip wheel . --no-deps --no-build-isolation -w dist
+	$(PYTHON) -m pip install --upgrade pip setuptools wheel
+	$(PYTHON) -m pip wheel . --no-deps -w dist
 
 quality: validate build audit benchmark context test
 	@git diff --exit-code -- README.md build/manifest.json build/audit.md build/audit.json build/benchmark.md build/benchmark.json build/release-context.md 2>/dev/null || \
