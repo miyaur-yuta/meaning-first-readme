@@ -10,17 +10,17 @@
 | 項目 | 値 |
 |---|---:|
 | 有効な意味ブロック | 39 |
-| 推定ソーストークン | 11,153 |
+| 推定ソーストークン | 11,357 |
 | 最新ソース更新日 | 2026-07-26 |
-| リポジトリ指紋 | `14a9fea736e659335789` |
+| リポジトリ指紋 | `37949851f0520e50f528` |
 | 生成規約 | `型付き意味ブロックから生成。README.md は直接編集しない。` |
 
-<!-- mfr:manifest {"active_blocks":39,"block_ids":["thesis.frictionless-ai-handoff","purpose.meaning","scope.entry","scope.readers","scope.artifact","non_goal.length","non_goal.omniscience","definition.meaning","definition.context-contract","principle.progressive-disclosure","principle.typed-claims","principle.fail-closed","assumption.readme-interface","constraint.truth","constraint.boundary","constraint.provenance","constraint.update-safety","decision.markdown-toml","decision.no-single-score","decision.self-hosting","architecture.pipeline","architecture.semantic-graph","architecture.context-packer","procedure.author","procedure.review","procedure.build","procedure.context","procedure.release","evidence.self-host-build","evidence.retrieval-benchmark","risk.prompt-injection","risk.context-overflow","risk.stale-truth","example.quickstart","example.typed-block","glossary.core","roadmap.v1","faq.longest","changelog.v1"],"estimated_source_tokens":11153,"latest_source_update":"2026-07-26","project":"Meaning First README","repository_digest":"14a9fea736e6593357890ccecaa6f4f01c72faf2e3ab13218dfe15ff408881e3","schema_version":1} -->
+<!-- mfr:manifest {"active_blocks":39,"block_ids":["thesis.frictionless-ai-handoff","purpose.meaning","scope.entry","scope.readers","scope.artifact","non_goal.length","non_goal.omniscience","definition.meaning","definition.context-contract","principle.progressive-disclosure","principle.typed-claims","principle.fail-closed","assumption.readme-interface","constraint.truth","constraint.boundary","constraint.provenance","constraint.update-safety","decision.markdown-toml","decision.no-single-score","decision.self-hosting","architecture.pipeline","architecture.semantic-graph","architecture.context-packer","procedure.author","procedure.review","procedure.build","procedure.context","procedure.release","evidence.self-host-build","evidence.retrieval-benchmark","risk.prompt-injection","risk.context-overflow","risk.stale-truth","example.quickstart","example.typed-block","glossary.core","roadmap.v1","faq.longest","changelog.v1"],"estimated_source_tokens":11357,"latest_source_update":"2026-07-26","project":"Meaning First README","repository_digest":"37949851f0520e50f528b427046316511a3475b21e35732b92bb84cb78ec746f","schema_version":1} -->
 
 ## 目次
 
 - [目的](#目的)
-  - [思想：AIコーディング環境への引き渡し摩擦を限界まで減らす](#思想：AIコーディング環境への引き渡し摩擦を限界まで減らす)
+  - [思想：Claude Code ハーネスへの引き渡し摩擦を限界まで減らす](#思想：Claude Code ハーネスへの引き渡し摩擦を限界まで減らす)
   - [目的は「意味を達成すること」](#目的は「意味を達成すること」)
 - [対象範囲](#対象範囲)
   - [最初の30秒でやること](#最初の30秒でやること)
@@ -70,7 +70,7 @@
 - [用語](#用語)
   - [主要用語](#主要用語)
 - [ロードマップ](#ロードマップ)
-  - [初号機から意味基盤へ](#初号機から意味基盤へ)
+  - [v1 から Claude Code ハーネス基盤へ](#v1 から Claude Code ハーネス基盤へ)
 - [FAQ](#FAQ)
   - [世界一長くしないのか](#世界一長くしないのか)
 - [変更履歴](#変更履歴)
@@ -78,38 +78,58 @@
 
 ## 目的
 
-<!-- mfr:block {"digest":"fd2d4e825e91155a","id":"thesis.frictionless-ai-handoff","kind":"purpose","priority":70,"status":"active"} -->
-### 思想：AIコーディング環境への引き渡し摩擦を限界まで減らす
+<!-- mfr:block {"digest":"c8e131ba327bd0c0","id":"thesis.frictionless-ai-handoff","kind":"purpose","priority":70,"status":"active"} -->
+### 思想：Claude Code ハーネスへの引き渡し摩擦を限界まで減らす
 
-> README を「正しく書く」ことではなく、ClaudeCode/Cursor 等へリポジトリを渡す摩擦を限界まで減らすことを中心思想とする。
+> README を整備する道具ではなく、Claude Code ハーネス（CLAUDE.md, Skills, Hooks, Subagents, MCP）への引き渡しを、意味ブロックから一貫して生成・検証する体制にする。
 
 <sub>`thesis.frictionless-ai-handoff` · 種別: `purpose` · 優先度: `70` · 信頼区分: `reviewed` · 対象: `human` · 更新: `2026-07-26` · 依存: `purpose.meaning`</sub>
 
-このプロジェクトの思想は、「README を正しく書く」ことではなく、**AIコーディング環境（ClaudeCode, Cursor, その他）へリポジトリを渡す摩擦を限界まで減らす**ことにある。
+このプロジェクトの思想は、「README を正しく書く」ことではなく、**Claude Code ハーネスへのリポジトリ引き渡し摩擦を限界まで減らす**ことにある。
+
+## Claude Code は README を超える
+
+Claude Code（2026-07 時点）は、README を含む包括的なエージェントハーネスである。主な拡張プリミティブは次の7つ。
+
+| プリミティブ | 役割 | 読込タイミング |
+|---|---|---|
+| CLAUDE.md / Rules | 常に効く文脈・指示 | セッション毎に常に |
+| Skills | オンデマンドの知識・ワークフロー | `/` や自動判定 |
+| Hooks | ライフサイクル事件で必ず発火 | 毎回必ず |
+| Subagents | 独立コンテキストで専門作業 | タスク委譲時 |
+| Agent Teams | 複数セッション協調 | 並列処理時 |
+| MCP | 外部システム接続 | ツール呼び出し時 |
+| Plugins | 上記を束ねて配布 | インストール時 |
+
+README は **CLAUDE.md の一部** にすぎない。「README を整備する道具」という位置付けでは、Claude Code 本体の機能のほんの一部しか支えない。
+
+## このプロジェクトが目指す状態
+
+意味ブロック（`content/blocks/`）を正本とし、そこから Claude Code ハーネス設定を一貫して生成・検証する。
+
+- `CLAUDE.md` を意味ブロックから生成する
+- Skills 用の YAML/markdown を同じブロックから生成する
+- 「禁止事項」ブロックから Hooks（モデル依存しない強制ルール）を生成する
+- 「手順」ブロックから Subagent 定義を生成する
+- README は人間向けビューの1つにすぎない
 
 ## 中心ペルソナ
 
-### ペルソナA：ClaudeCode/Cursor を使い始めた人（中心）
-- **苦痛:** AI にリポジトリを渡すたびに README が古い・長い・矛盾し、AI が迷子になる
-- **解く:** タスクに必要な文脈だけを取り出して AI に渡せる。README 全体を食わせなくてよい
+### ペルソナA：Claude Code を使い始めた人（中心）
+- **苦痛:** CLAUDE.md, Skills, Hooks の設定がバラバラで、AI が方針を取り違える
+- **解く:** 意味ブロックを正本にし、各種ハーネス設定を一貫生成する
 
-### ペルソナB：README を保守する人
-- **苦痛:** 「これ消していい？ 根拠どこ？ 誰の判断？」が分からず更新が怖い
-- **解く:** 意味ブロックに根拠・依存・来歴を強制し、怖くなく更新できる
+### ペルソナB：ハーネス設定を保守する人
+- **苦痛:** 「このルール消していい？根拠どこ？」が分からない
+- **解く:** ブロックに根拠・依存・来歴を強制し、怖くなく更新できる
 
 ### ペルソナC：初見でリポジトリを見る人
-- **苦痛:** 長い README から目的と禁止事項を探すのがつらい
-- **解く:** 「目的・禁止・次手」だけの短縮版を機械的に作れる
+- **苦痛:** 何を Claude Code に渡しているか把握できない
+- **解く:** 人間向け README ビューで全体を俯瞰できる
 
 ## 成功の測り方
 
-成果物の価値は、「機能の数」ではなく、**対象ペルソナの摩擦がどれだけ減ったか**で測る。ベンチマークと監査は、この摩擦削減が退歩していないことを回帰検出するための仕組みである。
-
-## この思想が意味しないこと
-
-- 全員が ClaudeCode/Cursor を使うことを前提にしない。人間単独読者も同一ソースから扱う。
-- README を廃止するわけではない。README を「AI に渡しやすい構造」として再編成する。
-- 他ツールの置き換えを主張しない。摩擦が減る部分だけ共存する。
+成果物の価値は「機能の数」ではなく、**対象ペルソナの摩擦がどれだけ減ったか**で測る。
 
 <!-- /mfr:block thesis.frictionless-ai-handoff -->
 
@@ -915,24 +935,24 @@ IDは表示順ではなく概念へ結び付ける。本文を移動してもID�
 
 ## ロードマップ
 
-<!-- mfr:block {"digest":"596e4464f236a155","id":"roadmap.v1","kind":"roadmap","priority":70,"status":"active"} -->
-### 初号機から意味基盤へ
+<!-- mfr:block {"digest":"f5ed7e787d069fd6","id":"roadmap.v1","kind":"roadmap","priority":55,"status":"active"} -->
+### v1 から Claude Code ハーネス基盤へ
 
-> 完成を装わず、現在実装した核と、実運用で検証すべき拡張を分離する。
+> 初号機は README 生成に留まる。次はハーネス設定の生成へ拡張する。
 
-<sub>`roadmap.v1` · 種別: `roadmap` · 優先度: `70` · 信頼区分: `reviewed` · 対象: `both` · 更新: `2026-07-26` · 依存: `purpose.meaning`, `architecture.pipeline`</sub>
+<sub>`roadmap.v1` · 種別: `roadmap` · 優先度: `55` · 信頼区分: `reviewed` · 対象: `both` · 更新: `2026-07-26` · 依存: `purpose.meaning`, `architecture.pipeline`</sub>
 
-初号機で実装する核は、型付きブロック、決定論的README生成、構造検証、意味グラフ、タスク文脈、意味差分、複数次元監査、検索ベンチマーク、テスト、CIである。
+初号機（v1）で実装する核は、型付きブロック、決定論的 README 生成、構造検証、意味グラフ、タスク文脈、意味差分、複数次元監査、検索ベンチマーク、テスト、CI である。これは README ビューに留まる。
 
-次の段階では、実際の利用ログを根拠に拡張する。
+次の段階では、同じ意味ブロックから Claude Code ハーネス設定を生成する。
 
-1. 日本語の形態素解析を任意プラグインとして追加し、検索品質を比較する。
-2. Git履歴からブロック単位の所有者と変更理由を補助生成する。
-3. 外部URLの鮮度確認を、ネットワークを許可した検証環境で実行する。
-4. 複数モデルへ同じ質問を与え、回答の根拠IDと停止判断を評価する。
-5. 巨大リポジトリで性能試験を行い、索引とキャッシュを追加する。
+1. 目的・禁止事項・前提ブロックから CLAUDE.md を生成
+2. 手順ブロックから Skills を生成
+3. 禁止事項ブロックから Hooks を生成
+4. 役割ブロックから Subagents を生成
+5. 他エージェント環境への移植ビューを生成
 
-拡張は機能数ではなく、観測された失敗モードを減らす順に行う。
+拡張は機能数ではなく、観測された引き渡し摩擦を減らす順に行う。
 
 <!-- /mfr:block roadmap.v1 -->
 
@@ -984,13 +1004,13 @@ IDは表示順ではなく概念へ結び付ける。本文を移動してもID�
 ```json
 {
   "schema_version": 1,
-  "repository_digest": "14a9fea736e6593357890ccecaa6f4f01c72faf2e3ab13218dfe15ff408881e3",
+  "repository_digest": "37949851f0520e50f528b427046316511a3475b21e35732b92bb84cb78ec746f",
   "blocks": [
     {
       "id": "thesis.frictionless-ai-handoff",
       "kind": "purpose",
-      "title": "思想：AIコーディング環境への引き渡し摩擦を限界まで減らす",
-      "summary": "README を「正しく書く」ことではなく、ClaudeCode/Cursor 等へリポジトリを渡す摩擦を限界まで減らすことを中心思想とする。",
+      "title": "思想：Claude Code ハーネスへの引き渡し摩擦を限界まで減らす",
+      "summary": "README を整備する道具ではなく、Claude Code ハーネス（CLAUDE.md, Skills, Hooks, Subagents, MCP）への引き渡しを、意味ブロックから一貫して生成・検証する体制にする。",
       "order": 9,
       "priority": 70,
       "audience": [
@@ -998,12 +1018,13 @@ IDは表示順ではなく概念へ結び付ける。本文を移動してもID�
       ],
       "tags": [
         "思想",
-        "AI",
         "ClaudeCode",
-        "Cursor",
-        "引き渡し",
-        "摩擦",
-        "ペルソナ"
+        "ハーネス",
+        "CLAUDE.md",
+        "Skills",
+        "Hooks",
+        "Subagents",
+        "MCP"
       ],
       "status": "active",
       "trust": "reviewed",
@@ -1013,8 +1034,8 @@ IDは表示順ではなく概念へ結び付ける。本文を移動してもID�
       "evidence": [],
       "supports": [],
       "claims": [
-        "中心ペルソナは ClaudeCode/Cursor 利用者である",
-        "成果物の価値は摩擦削減量で測る"
+        "Claude Code は README を超える包括ハーネスである",
+        "README は人間向けビューの一つにすぎない"
       ],
       "negates": [],
       "acceptance": [],
@@ -1024,7 +1045,7 @@ IDは表示順ではなく概念へ結び付ける。本文を移動してもID�
       "updated": "2026-07-26",
       "expires": null,
       "volatile": false,
-      "digest": "fd2d4e825e91155a3d8c2ae6441e581da26ac213fa6590781b78921edc36c2e8"
+      "digest": "c8e131ba327bd0c08d26d16456f41a30319f68b9a4d55b971bd4a5e47953d1a5"
     },
     {
       "id": "purpose.meaning",
@@ -2347,20 +2368,15 @@ IDは表示順ではなく概念へ結び付ける。本文を移動してもID�
     {
       "id": "roadmap.v1",
       "kind": "roadmap",
-      "title": "初号機から意味基盤へ",
-      "summary": "完成を装わず、現在実装した核と、実運用で検証すべき拡張を分離する。",
+      "title": "v1 から Claude Code ハーネス基盤へ",
+      "summary": "初号機は README 生成に留まる。次はハーネス設定の生成へ拡張する。",
       "order": 150,
-      "priority": 70,
+      "priority": 55,
       "audience": [
         "both"
       ],
       "tags": [
         "ロードマップ",
-        "初号機",
-        "拡張",
-        "運用",
-        "失敗モード",
-        "改善",
         "次の開発"
       ],
       "status": "active",
@@ -2380,7 +2396,7 @@ IDは表示順ではなく概念へ結び付ける。本文を移動してもID�
       "updated": "2026-07-26",
       "expires": null,
       "volatile": false,
-      "digest": "596e4464f236a15599745be4c808cbfb284876ea74cdb90e85c5183beb19fe35"
+      "digest": "f5ed7e787d069fd615494142c5cef3458e93ad64aec9ad02df6f80ef04d061a9"
     },
     {
       "id": "faq.longest",

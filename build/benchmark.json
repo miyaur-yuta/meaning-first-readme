@@ -1,7 +1,7 @@
 {
   "passed": true,
   "macro_recall": 1.0,
-  "macro_precision": 0.523011982570806,
+  "macro_precision": 0.5205753353973168,
   "cases": [
     {
       "name": "purpose-not-length",
@@ -234,6 +234,7 @@
         "constraint.provenance",
         "constraint.update-safety",
         "decision.markdown-toml",
+        "decision.no-single-score",
         "architecture.pipeline",
         "risk.stale-truth",
         "roadmap.v1",
@@ -241,7 +242,7 @@
         "changelog.v1"
       ],
       "recall": 1.0,
-      "precision": 0.5555555555555556,
+      "precision": 0.5263157894736842,
       "passed": true
     },
     {

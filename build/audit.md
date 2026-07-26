@@ -21,7 +21,7 @@
 - **active_blocks:** `39`
 - **kinds:** `['architecture', 'assumption', 'changelog', 'constraint', 'decision', 'definition', 'evidence', 'example', 'faq', 'glossary', 'non_goal', 'principle', 'procedure', 'purpose', 'risk', 'roadmap', 'scope']`
 - **required_kinds_present:** `True`
-- **estimated_tokens:** `11153`
+- **estimated_tokens:** `11357`
 
 ### traceability
 
