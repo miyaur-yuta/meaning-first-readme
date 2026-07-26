@@ -1,7 +1,7 @@
 {
   "passed": true,
   "macro_recall": 1.0,
-  "macro_precision": 0.5183823529411765,
+  "macro_precision": 0.523011982570806,
   "cases": [
     {
       "name": "purpose-not-length",
@@ -189,7 +189,6 @@
       ],
       "selected": [
         "purpose.meaning",
-        "scope.entry",
         "scope.readers",
         "scope.artifact",
         "non_goal.length",
@@ -209,7 +208,7 @@
         "risk.prompt-injection"
       ],
       "recall": 1.0,
-      "precision": 0.47368421052631576,
+      "precision": 0.5,
       "passed": true
     },
     {
@@ -223,7 +222,6 @@
       ],
       "selected": [
         "purpose.meaning",
-        "scope.entry",
         "scope.readers",
         "scope.artifact",
         "non_goal.length",
@@ -243,7 +241,7 @@
         "changelog.v1"
       ],
       "recall": 1.0,
-      "precision": 0.5263157894736842,
+      "precision": 0.5555555555555556,
       "passed": true
     },
     {

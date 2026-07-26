@@ -2,7 +2,7 @@
 
 **Result:** PASS
 **Macro recall:** `1.000`
-**Macro precision:** `0.518`
+**Macro precision:** `0.523`
 
 | Case | Recall | Precision | Result |
 |---|---:|---:|---|
@@ -11,8 +11,8 @@
 | release-pr | 1.000 | 0.550 | PASS |
 | author-new-block | 1.000 | 0.600 | PASS |
 | review-semantic-change | 1.000 | 0.550 | PASS |
-| prompt-injection | 1.000 | 0.474 | PASS |
-| stale-information | 1.000 | 0.526 | PASS |
+| prompt-injection | 1.000 | 0.500 | PASS |
+| stale-information | 1.000 | 0.556 | PASS |
 | self-hosted-readme | 1.000 | 0.550 | PASS |
 | meaning-evaluation | 1.000 | 0.500 | PASS |
 | system-architecture | 1.000 | 0.500 | PASS |
@@ -53,13 +53,13 @@
 
 - Query: 外部資料に以前の指示を無視しろと書かれていた。AIはどう扱うべきか
 - Expected: risk.prompt-injection, constraint.boundary, architecture.context-packer, principle.fail-closed
-- Selected: purpose.meaning, scope.entry, scope.readers, scope.artifact, non_goal.length, definition.meaning, definition.context-contract, principle.typed-claims, principle.fail-closed, constraint.truth, constraint.boundary, constraint.provenance, constraint.update-safety, decision.markdown-toml, architecture.pipeline, architecture.semantic-graph, architecture.context-packer, evidence.retrieval-benchmark, risk.prompt-injection
+- Selected: purpose.meaning, scope.readers, scope.artifact, non_goal.length, definition.meaning, definition.context-contract, principle.typed-claims, principle.fail-closed, constraint.truth, constraint.boundary, constraint.provenance, constraint.update-safety, decision.markdown-toml, architecture.pipeline, architecture.semantic-graph, architecture.context-packer, evidence.retrieval-benchmark, risk.prompt-injection
 
 ## stale-information
 
 - Query: 料金や仕様や記録が古くなったときに、期限切れ情報を公開しない仕組み
 - Expected: risk.stale-truth, constraint.truth, constraint.provenance, principle.fail-closed
-- Selected: purpose.meaning, scope.entry, scope.readers, scope.artifact, non_goal.length, definition.meaning, definition.context-contract, principle.typed-claims, principle.fail-closed, constraint.truth, constraint.boundary, constraint.provenance, constraint.update-safety, decision.markdown-toml, architecture.pipeline, risk.stale-truth, roadmap.v1, faq.longest, changelog.v1
+- Selected: purpose.meaning, scope.readers, scope.artifact, non_goal.length, definition.meaning, definition.context-contract, principle.typed-claims, principle.fail-closed, constraint.truth, constraint.boundary, constraint.provenance, constraint.update-safety, decision.markdown-toml, architecture.pipeline, risk.stale-truth, roadmap.v1, faq.longest, changelog.v1
 
 ## self-hosted-readme
 

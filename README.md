@@ -1,6 +1,6 @@
 # Meaning First README
 
-> **目的は意味を達成すること。READMEを、人間とAIのための実行可能な文脈契約にする。**
+> **長いREADMEを書く道具ではない。読んだ人とAIが、目的・禁止事項・次の一手を取り違えないためのREADME生成器。**
 
 > [!IMPORTANT]
 > **目的は「意味を達成すること」。長さは目的ではなく、必要な意味を失わず収容するための容量です。**
@@ -10,12 +10,12 @@
 | 項目 | 値 |
 |---|---:|
 | 有効な意味ブロック | 37 |
-| 推定ソーストークン | 10,009 |
+| 推定ソーストークン | 10,058 |
 | 最新ソース更新日 | 2026-07-26 |
-| リポジトリ指紋 | `4ae032b972527fad8b21` |
-| 生成規約 | `Generated from typed semantic blocks; do not edit README.md directly.` |
+| リポジトリ指紋 | `57f7ea0bcabda99da5f1` |
+| 生成規約 | `型付き意味ブロックから生成。README.md は直接編集しない。` |
 
-<!-- mfr:manifest {"active_blocks":37,"block_ids":["purpose.meaning","scope.entry","scope.readers","scope.artifact","non_goal.length","non_goal.omniscience","definition.meaning","definition.context-contract","principle.progressive-disclosure","principle.typed-claims","principle.fail-closed","assumption.readme-interface","constraint.truth","constraint.boundary","constraint.provenance","constraint.update-safety","decision.markdown-toml","decision.no-single-score","decision.self-hosting","architecture.pipeline","architecture.semantic-graph","architecture.context-packer","procedure.author","procedure.review","procedure.build","procedure.context","procedure.release","evidence.self-host-build","evidence.retrieval-benchmark","risk.prompt-injection","risk.context-overflow","risk.stale-truth","example.typed-block","glossary.core","roadmap.v1","faq.longest","changelog.v1"],"estimated_source_tokens":10009,"latest_source_update":"2026-07-26","project":"Meaning First README","repository_digest":"4ae032b972527fad8b214dde9bd92f9024ed8e4574bbc66302573660412b7140","schema_version":1} -->
+<!-- mfr:manifest {"active_blocks":37,"block_ids":["purpose.meaning","scope.entry","scope.readers","scope.artifact","non_goal.length","non_goal.omniscience","definition.meaning","definition.context-contract","principle.progressive-disclosure","principle.typed-claims","principle.fail-closed","assumption.readme-interface","constraint.truth","constraint.boundary","constraint.provenance","constraint.update-safety","decision.markdown-toml","decision.no-single-score","decision.self-hosting","architecture.pipeline","architecture.semantic-graph","architecture.context-packer","procedure.author","procedure.review","procedure.build","procedure.context","procedure.release","evidence.self-host-build","evidence.retrieval-benchmark","risk.prompt-injection","risk.context-overflow","risk.stale-truth","example.typed-block","glossary.core","roadmap.v1","faq.longest","changelog.v1"],"estimated_source_tokens":10058,"latest_source_update":"2026-07-26","project":"Meaning First README","repository_digest":"57f7ea0bcabda99da5f104ec7d94e0714ace8d566fef5a0fd5f44d5382bb270c","schema_version":1} -->
 
 ## 目次
 
@@ -98,14 +98,16 @@
 
 ## 対象範囲
 
-<!-- mfr:block {"digest":"b09a377546a947ce","id":"scope.entry","kind":"scope","priority":97,"status":"active"} -->
+<!-- mfr:block {"digest":"f375693f08f30e8a","id":"scope.entry","kind":"scope","priority":97,"status":"active"} -->
 ### 最初の30秒でやること
 
-> 全体を読む前に、入口ドキュメントと3コマンドだけを通す。
+> 全体を読む前に、ひとこと説明と最短コマンドだけ通す。
 
 <sub>`scope.entry` · 種別: `scope` · 優先度: `97` · 信頼区分: `reviewed` · 対象: `both` · 更新: `2026-07-26` · 依存: `purpose.meaning`, `scope.readers`</sub>
 
-レビューや初見利用で、最初に全部の章を読む必要はない。
+ひとことで言うと: 長いREADMEを書く道具ではない。読んだ人とAIが、目的・禁止事項・次の一手を取り違えないためのREADME生成器。
+
+レビューや初見で、最初に全部の章を読む必要はない。
 
 1. 入口: [`docs/START_HERE.md`](docs/START_HERE.md)
 2. 目的の正本: [`content/blocks/001-purpose.md`](content/blocks/001-purpose.md)
@@ -895,7 +897,7 @@ IDは表示順ではなく概念へ結び付ける。本文を移動してもID�
 ```json
 {
   "schema_version": 1,
-  "repository_digest": "4ae032b972527fad8b214dde9bd92f9024ed8e4574bbc66302573660412b7140",
+  "repository_digest": "57f7ea0bcabda99da5f104ec7d94e0714ace8d566fef5a0fd5f44d5382bb270c",
   "blocks": [
     {
       "id": "purpose.meaning",
@@ -937,7 +939,7 @@ IDは表示順ではなく概念へ結び付ける。本文を移動してもID�
       "id": "scope.entry",
       "kind": "scope",
       "title": "最初の30秒でやること",
-      "summary": "全体を読む前に、入口ドキュメントと3コマンドだけを通す。",
+      "summary": "全体を読む前に、ひとこと説明と最短コマンドだけ通す。",
       "order": 15,
       "priority": 97,
       "audience": [
@@ -969,7 +971,7 @@ IDは表示順ではなく概念へ結び付ける。本文を移動してもID�
       "updated": "2026-07-26",
       "expires": null,
       "volatile": false,
-      "digest": "b09a377546a947ce048cee7dd030318cf4e72bbec21f13eec28da392014c626f"
+      "digest": "f375693f08f30e8a8b6c1358673ed4f3a627eabd2315427fd6ad392e83c89f25"
     },
     {
       "id": "scope.readers",

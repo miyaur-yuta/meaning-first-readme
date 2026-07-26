@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "repository_digest": "4ae032b972527fad8b214dde9bd92f9024ed8e4574bbc66302573660412b7140",
+  "repository_digest": "57f7ea0bcabda99da5f104ec7d94e0714ace8d566fef5a0fd5f44d5382bb270c",
   "blocks": [
     {
       "id": "architecture.context-packer",
@@ -1357,7 +1357,7 @@
       "id": "scope.entry",
       "kind": "scope",
       "title": "最初の30秒でやること",
-      "summary": "全体を読む前に、入口ドキュメントと3コマンドだけを通す。",
+      "summary": "全体を読む前に、ひとこと説明と最短コマンドだけ通す。",
       "order": 15,
       "priority": 97,
       "audience": [
@@ -1389,8 +1389,8 @@
       "updated": "2026-07-26",
       "expires": null,
       "volatile": false,
-      "body": "レビューや初見利用で、最初に全部の章を読む必要はない。\n\n1. 入口: [`docs/START_HERE.md`](docs/START_HERE.md)\n2. 目的の正本: [`content/blocks/001-purpose.md`](content/blocks/001-purpose.md)\n3. 検証結果: [`release/VALIDATION_REPORT.md`](release/VALIDATION_REPORT.md)\n\nローカル確認は次の3コマンドで足りる。\n\n```bash\nexport PYTHONPATH=src\npython -m meaning_first_readme doctor\npython -m meaning_first_readme validate\n```\n\n`README.md` は生成物なので直接編集しない。変更は `content/blocks/` に入れる。",
-      "digest": "b09a377546a947ce048cee7dd030318cf4e72bbec21f13eec28da392014c626f"
+      "body": "ひとことで言うと: 長いREADMEを書く道具ではない。読んだ人とAIが、目的・禁止事項・次の一手を取り違えないためのREADME生成器。\n\nレビューや初見で、最初に全部の章を読む必要はない。\n\n1. 入口: [`docs/START_HERE.md`](docs/START_HERE.md)\n2. 目的の正本: [`content/blocks/001-purpose.md`](content/blocks/001-purpose.md)\n3. 検証結果: [`release/VALIDATION_REPORT.md`](release/VALIDATION_REPORT.md)\n\nローカル確認は次の3コマンドで足りる。\n\n```bash\nexport PYTHONPATH=src\npython -m meaning_first_readme doctor\npython -m meaning_first_readme validate\n```\n\n`README.md` は生成物なので直接編集しない。変更は `content/blocks/` に入れる。",
+      "digest": "f375693f08f30e8a8b6c1358673ed4f3a627eabd2315427fd6ad392e83c89f25"
     },
     {
       "id": "scope.readers",

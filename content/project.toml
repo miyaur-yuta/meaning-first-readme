@@ -1,6 +1,6 @@
 [project]
 name = "Meaning First README"
-tagline = "目的は意味を達成すること。READMEを、人間とAIのための実行可能な文脈契約にする。"
+tagline = "長いREADMEを書く道具ではない。読んだ人とAIが、目的・禁止事項・次の一手を取り違えないためのREADME生成器。"
 language = "ja"
 content_dir = "content/blocks"
 required_kinds = ["purpose", "scope", "non_goal", "definition", "principle", "constraint", "decision", "architecture", "procedure", "evidence", "risk", "roadmap"]
@@ -21,4 +21,4 @@ minimum_recall = 0.85
 minimum_precision = 0.30
 
 [render]
-generated_notice = "Generated from typed semantic blocks; do not edit README.md directly."
+generated_notice = "型付き意味ブロックから生成。README.md は直接編集しない。"

@@ -2,7 +2,7 @@
 id = "scope.entry"
 kind = "scope"
 title = "最初の30秒でやること"
-summary = "全体を読む前に、入口ドキュメントと3コマンドだけを通す。"
+summary = "全体を読む前に、ひとこと説明と最短コマンドだけ通す。"
 order = 15
 priority = 97
 audience = ["both"]
@@ -14,7 +14,9 @@ claims = ["初見は入口ドキュメントと最短コマンドから入る"]
 owner = "project"
 updated = "2026-07-26"
 +++
-レビューや初見利用で、最初に全部の章を読む必要はない。
+ひとことで言うと: 長いREADMEを書く道具ではない。読んだ人とAIが、目的・禁止事項・次の一手を取り違えないためのREADME生成器。
+
+レビューや初見で、最初に全部の章を読む必要はない。
 
 1. 入口: [`docs/START_HERE.md`](docs/START_HERE.md)
 2. 目的の正本: [`content/blocks/001-purpose.md`](content/blocks/001-purpose.md)
