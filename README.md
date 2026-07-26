@@ -10,12 +10,12 @@
 | 項目 | 値 |
 |---|---:|
 | 有効な意味ブロック | 41 |
-| 推定ソーストークン | 12,520 |
+| 推定ソーストークン | 12,553 |
 | 最新ソース更新日 | 2026-07-26 |
-| リポジトリ指紋 | `c4d9d0ad4cea2012142a` |
+| リポジトリ指紋 | `590bea6965ce2556970e` |
 | 生成規約 | `型付き意味ブロックから生成。README.md は直接編集しない。` |
 
-<!-- mfr:manifest {"active_blocks":41,"block_ids":["thesis.frictionless-ai-handoff","purpose.meaning","scope.entry","scope.readers","scope.artifact","non_goal.length","non_goal.omniscience","definition.meaning","definition.context-contract","principle.progressive-disclosure","principle.typed-claims","principle.fail-closed","assumption.readme-interface","constraint.truth","constraint.boundary","constraint.provenance","constraint.update-safety","constraint.permission-scope","constraint.real-conversation-quality","decision.markdown-toml","decision.no-single-score","decision.self-hosting","architecture.pipeline","architecture.semantic-graph","architecture.context-packer","procedure.author","procedure.review","procedure.build","procedure.context","procedure.release","evidence.self-host-build","evidence.retrieval-benchmark","risk.prompt-injection","risk.context-overflow","risk.stale-truth","example.quickstart","example.typed-block","glossary.core","roadmap.v1","faq.longest","changelog.v1"],"estimated_source_tokens":12520,"latest_source_update":"2026-07-26","project":"Meaning First README","repository_digest":"c4d9d0ad4cea2012142ae486e1f95876cf6fc4e101052aa0908c251826aa2825","schema_version":1} -->
+<!-- mfr:manifest {"active_blocks":41,"block_ids":["thesis.frictionless-ai-handoff","purpose.meaning","scope.entry","scope.readers","scope.artifact","non_goal.length","non_goal.omniscience","definition.meaning","definition.context-contract","principle.progressive-disclosure","principle.typed-claims","principle.fail-closed","assumption.readme-interface","constraint.truth","constraint.boundary","constraint.provenance","constraint.update-safety","constraint.permission-scope","constraint.real-conversation-quality","decision.markdown-toml","decision.no-single-score","decision.self-hosting","architecture.pipeline","architecture.semantic-graph","architecture.context-packer","procedure.author","procedure.review","procedure.build","procedure.context","procedure.release","evidence.self-host-build","evidence.retrieval-benchmark","risk.prompt-injection","risk.context-overflow","risk.stale-truth","example.quickstart","example.typed-block","glossary.core","roadmap.v1","faq.longest","changelog.v1"],"estimated_source_tokens":12553,"latest_source_update":"2026-07-26","project":"Meaning First README","repository_digest":"590bea6965ce2556970ec9ea4b890f30437efcb96ed18305124c4763eeaa7e7c","schema_version":1} -->
 
 ## 目次
 
@@ -157,20 +157,21 @@ README は **CLAUDE.md の一部** にすぎない。「README を整備する�
 
 ## 対象範囲
 
-<!-- mfr:block {"digest":"e0aa0358bb03343c","id":"scope.entry","kind":"scope","priority":60,"status":"active"} -->
+<!-- mfr:block {"digest":"937a7eab0dff28c1","id":"scope.entry","kind":"scope","priority":60,"status":"active"} -->
 ### 最初の30秒でやること
 
 > 全体を読む前に、ひとこと説明と最短コマンドだけ通す。
 
 <sub>`scope.entry` · 種別: `scope` · 優先度: `60` · 信頼区分: `reviewed` · 対象: `human` · 更新: `2026-07-26` · 依存: `purpose.meaning`, `scope.readers`</sub>
 
-ひとことで言うと: 長いREADMEを書く道具ではない。読んだ人とAIが、目的・禁止事項・次の一手を取り違えないためのREADME生成器。
+ひとことで言うと: Claude Code ハーネス（CLAUDE.md, Skills, Hooks, Subagents, MCP）への引き渡し摩擦を、意味ブロックから限界まで減らすツール。v1 は README ビューのみ。
 
 レビューや初見で、最初に全部の章を読む必要はない。
 
 1. 入口: [`docs/START_HERE.md`](docs/START_HERE.md)
 2. 目的の正本: [`content/blocks/001-purpose.md`](content/blocks/001-purpose.md)
-3. 検証結果: [`release/VALIDATION_REPORT.md`](release/VALIDATION_REPORT.md)
+3. 思想: [`content/blocks/002-thesis-frictionless.md`](content/blocks/002-thesis-frictionless.md)
+4. 検証結果: [`release/VALIDATION_REPORT.md`](release/VALIDATION_REPORT.md)
 
 ローカル確認は次の3コマンドで足りる。
 
@@ -1082,7 +1083,7 @@ IDは表示順ではなく概念へ結び付ける。本文を移動してもID�
 ```json
 {
   "schema_version": 1,
-  "repository_digest": "c4d9d0ad4cea2012142ae486e1f95876cf6fc4e101052aa0908c251826aa2825",
+  "repository_digest": "590bea6965ce2556970ec9ea4b890f30437efcb96ed18305124c4763eeaa7e7c",
   "blocks": [
     {
       "id": "thesis.frictionless-ai-handoff",
@@ -1195,7 +1196,7 @@ IDは表示順ではなく概念へ結び付ける。本文を移動してもID�
       "updated": "2026-07-26",
       "expires": null,
       "volatile": false,
-      "digest": "e0aa0358bb03343cec8d47a56eb662e03225ee3425740f86a2561804e4a32b66"
+      "digest": "937a7eab0dff28c1bb5b97993a854020fc694ed446bb63881dc1a37134c55fc5"
     },
     {
       "id": "scope.readers",

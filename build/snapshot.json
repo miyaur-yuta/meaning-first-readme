@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "repository_digest": "c4d9d0ad4cea2012142ae486e1f95876cf6fc4e101052aa0908c251826aa2825",
+  "repository_digest": "590bea6965ce2556970ec9ea4b890f30437efcb96ed18305124c4763eeaa7e7c",
   "blocks": [
     {
       "id": "architecture.context-packer",
@@ -1498,8 +1498,8 @@
       "updated": "2026-07-26",
       "expires": null,
       "volatile": false,
-      "body": "ひとことで言うと: 長いREADMEを書く道具ではない。読んだ人とAIが、目的・禁止事項・次の一手を取り違えないためのREADME生成器。\n\nレビューや初見で、最初に全部の章を読む必要はない。\n\n1. 入口: [`docs/START_HERE.md`](docs/START_HERE.md)\n2. 目的の正本: [`content/blocks/001-purpose.md`](content/blocks/001-purpose.md)\n3. 検証結果: [`release/VALIDATION_REPORT.md`](release/VALIDATION_REPORT.md)\n\nローカル確認は次の3コマンドで足りる。\n\n```bash\nexport PYTHONPATH=src\npython -m meaning_first_readme doctor\npython -m meaning_first_readme validate\n```\n\n`README.md` は生成物なので直接編集しない。変更は `content/blocks/` に入れる。",
-      "digest": "e0aa0358bb03343cec8d47a56eb662e03225ee3425740f86a2561804e4a32b66"
+      "body": "ひとことで言うと: Claude Code ハーネス（CLAUDE.md, Skills, Hooks, Subagents, MCP）への引き渡し摩擦を、意味ブロックから限界まで減らすツール。v1 は README ビューのみ。\n\nレビューや初見で、最初に全部の章を読む必要はない。\n\n1. 入口: [`docs/START_HERE.md`](docs/START_HERE.md)\n2. 目的の正本: [`content/blocks/001-purpose.md`](content/blocks/001-purpose.md)\n3. 思想: [`content/blocks/002-thesis-frictionless.md`](content/blocks/002-thesis-frictionless.md)\n4. 検証結果: [`release/VALIDATION_REPORT.md`](release/VALIDATION_REPORT.md)\n\nローカル確認は次の3コマンドで足りる。\n\n```bash\nexport PYTHONPATH=src\npython -m meaning_first_readme doctor\npython -m meaning_first_readme validate\n```\n\n`README.md` は生成物なので直接編集しない。変更は `content/blocks/` に入れる。",
+      "digest": "937a7eab0dff28c1bb5b97993a854020fc694ed446bb63881dc1a37134c55fc5"
     },
     {
       "id": "scope.readers",

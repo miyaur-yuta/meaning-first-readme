@@ -14,13 +14,14 @@ claims = ["初見は入口ドキュメントと最短コマンドから入る"]
 owner = "project"
 updated = "2026-07-26"
 +++
-ひとことで言うと: 長いREADMEを書く道具ではない。読んだ人とAIが、目的・禁止事項・次の一手を取り違えないためのREADME生成器。
+ひとことで言うと: Claude Code ハーネス（CLAUDE.md, Skills, Hooks, Subagents, MCP）への引き渡し摩擦を、意味ブロックから限界まで減らすツール。v1 は README ビューのみ。
 
 レビューや初見で、最初に全部の章を読む必要はない。
 
 1. 入口: [`docs/START_HERE.md`](docs/START_HERE.md)
 2. 目的の正本: [`content/blocks/001-purpose.md`](content/blocks/001-purpose.md)
-3. 検証結果: [`release/VALIDATION_REPORT.md`](release/VALIDATION_REPORT.md)
+3. 思想: [`content/blocks/002-thesis-frictionless.md`](content/blocks/002-thesis-frictionless.md)
+4. 検証結果: [`release/VALIDATION_REPORT.md`](release/VALIDATION_REPORT.md)
 
 ローカル確認は次の3コマンドで足りる。
 
