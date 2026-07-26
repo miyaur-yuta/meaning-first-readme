@@ -9,19 +9,20 @@
 
 | 項目 | 値 |
 |---|---:|
-| 有効な意味ブロック | 36 |
-| 推定ソーストークン | 9,781 |
+| 有効な意味ブロック | 37 |
+| 推定ソーストークン | 10,009 |
 | 最新ソース更新日 | 2026-07-26 |
-| リポジトリ指紋 | `3e7d56c34a4957b41421` |
+| リポジトリ指紋 | `4ae032b972527fad8b21` |
 | 生成規約 | `Generated from typed semantic blocks; do not edit README.md directly.` |
 
-<!-- mfr:manifest {"active_blocks":36,"block_ids":["purpose.meaning","scope.readers","scope.artifact","non_goal.length","non_goal.omniscience","definition.meaning","definition.context-contract","principle.progressive-disclosure","principle.typed-claims","principle.fail-closed","assumption.readme-interface","constraint.truth","constraint.boundary","constraint.provenance","constraint.update-safety","decision.markdown-toml","decision.no-single-score","decision.self-hosting","architecture.pipeline","architecture.semantic-graph","architecture.context-packer","procedure.author","procedure.review","procedure.build","procedure.context","procedure.release","evidence.self-host-build","evidence.retrieval-benchmark","risk.prompt-injection","risk.context-overflow","risk.stale-truth","example.typed-block","glossary.core","roadmap.v1","faq.longest","changelog.v1"],"estimated_source_tokens":9781,"latest_source_update":"2026-07-26","project":"Meaning First README","repository_digest":"3e7d56c34a4957b414211bffef9610005e87152aa2a77549b21ff1b098b0c894","schema_version":1} -->
+<!-- mfr:manifest {"active_blocks":37,"block_ids":["purpose.meaning","scope.entry","scope.readers","scope.artifact","non_goal.length","non_goal.omniscience","definition.meaning","definition.context-contract","principle.progressive-disclosure","principle.typed-claims","principle.fail-closed","assumption.readme-interface","constraint.truth","constraint.boundary","constraint.provenance","constraint.update-safety","decision.markdown-toml","decision.no-single-score","decision.self-hosting","architecture.pipeline","architecture.semantic-graph","architecture.context-packer","procedure.author","procedure.review","procedure.build","procedure.context","procedure.release","evidence.self-host-build","evidence.retrieval-benchmark","risk.prompt-injection","risk.context-overflow","risk.stale-truth","example.typed-block","glossary.core","roadmap.v1","faq.longest","changelog.v1"],"estimated_source_tokens":10009,"latest_source_update":"2026-07-26","project":"Meaning First README","repository_digest":"4ae032b972527fad8b214dde9bd92f9024ed8e4574bbc66302573660412b7140","schema_version":1} -->
 
 ## 目次
 
 - [目的](#目的)
   - [目的は「意味を達成すること」](#目的は「意味を達成すること」)
 - [対象範囲](#対象範囲)
+  - [最初の30秒でやること](#最初の30秒でやること)
   - [対象読者と利用主体](#対象読者と利用主体)
   - [成果物の範囲](#成果物の範囲)
 - [非目的](#非目的)
@@ -96,6 +97,31 @@
 <!-- /mfr:block purpose.meaning -->
 
 ## 対象範囲
+
+<!-- mfr:block {"digest":"b09a377546a947ce","id":"scope.entry","kind":"scope","priority":97,"status":"active"} -->
+### 最初の30秒でやること
+
+> 全体を読む前に、入口ドキュメントと3コマンドだけを通す。
+
+<sub>`scope.entry` · 種別: `scope` · 優先度: `97` · 信頼区分: `reviewed` · 対象: `both` · 更新: `2026-07-26` · 依存: `purpose.meaning`, `scope.readers`</sub>
+
+レビューや初見利用で、最初に全部の章を読む必要はない。
+
+1. 入口: [`docs/START_HERE.md`](docs/START_HERE.md)
+2. 目的の正本: [`content/blocks/001-purpose.md`](content/blocks/001-purpose.md)
+3. 検証結果: [`release/VALIDATION_REPORT.md`](release/VALIDATION_REPORT.md)
+
+ローカル確認は次の3コマンドで足りる。
+
+```bash
+export PYTHONPATH=src
+python -m meaning_first_readme doctor
+python -m meaning_first_readme validate
+```
+
+`README.md` は生成物なので直接編集しない。変更は `content/blocks/` に入れる。
+
+<!-- /mfr:block scope.entry -->
 
 <!-- mfr:block {"digest":"840ab5128fe8bae0","id":"scope.readers","kind":"scope","priority":95,"status":"active"} -->
 ### 対象読者と利用主体
@@ -869,7 +895,7 @@ IDは表示順ではなく概念へ結び付ける。本文を移動してもID�
 ```json
 {
   "schema_version": 1,
-  "repository_digest": "3e7d56c34a4957b414211bffef9610005e87152aa2a77549b21ff1b098b0c894",
+  "repository_digest": "4ae032b972527fad8b214dde9bd92f9024ed8e4574bbc66302573660412b7140",
   "blocks": [
     {
       "id": "purpose.meaning",
@@ -906,6 +932,44 @@ IDは表示順ではなく概念へ結び付ける。本文を移動してもID�
       "expires": null,
       "volatile": false,
       "digest": "bff1a52f6a22124296a0aeb73887f01a3da6cf83523cf58d964cfcd306ce5027"
+    },
+    {
+      "id": "scope.entry",
+      "kind": "scope",
+      "title": "最初の30秒でやること",
+      "summary": "全体を読む前に、入口ドキュメントと3コマンドだけを通す。",
+      "order": 15,
+      "priority": 97,
+      "audience": [
+        "both"
+      ],
+      "tags": [
+        "入口",
+        "最短",
+        "オンボーディング",
+        "レビュー",
+        "コマンド"
+      ],
+      "status": "active",
+      "trust": "reviewed",
+      "depends_on": [
+        "purpose.meaning",
+        "scope.readers"
+      ],
+      "evidence": [],
+      "supports": [],
+      "claims": [
+        "初見は入口ドキュメントと最短コマンドから入る"
+      ],
+      "negates": [],
+      "acceptance": [],
+      "rationale": "",
+      "owner": "project",
+      "source": "",
+      "updated": "2026-07-26",
+      "expires": null,
+      "volatile": false,
+      "digest": "b09a377546a947ce048cee7dd030318cf4e72bbec21f13eec28da392014c626f"
     },
     {
       "id": "scope.readers",

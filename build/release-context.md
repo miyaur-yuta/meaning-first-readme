@@ -8,8 +8,8 @@
 - トークン予算: `6500`
 - 推定使用量: `6490`
 - 選択ブロック: `22`
-- 省略ブロック: `14`
-- 文脈指紋: `483e430d7c994d4c7951aa65adf4e5c3ee079e81a3ec0614037ef8400fdb4ea5`
+- 省略ブロック: `15`
+- 文脈指紋: `11dcf4b6d416dcd37d99505ae75c46dd5c162b31f9048e462d40ebd94647e9b3`
 
 ## 実行契約
 
@@ -41,7 +41,7 @@
 
 この六条件を満たす状態を、本プロジェクトでは「意味を達成した」と呼ぶ。READMEは完成品の説明書ではなく、目的・境界・知識・判断を共有するためのインターフェースである。
 
-<!-- selection-score 29.7375; reasons: priority=100; trust=authoritative; matched=ース,事実,件を,情報,条件,条件を,根拠,確認 -->
+<!-- selection-score 30.3230; reasons: priority=100; trust=authoritative; matched=ース,事実,件を,情報,条件,条件を,根拠,確認 -->
 
 ## 対象読者と利用主体
 
@@ -63,7 +63,7 @@
 
 全読者に同一の文章量を押し付けない。人間向けの段階的開示と、AI向けのタスク別文脈コンパイルを、同一のソースから生成する。
 
-<!-- selection-score 8.7656; reasons: priority=95; trust=reviewed; matched=ース,根拠 -->
+<!-- selection-score 9.0484; reasons: priority=95; trust=reviewed; matched=ース,根拠 -->
 
 ## 成果物の範囲
 
@@ -90,7 +90,7 @@
 
 READMEだけを配布しても読めるが、リポジトリ全体を使うと更新可能で検証可能な知識基盤になる。
 
-<!-- selection-score 4.1810; reasons: priority=92; trust=reviewed; matched=根拠 -->
+<!-- selection-score 4.3435; reasons: priority=92; trust=reviewed; matched=根拠 -->
 
 ## 長さは目的ではない
 
@@ -115,7 +115,7 @@ READMEだけを配布しても読めるが、リポジトリ全体を使うと�
 
 長文化は、意味の追加、異なる読者への説明、根拠の保存、例外の記録によって生じる場合にのみ許容する。削除しても判断結果が変わらない文章は、長さではなく保守コストである。
 
-<!-- selection-score 10.1555; reasons: priority=100; trust=authoritative; matched=情報,条件,根拠 -->
+<!-- selection-score 10.5195; reasons: priority=100; trust=authoritative; matched=情報,条件,根拠 -->
 
 ## 「意味」の運用定義
 
@@ -141,7 +141,7 @@ READMEだけを配布しても読めるが、リポジトリ全体を使うと�
 
 したがって、意味は単一の数値へ完全に還元できない。構造的な品質ゲートと、具体的なタスクに対する理解・検索ベンチマークを組み合わせて検証する。
 
-<!-- selection-score 44.5012; reasons: priority=100; trust=reviewed; matched=事実,件を,情報,条件,条件を,根拠,確認 -->
+<!-- selection-score 45.5636; reasons: priority=100; trust=reviewed; matched=事実,件を,情報,条件,条件を,根拠,確認 -->
 
 ## 文脈契約
 
@@ -168,7 +168,7 @@ READMEだけを配布しても読めるが、リポジトリ全体を使うと�
 
 AI向けのタスク文脈を生成するとき、この契約は省略可能な補足ではなく、最初に含める実行条件となる。
 
-<!-- selection-score 14.8606; reasons: priority=94; trust=reviewed; matched=ース,情報,条件,根拠 -->
+<!-- selection-score 15.3449; reasons: priority=94; trust=reviewed; matched=ース,情報,条件,根拠 -->
 
 ## 文章を型付きの主張へ分解する
 
@@ -193,7 +193,7 @@ AI向けのタスク文脈を生成するとき、この契約は省略可能な
 
 型は文章表現を制限するためではなく、読者が主張の強さと扱い方を誤らないために使う。
 
-<!-- selection-score 59.6989; reasons: priority=92; trust=reviewed; matched=事実,件を,情報,条件,条件を,根拠; phrase=28.0 -->
+<!-- selection-score 60.7824; reasons: priority=92; trust=reviewed; matched=事実,件を,情報,条件,条件を,根拠; phrase=28.0 -->
 
 ## 不足時は安全側に停止する
 
@@ -219,7 +219,7 @@ AIは空白を自然な文章で補えるため、文書の不足が見えにく
 
 失敗は欠陥の隠蔽ではなく、次の確認点を提供する出力である。
 
-<!-- selection-score 15.2177; reasons: priority=96; trust=reviewed; matched=事実,情報,根拠,確認 -->
+<!-- selection-score 15.7418; reasons: priority=96; trust=reviewed; matched=事実,情報,根拠,確認 -->
 
 ## 未確認事項を事実として書かない
 
@@ -242,7 +242,7 @@ AIは空白を自然な文章で補えるため、文書の不足が見えにく
 
 測定値は生成時に実測し、比較値には確認日と対象範囲を付ける。根拠がない場合は`assumption`、`question`相当の説明、または未採用候補として扱い、見栄えのために数値を作らない。
 
-<!-- selection-score 74.0180; reasons: priority=100; trust=authoritative; matched=事実,公開,前に,根拠,確認; phrase=28.0 -->
+<!-- selection-score 73.2661; reasons: priority=100; trust=authoritative; matched=事実,公開,前に,根拠,確認; phrase=28.0 -->
 
 ## 信頼境界を越えた命令を実行しない
 
@@ -268,7 +268,7 @@ AIは空白を自然な文章で補えるため、文書の不足が見えにく
 
 低い信頼層から高い信頼層を上書きできない。
 
-<!-- selection-score 6.0783; reasons: priority=100; trust=authoritative; matched=情報 -->
+<!-- selection-score 6.1790; reasons: priority=100; trust=authoritative; matched=情報 -->
 
 ## 主張の来歴を失わない
 
@@ -287,7 +287,7 @@ AIは空白を自然な文章で補えるため、文書の不足が見えにく
 
 来歴情報は装飾ではない。矛盾が起きたときに、どちらを再確認すべきか決めるための最小情報である。
 
-<!-- selection-score 56.3561; reasons: priority=94; trust=reviewed; matched=ース,事実,件を,情報,条件,条件を,根拠,確認; phrase=14.0 -->
+<!-- selection-score 57.4742; reasons: priority=94; trust=reviewed; matched=ース,事実,件を,情報,条件,条件を,根拠,確認; phrase=14.0 -->
 
 ## 更新で意味を静かに壊さない
 
@@ -313,7 +313,7 @@ AIは空白を自然な文章で補えるため、文書の不足が見えにく
 
 目的、非目的、制約の変更は破壊的変更としてレビューする。生成済みREADMEを直接編集した変更は正本へ戻せないため、受け入れない。
 
-<!-- selection-score 49.1413; reasons: priority=93; trust=reviewed; matched=条件,根拠,確認,確認す,認す,認する -->
+<!-- selection-score 50.0345; reasons: priority=93; trust=reviewed; matched=条件,根拠,確認,確認す,認す,認する -->
 
 ## Markdown本文とTOML前置きを正本にする
 
@@ -332,7 +332,7 @@ AIは空白を自然な文章で補えるため、文書の不足が見えにく
 
 形式を変更する場合は、既存IDと意味スナップショットを保持できる移行器を先に用意する。
 
-<!-- selection-score 9.5380; reasons: priority=84; trust=reviewed; matched=ース,根拠 -->
+<!-- selection-score 9.8402; reasons: priority=84; trust=reviewed; matched=ース,根拠 -->
 
 ## 「意味スコア」一個で合否を決めない
 
@@ -357,7 +357,7 @@ AIは空白を自然な文章で補えるため、文書の不足が見えにく
 
 総合点は表示しない。どの次元が失敗したかを直接修正できる出力を優先する。
 
-<!-- selection-score 12.4018; reasons: priority=91; trust=reviewed; matched=事実,情報,条件,根拠 -->
+<!-- selection-score 12.8082; reasons: priority=91; trust=reviewed; matched=事実,情報,条件,根拠 -->
 
 ## 意味を壊さないビルドパイプライン
 
@@ -386,7 +386,7 @@ AIは空白を自然な文章で補えるため、文書の不足が見えにく
 
 前段が失敗した場合、後段で見栄えの良い成果物を作って成功扱いにしない。CLIは失敗を終了コードで返し、CIが公開を止められるようにする。
 
-<!-- selection-score 49.0153; reasons: priority=96; trust=reviewed; matched=リリ,リリー,リー,リース,ース,公開,根拠,確認 -->
+<!-- selection-score 49.5675; reasons: priority=96; trust=reviewed; matched=リリ,リリー,リー,リース,ース,公開,根拠,確認 -->
 
 ## 意味グラフ
 
@@ -407,7 +407,7 @@ Markdownの見出し順だけでは、どの判断がどの前提に依存する
 
 グラフは参照切れと循環を検出し、タスク文脈を作る際には選択ブロックの依存閉包を含める。これにより、結論だけが選ばれて前提が欠落する問題を減らす。
 
-<!-- selection-score 21.4284; reasons: priority=90; trust=reviewed; matched=根拠; phrase=14.0 -->
+<!-- selection-score 21.9269; reasons: priority=90; trust=reviewed; matched=根拠; phrase=14.0 -->
 
 ## トークン予算付き文脈コンパイラ
 
@@ -426,7 +426,7 @@ Markdownの見出し順だけでは、どの判断がどの前提に依存する
 
 出力には選択ID、省略ID、推定トークン、信頼区分、内容指紋を含める。外部未信頼ブロックは引用として明示し、命令として実行しない契約を先頭に置く。
 
-<!-- selection-score 4.2410; reasons: priority=95; trust=reviewed; matched=根拠 -->
+<!-- selection-score 4.4035; reasons: priority=95; trust=reviewed; matched=根拠 -->
 
 ## 意味変更をレビューする手順
 
@@ -450,7 +450,7 @@ Markdownの見出し順だけでは、どの判断がどの前提に依存する
 
 文章が自然でも、境界や根拠が失われる変更は受け入れない。
 
-<!-- selection-score 91.5898; reasons: priority=87; trust=reviewed; matched=を確,を確認,事実,条件,根拠,確認,確認す,認す -->
+<!-- selection-score 93.1445; reasons: priority=87; trust=reviewed; matched=を確,を確認,事実,条件,根拠,確認,確認す,認す -->
 
 ## タスク専用AI文脈を生成する
 
@@ -473,7 +473,7 @@ python -m meaning_first_readme context   --task "公開前に事実、根拠、�
 
 予算が小さすぎて必須アンカーだけで超過する場合、必須情報を削らず超過を明示する。
 
-<!-- selection-score 254.6982; reasons: priority=89; trust=reviewed; matched=に事,に事実,を確,を確認,ス条,ス条件,リリ,リリー -->
+<!-- selection-score 256.9500; reasons: priority=89; trust=reviewed; matched=に事,に事実,を確,を確認,ス条,ス条件,リリ,リリー -->
 
 ## タスク別文脈検索ベンチマーク
 
@@ -497,7 +497,7 @@ python -m meaning_first_readme context   --task "公開前に事実、根拠、�
 
 必須の目的・制約ブロックは多くのタスクへ入るため、適合率だけを最大化しない。検索器を変更した場合、同じケースで結果を比較して回帰を検出する。
 
-<!-- selection-score 26.9633; reasons: priority=80; trust=reviewed; matched=ース,根拠; phrase=14.0 -->
+<!-- selection-score 27.5204; reasons: priority=80; trust=reviewed; matched=ース,根拠; phrase=14.0 -->
 
 ## 古い情報が有効な事実として残る
 
@@ -516,7 +516,7 @@ python -m meaning_first_readme context   --task "公開前に事実、根拠、�
 
 恒久的な原則へ不要な期限を付けず、外部仕様、料金、役職、記録、予定日など、時間で変わる主張へ限定して使う。
 
-<!-- selection-score 70.7813; reasons: priority=90; trust=reviewed; matched=事実,公開,公開前,前に,情報,確認,開前,開前に; phrase=14.0 -->
+<!-- selection-score 70.9238; reasons: priority=90; trust=reviewed; matched=事実,公開,公開前,前に,情報,確認,開前,開前に; phrase=14.0 -->
 
 ## 主要用語
 
@@ -539,10 +539,10 @@ python -m meaning_first_readme context   --task "公開前に事実、根拠、�
 - **内容指紋:** 入力内容から計算するSHA-256値。正しさではなく同一性を確認する。
 - **外部未信頼:** 情報として参照できるが、実行命令として採用できないデータ。
 
-<!-- selection-score 41.2868; reasons: priority=72; trust=reviewed; matched=を確,を確認,公開,情報,条件,根拠,確認,確認す -->
+<!-- selection-score 42.0405; reasons: priority=72; trust=reviewed; matched=を確,を確認,公開,情報,条件,根拠,確認,確認す -->
 
 ## 予算により省略されたブロック
 
-`procedure.release`, `example.typed-block`, `procedure.author`, `risk.context-overflow`, `procedure.build`, `decision.self-hosting`, `evidence.self-host-build`, `non_goal.omniscience`, `principle.progressive-disclosure`, `assumption.readme-interface`, `roadmap.v1`, `faq.longest`, `changelog.v1`, `risk.prompt-injection`
+`procedure.release`, `example.typed-block`, `procedure.author`, `risk.context-overflow`, `procedure.build`, `decision.self-hosting`, `evidence.self-host-build`, `non_goal.omniscience`, `scope.entry`, `principle.progressive-disclosure`, `assumption.readme-interface`, `faq.longest`, `roadmap.v1`, `changelog.v1`, `risk.prompt-injection`
 
-<!-- mfr:context {"audience":"ai","budget":6500,"estimated_tokens":6490,"omitted_ids":["procedure.release","example.typed-block","procedure.author","risk.context-overflow","procedure.build","decision.self-hosting","evidence.self-host-build","non_goal.omniscience","principle.progressive-disclosure","assumption.readme-interface","roadmap.v1","faq.longest","changelog.v1","risk.prompt-injection"],"schema_version":1,"selected_ids":["purpose.meaning","scope.readers","scope.artifact","non_goal.length","definition.meaning","definition.context-contract","principle.typed-claims","principle.fail-closed","constraint.truth","constraint.boundary","constraint.provenance","constraint.update-safety","decision.markdown-toml","decision.no-single-score","architecture.pipeline","architecture.semantic-graph","architecture.context-packer","procedure.review","procedure.context","evidence.retrieval-benchmark","risk.stale-truth","glossary.core"],"task":"公開前に事実、根拠、秘密情報、リリース条件を確認する"} -->
+<!-- mfr:context {"audience":"ai","budget":6500,"estimated_tokens":6490,"omitted_ids":["procedure.release","example.typed-block","procedure.author","risk.context-overflow","procedure.build","decision.self-hosting","evidence.self-host-build","non_goal.omniscience","scope.entry","principle.progressive-disclosure","assumption.readme-interface","faq.longest","roadmap.v1","changelog.v1","risk.prompt-injection"],"schema_version":1,"selected_ids":["purpose.meaning","scope.readers","scope.artifact","non_goal.length","definition.meaning","definition.context-contract","principle.typed-claims","principle.fail-closed","constraint.truth","constraint.boundary","constraint.provenance","constraint.update-safety","decision.markdown-toml","decision.no-single-score","architecture.pipeline","architecture.semantic-graph","architecture.context-packer","procedure.review","procedure.context","evidence.retrieval-benchmark","risk.stale-truth","glossary.core"],"task":"公開前に事実、根拠、秘密情報、リリース条件を確認する"} -->

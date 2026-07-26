@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "repository_digest": "3e7d56c34a4957b414211bffef9610005e87152aa2a77549b21ff1b098b0c894",
+  "repository_digest": "4ae032b972527fad8b214dde9bd92f9024ed8e4574bbc66302573660412b7140",
   "blocks": [
     {
       "id": "architecture.context-packer",
@@ -1352,6 +1352,45 @@
       "volatile": false,
       "body": "成果物は単一のMarkdownファイルに限定しない。正本は型付きの意味ブロック群であり、READMEはその人間可読ビューである。\n\n成果物に含めるものは以下である。\n\n- `content/blocks/`: 独立して参照できる意味ブロック。\n- `README.md`: ブロックから決定論的に生成される標準ビュー。\n- `mfr validate`: 構造、参照、矛盾、期限、根拠を検査する品質ゲート。\n- `mfr context`: タスクと予算に応じて文脈を選択するコンパイラ。\n- `mfr audit`: 単一スコアに潰さず、複数の品質次元を報告する監査器。\n- `mfr benchmark`: 文脈検索が必要な意味を取り出せるか測るテスト。\n- 意味スナップショットと差分: 文言ではなく、判断・主張・依存の変化を追跡する記録。\n\nREADMEだけを配布しても読めるが、リポジトリ全体を使うと更新可能で検証可能な知識基盤になる。",
       "digest": "dedf49ead4e874dce4ca08e6aa20c2d396c5bda330dc09340ad135686f59f702"
+    },
+    {
+      "id": "scope.entry",
+      "kind": "scope",
+      "title": "最初の30秒でやること",
+      "summary": "全体を読む前に、入口ドキュメントと3コマンドだけを通す。",
+      "order": 15,
+      "priority": 97,
+      "audience": [
+        "both"
+      ],
+      "tags": [
+        "入口",
+        "最短",
+        "オンボーディング",
+        "レビュー",
+        "コマンド"
+      ],
+      "status": "active",
+      "trust": "reviewed",
+      "depends_on": [
+        "purpose.meaning",
+        "scope.readers"
+      ],
+      "evidence": [],
+      "supports": [],
+      "claims": [
+        "初見は入口ドキュメントと最短コマンドから入る"
+      ],
+      "negates": [],
+      "acceptance": [],
+      "rationale": "",
+      "owner": "project",
+      "source": "",
+      "updated": "2026-07-26",
+      "expires": null,
+      "volatile": false,
+      "body": "レビューや初見利用で、最初に全部の章を読む必要はない。\n\n1. 入口: [`docs/START_HERE.md`](docs/START_HERE.md)\n2. 目的の正本: [`content/blocks/001-purpose.md`](content/blocks/001-purpose.md)\n3. 検証結果: [`release/VALIDATION_REPORT.md`](release/VALIDATION_REPORT.md)\n\nローカル確認は次の3コマンドで足りる。\n\n```bash\nexport PYTHONPATH=src\npython -m meaning_first_readme doctor\npython -m meaning_first_readme validate\n```\n\n`README.md` は生成物なので直接編集しない。変更は `content/blocks/` に入れる。",
+      "digest": "b09a377546a947ce048cee7dd030318cf4e72bbec21f13eec28da392014c626f"
     },
     {
       "id": "scope.readers",

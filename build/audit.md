@@ -18,10 +18,10 @@
 
 ### structure
 
-- **active_blocks:** `36`
+- **active_blocks:** `37`
 - **kinds:** `['architecture', 'assumption', 'changelog', 'constraint', 'decision', 'definition', 'evidence', 'example', 'faq', 'glossary', 'non_goal', 'principle', 'procedure', 'purpose', 'risk', 'roadmap', 'scope']`
 - **required_kinds_present:** `True`
-- **estimated_tokens:** `9781`
+- **estimated_tokens:** `10009`
 
 ### traceability
 
@@ -46,7 +46,7 @@
 ### connectivity
 
 - **purpose_roots:** `['purpose.meaning']`
-- **reachable_blocks:** `36`
+- **reachable_blocks:** `37`
 - **orphan_blocks:** `[]`
 - **ratio:** `1.0`
 

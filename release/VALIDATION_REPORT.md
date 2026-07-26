@@ -10,9 +10,9 @@
 
 | Item | Measured value |
 |---|---:|
-| Active semantic blocks | 36 |
+| Active semantic blocks | 37 |
 | Semantic kinds | 17 |
-| Generated README | 90,120 bytes / 2,235 lines |
+| Generated README | 92,230 bytes / 2,299 lines |
 | Estimated source tokens | 9,781 |
 | Runtime dependencies | 0 |
 | Python source | 1,899 lines |
