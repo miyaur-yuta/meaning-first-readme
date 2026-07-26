@@ -6,16 +6,16 @@ export PYTHONPATH
 
 help:
 	@printf '%s\n' \
-	  'make doctor     - inspect runtime and repository' \
-	  'make validate   - validate typed semantic blocks' \
-	  'make build      - generate README and manifest' \
-	  'make audit      - generate quality audit report' \
-	  'make benchmark  - run context retrieval benchmark' \
-	  'make test       - run the unittest suite' \
-	  'make context    - generate an example AI context' \
-	  'make performance - run a 2,000-block synthetic observation' \
-	  'make package    - build an offline-installable wheel' \
-	  'make quality    - run the complete local quality gate'
+	  'make doctor      - 実行環境とリポジトリを点検' \
+	  'make validate    - 型付き意味ブロックを検証' \
+	  'make build       - README とマニフェストを生成' \
+	  'make audit       - 品質監査レポートを生成' \
+	  'make benchmark   - 文脈検索ベンチマークを実行' \
+	  'make test        - 単体テストを実行' \
+	  'make context     - 例示の AI 文脈を生成' \
+	  'make performance - 2,000 ブロックの合成観測' \
+	  'make package     - オフライン用 wheel を構築' \
+	  'make quality     - ローカル品質ゲート一式'
 
 doctor:
 	$(PYTHON) -m meaning_first_readme doctor

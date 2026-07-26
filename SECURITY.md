@@ -1,4 +1,4 @@
-# Security Policy
+# セキュリティ方針
 
 ## 対象
 

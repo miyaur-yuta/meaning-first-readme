@@ -1,4 +1,4 @@
-# Release Process
+# リリース手順
 
 1. 作業ブランチで意味ブロックと実装を更新する。
 2. `make quality`を実行する。
