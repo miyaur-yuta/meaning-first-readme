@@ -10,16 +10,14 @@
 
 | Item | Measured value |
 |---|---:|
-| Active semantic blocks | 37 |
+| Active semantic blocks | 38 |
 | Semantic kinds | 17 |
-| Generated README | 92,230 bytes / 2,299 lines |
-| Estimated source tokens | 9,781 |
+| Generated README | 95,669 bytes / 2,389 lines |
+| Estimated source tokens | 7,837 |
 | Runtime dependencies | 0 |
-| Python source | 1,899 lines |
-| Test source | 703 lines |
 | Automated tests | 81 |
 | Benchmark cases | 12 |
-| Repository semantic digest | `3e7d56c34a4957b414211bffef9610005e87152aa2a77549b21ff1b098b0c894` |
+| Repository semantic digest | `6e079d52ab693877761ff1d1a32c830718e87dc5de12f37cea9d1c61faf8e088` |
 
 ## Quality gates
 
@@ -51,22 +49,10 @@
 
 | Observation | Value |
 |---|---:|
-| Validation | 2.466404 s |
-| Context selection | 0.373166 s |
-| README rendering | 0.147123 s |
-| Snapshot | 0.029351 s |
-| Total | 3.023834 s |
-| Generated README | 3,317,631 bytes |
-| Max RSS | 182,192 KiB |
+| Total (Windows / Python 3.13) | 6.316 s |
+| Max RSS | 92,740 KiB |
 
 計測値はこの実行環境固有であり、他環境への性能保証ではない。重複候補生成は64-bit SimHashの8バンドLSHを使い、全組み合わせ比較を避けている。
-
-## Package verification
-
-- Wheel: `meaning_first_readme-1.0.0-py3-none-any.whl`
-- Wheel SHA-256: `bbd1aedef0ad757573a7c995970ab3f04b568df67ebcf22a5a7bf57f21d5ebda`
-- 新規仮想環境へ依存なしでインストールした。
-- インストールされた`mfr`コマンドから、実リポジトリの`validate`が成功した。
 
 ## Reproducibility checks
 
@@ -87,9 +73,8 @@
 
 | Artifact | SHA-256 |
 |---|---|
-| `README.md` | `0e9ff0ef95a83c80adb2042bba123c6448e980b951393b1c7934042bc1436c2e` |
-| `build/manifest.json` | `fb639e4c9b46b0559d7c9040b5cbffd9aca23c52b49d8fe283ab04287533eebd` |
-| `build/audit.json` | `ca7551df492a7b6afa60ffeba83782d19152b905c69f4b6c345b947dbad40666` |
+| `README.md` | `90ac540619f0b8b623474c4e300287804609689589556f7e46ec6e63e8b77d09` |
+| `build/manifest.json` | `7f5d2bf14dd73122642cfd70c64396b515dbd29e6eda671ea0389a81333f0281` |
+| `build/audit.json` | `77cca0d64b4714276050f04b0e025822be19de29bdc4feef2a798152c5dd74b4` |
 | `build/benchmark.json` | `eca45ef09d3bd245bd0e2e6fe58276ca6bdee6b0bfe5f60cdff8c3b6a9b3a345` |
-| `build/performance.json` | `1c1593cba1df02dd6d49541771bd12c60035cbf840dcd676a7e5ee6ddd208052` |
-| `meaning_first_readme-1.0.0-py3-none-any.whl` | `bbd1aedef0ad757573a7c995970ab3f04b568df67ebcf22a5a7bf57f21d5ebda` |
+| `build/performance.json` | `532c13374fd954f0408ca1a36247888786e90b88e8ae9f479905b89014e80a66` |
