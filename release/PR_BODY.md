@@ -1,0 +1,115 @@
+# Meaning First README v1
+
+> **30秒サマリ:** Claude Code ハーネス（CLAUDE.md/Skills/Hooks/Subagents/MCP）への引き渡し摩擦を限界まで減らす道具。**v1 は README ビューのみ**。CI 🟢 3.11/3.12/3.13 通過済み。Draft で整備中。
+
+---
+
+## ⭐ ここだけ見ればOK（所要30秒）
+
+1. ⭐ [`docs/START_HERE.md`](https://github.com/miyaur-yuta/meaning-first-readme/blob/release/v1.0.0/docs/START_HERE.md) — 入口
+2. 🎯 [`content/blocks/002-thesis-frictionless.md`](https://github.com/miyaur-yuta/meaning-first-readme/blob/release/v1.0.0/content/blocks/002-thesis-frictionless.md) — 思想
+3. 📋 [`content/blocks/081-decision-spec-kit.md`](https://github.com/miyaur-yuta/meaning-first-readme/blob/release/v1.0.0/content/blocks/081-decision-spec-kit.md) — Spec Kit 統合
+4. 🎨 [`slides/for-beginners.html`](https://github.com/miyaur-yuta/meaning-first-readme/blob/release/v1.0.0/slides/for-beginners.html) — 初学者向けスライド
+5. 🛠 [`slides/for-engineers.html`](https://github.com/miyaur-yuta/meaning-first-readme/blob/release/v1.0.0/slides/for-engineers.html) — エンジニア向けスライド
+6. 📝 [`slides/script.md`](https://github.com/miyaur-yuta/meaning-first-readme/blob/release/v1.0.0/slides/script.md) — 説明時の台本
+7. ✅ [`release/VALIDATION_REPORT.md`](https://github.com/miyaur-yuta/meaning-first-readme/blob/release/v1.0.0/release/VALIDATION_REPORT.md) — 検証結果
+
+---
+
+## 一言で言うと
+
+README を「正しく書く」ための道具ではない。**意味ブロックを正本とし、Spec Kit の SDD ライフサイクルで Claude Code ハーネスへの引き渡し摩擦を限界まで減らす**。<strong>Claude Code 限定</strong>。
+
+## Spec Kit との関係（要件定義ファースト）
+
+[GitHub Spec Kit](https://github.com/github/spec-kit) の SDD（constitution → spec → clarify → plan → tasks → implement → converge）を採用。意味ブロックは**正本**、Spec Kit は**工程**。
+
+| Spec Kit 入力 | 意味ブロック層 |
+|---|---|
+| `constitution.md` | `principle` / `constraint` |
+| `spec.md` | `purpose` / `scope` / `non_goal` / `definition` |
+| `plan.md` | `architecture` / `procedure` |
+| `tasks.md` | `procedure`（具体化） |
+
+詳細は [`decision.spec-kit-integration`](https://github.com/miyaur-yuta/meaning-first-readme/blob/release/v1.0.0/content/blocks/081-decision-spec-kit.md) と [`guide.spec-kit`](https://github.com/miyaur-yuta/meaning-first-readme/blob/release/v1.0.0/content/blocks/091-guide-spec-kit.md)。
+
+## 説明資料（HTML スライド）
+
+| 対象 | ソース | 直接表示 | 所要 |
+|---|---|---|---|
+| 初学者 | [`slides/for-beginners.html`](https://github.com/miyaur-yuta/meaning-first-readme/blob/release/v1.0.0/slides/for-beginners.html) | [▶ 開く](https://htmlpreview.github.io/?https://raw.githubusercontent.com/miyaur-yuta/meaning-first-readme/release/v1.0.0/slides/for-beginners.html) | 10分 |
+| エンジニア | [`slides/for-engineers.html`](https://github.com/miyaur-yuta/meaning-first-readme/blob/release/v1.0.0/slides/for-engineers.html) | [▶ 開く](https://htmlpreview.github.io/?https://raw.githubusercontent.com/miyaur-yuta/meaning-first-readme/release/v1.0.0/slides/for-engineers.html) | 15分 |
+| 台本 | [`slides/script.md`](https://github.com/miyaur-yuta/meaning-first-readme/blob/release/v1.0.0/slides/script.md) | — | — |
+
+> 💡 **スマホで見る時:** 「▶ 開く」リンクをタップすると、ブラウザでスライドがそのまま再生されます。矢印ボタンまたはスワイプで遷移。
+
+## v1 の範囲（正直に）
+
+**v1 は README ビューのみ**。詳細は [`016-scope-design-boundary`](https://github.com/miyaur-yuta/meaning-first-readme/blob/release/v1.0.0/content/blocks/016-scope-design-boundary.md)。
+
+**作る:** 意味ブロック管理、README 生成・検証・監査・ベンチマーク、コンテキスト/差分/スナップショット、自己ホスト
+
+**作らない（明示的に範囲外）:**
+- CLAUDE.md / Skills / Hooks / Subagents / MCP 設定の**自動生成機能**
+- 権限設定（`settings.json` 系）の**自動生成機能**
+- 対話観察の自動化パイプライン
+- ペルソナ全網羅検査
+
+> **注:** 生成機能が範囲外でも、概念・使い方・最小構成の**説明**は提供します（[`scope.explanation-vs-generation`](https://github.com/miyaur-yuta/meaning-first-readme/blob/release/v1.0.0/content/blocks/018-scope-explanation-vs-generation.md) / [`guide.claude-code-primitives`](https://github.com/miyaur-yuta/meaning-first-readme/blob/release/v1.0.0/content/blocks/090-guide-primitives.md)）。
+
+---
+
+## 思想（詳細）
+
+### Claude Code は README を超える
+
+| プリミティブ | 役割 |
+|---|---|
+| CLAUDE.md / Rules | 常に効く文脈・指示 |
+| Skills | オンデマンドの知識・ワークフロー |
+| Hooks | 必ず発火する強制ルール |
+| Subagents | 独立コンテキストで専門作業 |
+| MCP | 外部システム接続 |
+| Plugins | 上記を束ねて配布 |
+
+### 権限スコープ
+
+| スコープ | 場所 |
+|---|---|
+| ユーザー | `~/.claude/settings.json` |
+| プロジェクト共有 | `.claude/settings.json` |
+| プロジェクト個人 | `.claude/settings.local.json`（Git 除外） |
+| 管理者 | OS 固定（上書き不可） |
+
+モードは `default` / `acceptEdits` / `plan` / `auto` / `dontAsk` / `bypassPermissions`。`deny` はスコープ間で常に優先。
+
+### リアルな対話品質
+
+生成したハーネスを実際に読み込ませた Claude Code セッションで、**代表ペルソナの典型タスク**を実施した振る舞い。主観ではなく観察可能な基準（[`definition`](https://github.com/miyaur-yuta/meaning-first-readme/blob/release/v1.0.0/content/blocks/030-definition-real-conversation.md) 参照）。
+
+---
+
+## 既知の限界
+
+- 日本語検索は簡易（同義語に弱い）
+- 注入検査は補助（信頼境界の代替ではない）
+- 外部 URL の到達性は未検証
+- v1 は README ビューのみ
+
+## 公開境界
+
+Draft のまま整備中。Ready / merge は人間の明示承認後。
+
+## 品質メトリクス（全て満点）
+
+| 次元 | 結果 |
+|---|---|
+| 構造（51ブロック・17種） | ✅ PASS |
+| トレーサビリティ（根拠） | ✅ 6/6 (100%) |
+| アクション性（手順の受け入れ基準） | ✅ 7/7 (100%) |
+| 鮮度（揮発情報） | ✅ 0/0 (100%) |
+| 接続性（孤立ブロック） | ✅ 0 orphan |
+| 明瞭性（曖昧表現） | ✅ 0 / 1000語 |
+| ベンチマーク（recall） | ✅ 1.000 |
+
+CI: 🟢 Python 3.11 / 3.12 / 3.13 / 81 tests PASS / mergeable: CLEAN

@@ -1,0 +1,35 @@
+{
+  "bomFormat": "CycloneDX",
+  "specVersion": "1.5",
+  "serialNumber": "urn:uuid:ea50c55c-10d3-4f2d-a13c-2b6ac2b2b4c8",
+  "version": 1,
+  "metadata": {
+    "timestamp": "2026-07-26T00:00:00Z",
+    "component": {
+      "type": "application",
+      "bom-ref": "pkg:pypi/meaning-first-readme@1.0.0",
+      "name": "meaning-first-readme",
+      "version": "1.0.0",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT"
+          }
+        }
+      ],
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "bbd1aedef0ad757573a7c995970ab3f04b568df67ebcf22a5a7bf57f21d5ebda"
+        }
+      ]
+    }
+  },
+  "components": [],
+  "dependencies": [
+    {
+      "ref": "pkg:pypi/meaning-first-readme@1.0.0",
+      "dependsOn": []
+    }
+  ]
+}

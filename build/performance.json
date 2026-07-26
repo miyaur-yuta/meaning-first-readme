@@ -1,0 +1,21 @@
+{
+  "schema_version": 1,
+  "block_count": 2000,
+  "passed": true,
+  "warning_count": 0,
+  "error_count": 0,
+  "selected_context_blocks": 65,
+  "context_estimated_tokens": 7949,
+  "readme_bytes": 3317631,
+  "snapshot_digest": "425e8e1d1ff717a31edf20a36737d7ab998935951e1afbf5181480990fa5b4d1",
+  "seconds": {
+    "create": 0.017724,
+    "validate": 5.095851,
+    "context": 0.869349,
+    "render": 0.274573,
+    "snapshot": 0.058362,
+    "total": 6.315859
+  },
+  "max_rss_kib": 92740,
+  "note": "Timing is environment-specific and is recorded as an observation, not a portable performance guarantee."
+}

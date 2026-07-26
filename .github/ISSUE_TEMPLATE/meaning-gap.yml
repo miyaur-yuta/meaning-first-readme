@@ -1,0 +1,30 @@
+name: Meaning gap
+about: Report a place where a human or AI can reach the wrong interpretation
+body:
+  - type: textarea
+    id: task
+    attributes:
+      label: Task or question
+      description: What was the reader or AI trying to do?
+    validations:
+      required: true
+  - type: textarea
+    id: observed
+    attributes:
+      label: Observed interpretation or action
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected interpretation or action
+    validations:
+      required: true
+  - type: input
+    id: blocks
+    attributes:
+      label: Related block IDs
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Evidence or reproduction

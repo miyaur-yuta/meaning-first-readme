@@ -1,0 +1,36 @@
+name: meaning-quality
+
+on:
+  push:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  quality:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: ["3.11", "3.12", "3.13"]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+      - name: Validate, build, audit, benchmark, and test
+        env:
+          PYTHONPATH: src
+        run: bash scripts/quality.sh
+      - name: Verify generated artifacts are committed
+        run: git diff --exit-code -- README.md build/
+      - name: Build wheel
+        if: matrix.python-version == '3.13'
+        run: |
+          python -m pip install --upgrade pip setuptools wheel
+          rm -rf dist src/meaning_first_readme.egg-info
+          python -m pip wheel . --no-deps -w dist
+          python -m pip install --no-deps dist/*.whl
+          python -m meaning_first_readme --project content/project.toml validate
+
+

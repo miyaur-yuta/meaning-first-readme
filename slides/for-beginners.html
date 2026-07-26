@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Claude Code と Spec Kit の仕組み — 初学者向け</title>
+<style>
+  :root{
+    --bg:#fafaf7; --fg:#1a1a1a; --muted:#666; --accent:#2563eb;
+    --warm:#f59e0b; --soft:#f3f4f6; --card:#ffffff; --line:#e5e7eb;
+    --good:#10b981; --bad:#ef4444;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','Hiragino Sans','Yu Gothic',sans-serif;
+    background:var(--bg); color:var(--fg); line-height:1.7;
+    font-size:17px;
+  }
+  .slide{
+    min-height:100vh; padding:48px 24px; max-width:900px; margin:0 auto;
+    border-bottom:1px solid var(--line);
+    display:flex; flex-direction:column; justify-content:center;
+  }
+  .slide-num{
+    position:fixed; top:16px; right:20px; font-size:13px; color:var(--muted);
+    background:var(--card); padding:6px 12px; border-radius:999px;
+    box-shadow:0 1px 4px rgba(0,0,0,.08); z-index:10;
+  }
+  h1{font-size:38px; line-height:1.3; margin-bottom:18px; letter-spacing:-.01em}
+  h2{font-size:28px; margin-bottom:18px; letter-spacing:-.01em}
+  h3{font-size:20px; margin:20px 0 10px}
+  p{margin-bottom:14px}
+  .lead{font-size:19px; color:var(--muted); margin-bottom:24px}
+  ul,ol{margin:0 0 18px 22px}
+  li{margin-bottom:8px}
+  .card{
+    background:var(--card); border:1px solid var(--line); border-radius:14px;
+    padding:24px; margin:14px 0; box-shadow:0 1px 3px rgba(0,0,0,.04);
+  }
+  .highlight{background:linear-gradient(transparent 60%, #fde68a 60%); padding:0 2px}
+  .pill{
+    display:inline-block; padding:4px 12px; border-radius:999px;
+    font-size:13px; font-weight:600; margin:2px;
+  }
+  .pill.blue{background:#dbeafe; color:#1e40af}
+  .pill.amber{background:#fef3c7; color:#92400e}
+  .pill.green{background:#d1fae5; color:#065f46}
+  .grid2{display:grid; grid-template-columns:1fr 1fr; gap:14px; margin:18px 0}
+  @media(max-width:640px){.grid2{grid-template-columns:1fr}}
+  .arrow{font-size:28px; color:var(--accent); text-align:center; margin:8px 0}
+  .compare{display:grid; grid-template-columns:1fr 1fr; gap:0; margin:18px 0; border-radius:12px; overflow:hidden; border:1px solid var(--line)}
+  @media(max-width:640px){.compare{grid-template-columns:1fr}}
+  .compare > div{padding:18px}
+  .compare .left{background:#fef2f2}
+  .compare .right{background:#ecfdf5}
+  .compare h4{font-size:15px; margin-bottom:8px}
+  .compare .left h4{color:#991b1b}
+  .compare .right h4{color:#065f46}
+  .metaphor{
+    background:linear-gradient(135deg,#ede9fe 0%,#ddd6fe 100%);
+    border-radius:14px; padding:24px; margin:18px 0; font-size:18px;
+  }
+  .metaphor::before{content:"💡 "; font-size:22px}
+  .nav{
+    position:fixed; bottom:20px; left:50%; transform:translateX(-50%);
+    display:flex; gap:8px; background:var(--card); padding:8px;
+    border-radius:999px; box-shadow:0 4px 12px rgba(0,0,0,.12); z-index:10;
+  }
+  .nav button{
+    border:none; background:var(--accent); color:#fff; width:40px; height:40px;
+    border-radius:50%; font-size:18px; cursor:pointer; transition:transform .15s;
+  }
+  .nav button:hover{transform:scale(1.1)}
+  .nav .count{align-self:center; padding:0 12px; font-size:14px; color:var(--muted); font-variant-numeric:tabular-nums}
+  .step-list{counter-reset:step; list-style:none; margin:18px 0}
+  .step-list li{
+    counter-increment:step; position:relative; padding-left:48px; margin-bottom:16px;
+    min-height:36px;
+  }
+  .step-list li::before{
+    content:counter(step); position:absolute; left:0; top:0;
+    width:34px; height:34px; background:var(--accent); color:#fff;
+    border-radius:50%; display:flex; align-items:center; justify-content:center;
+    font-weight:700; font-size:15px;
+  }
+  .footer-note{font-size:13px; color:var(--muted); margin-top:32px; padding-top:16px; border-top:1px dashed var(--line)}
+  blockquote{
+    border-left:4px solid var(--warm); padding:12px 18px;
+    background:#fffbeb; border-radius:0 8px 8px 0; margin:14px 0;
+  }
+  .tag-row{margin:6px 0}
+  .small{font-size:14px; color:var(--muted)}
+  .progress-bar{
+    position:fixed; top:0; left:0; right:0; height:3px;
+    background:var(--line); z-index:20;
+  }
+  .progress-fill{
+    height:100%; background:linear-gradient(90deg, var(--accent), var(--warm));
+    width:10%; transition:width .3s ease;
+  }
+</style>
+</head>
+<body>
+<div class="slide-num" id="counter">1 / 10</div>
+<div class="progress-bar" id="progressBar"><div class="progress-fill" id="progressFill"></div></div>
+<nav class="nav">
+  <button onclick="prev()" aria-label="前へ">‹</button>
+  <span class="count" id="navCount">1/10</span>
+  <button onclick="next()" aria-label="次へ">›</button>
+</nav>
+
+<!-- Slide 1: Title -->
+<section class="slide" id="s1">
+  <div class="pill amber">初学者向け</div>
+  <h1>Claude Code と<br>Spec Kit の仕組み</h1>
+  <p class="lead">専門用語を使わず、比喩で分かる「AI と正しく仕事をする方法」</p>
+  <div class="card">
+    <p>所要時間: 約10分</p>
+    <p>対象: AI に触れたことはあるが、Claude Code や Spec Kit は初めての人</p>
+    <p class="small">最終更新: 2026-07-26</p>
+  </div>
+</section>
+
+<!-- Slide 2: Problem -->
+<section class="slide" id="s2">
+  <h2>「AI に頼んだら、<br>なんか違うものができた」</h2>
+  <p class="lead">こういう経験、ありませんか？</p>
+  <div class="compare">
+    <div class="left">
+      <h4>😅 よくある失敗</h4>
+      <ul>
+        <li>「○○して」と頼んだら別のことをされた</li>
+        <li>やってはいけないことをやられた</li>
+        <li>長い説明を読まないで推測された</li>
+        <li>設定がバラバラで AI が迷子になる</li>
+      </ul>
+    </div>
+    <div class="right">
+      <h4>🙂 理想の状態</h4>
+      <ul>
+        <li>目的を取り違えない</li>
+        <li>禁止事項を守る</li>
+        <li>次の一手が分かっている</li>
+        <li>設定が一貫している</li>
+      </ul>
+    </div>
+  </div>
+  <p>この「取り違え」を防ぐ仕組みが <span class="highlight">Claude Code</span> と <span class="highlight">Spec Kit</span> です。</p>
+</section>
+
+<!-- Slide 3: Claude Code Metaphor -->
+<section class="slide" id="s3">
+  <h2>Claude Code とは</h2>
+  <div class="metaphor">
+    AI に<strong>「この仕事場のルール」</strong>を常時読み込ませておく仕組み。AI がルールを忘れずに仕事をしてくれる。
+  </div>
+  <h3>比喩：新しいアルバイトさん</h3>
+  <p>新しいアルバイトさんが来たとき、毎回「冷蔵庫はここ、手を洗ってから、エプロン着用」と教えるのは大変ですよね。</p>
+  <p>Claude Code は<strong>「いつでも見返せるルールブック」</strong>を AI に渡しておく仕組みです。</p>
+  <div class="card">
+    <p class="small">公式: <a href="https://code.claude.com/">code.claude.com</a></p>
+  </div>
+</section>
+
+<!-- Slide 4: Harness parts -->
+<section class="slide" id="s4">
+  <h2>「ルールブック」の中身</h2>
+  <p class="lead">実は1冊ではなく、目的別に7つのパーツがあります</p>
+  <div class="grid2">
+    <div class="card">
+      <h3>📄 CLAUDE.md</h3>
+      <p class="small">常に効く基本ルール</p>
+    </div>
+    <div class="card">
+      <h3>🎓 Skills</h3>
+      <p class="small">必要な時だけ読むマニュアル</p>
+    </div>
+    <div class="card">
+      <h3>🚨 Hooks</h3>
+      <p class="small">絶対に守る禁止事項</p>
+    </div>
+    <div class="card">
+      <h3>🤖 Subagents</h3>
+      <p class="small">専門作業を任せる助手</p>
+    </div>
+    <div class="card">
+      <h3>🔌 MCP</h3>
+      <p class="small">外部システムへの接続</p>
+    </div>
+    <div class="card">
+      <h3>📦 Plugins</h3>
+      <p class="small">上記をまとめて配布</p>
+    </div>
+  </div>
+  <p class="small">これらを総称して「ハーネス（harness = 装具）」と呼びます。</p>
+</section>
+
+<!-- Slide 5: Permission -->
+<section class="slide" id="s5">
+  <h2>「誰の許可で動くか」も大事</h2>
+  <div class="metaphor">
+    AI が勝手にファイルを消さないよう、<strong>「何を自動でやっていいか」</strong>を段階的に設定します。
+  </div>
+  <h3>6つの許可モード</h3>
+  <div class="tag-row">
+    <span class="pill blue">default（毎回聞く）</span>
+    <span class="pill blue">acceptEdits（編集は自動）</span>
+    <span class="pill amber">plan（読むだけ）</span>
+    <span class="pill amber">auto（分類器で判断）</span>
+    <span class="pill green">dontAsk（CI 用）</span>
+    <span class="pill" style="background:#fee2e2;color:#991b1b">bypass（隔離環境のみ）</span>
+  </div>
+  <p class="small">さらに「個人の設定」「チームの設定」「管理者の設定」の3段階があり、<strong>「ダメ」は常に優先</strong>されます。</p>
+</section>
+
+<!-- Slide 6: Spec Kit -->
+<section class="slide" id="s6">
+  <h2>Spec Kit とは</h2>
+  <div class="metaphor">
+    AI と一緒に仕事するときの<strong>「作業手順書のテンプレ」</strong>。GitHub 公式。
+  </div>
+  <p>従来は「コードが王様」でした。Spec Kit は<strong>「指示書が王様、コードはそこから生まれる」</strong>という発想の転換です。</p>
+  <div class="card">
+    <p class="small">公式: <a href="https://github.com/github/spec-kit">github.com/github/spec-kit</a> (v0.12.5, 2026-07)</p>
+  </div>
+</section>
+
+<!-- Slide 7: SDD flow -->
+<section class="slide" id="s7">
+  <h2>Spec Kit の9つの手順</h2>
+  <p class="lead">指示書を段階的に詰めて、最後にコードを生む</p>
+  <ol class="step-list">
+    <li><strong>Constitution</strong> — プロジェクトの絶対原則</li>
+    <li><strong>Specify</strong> — 何を作るか書く</li>
+    <li><strong>Clarify</strong> — 曖昧さを質問で潰す</li>
+    <li><strong>Plan</strong> — どう作るか決める</li>
+    <li><strong>Checklist</strong> — 抜けがないか確認</li>
+    <li><strong>Tasks</strong> — 細かい作業に分ける</li>
+    <li><strong>Analyze</strong> — 全体の整合性を見る</li>
+    <li><strong>Implement</strong> — コードを書く</li>
+    <li><strong>Converge</strong> — 指示と結果が一致したか確認</li>
+  </ol>
+</section>
+
+<!-- Slide 8: Integration -->
+<section class="slide" id="s8">
+  <h2>この2つを組み合わせると？</h2>
+  <p class="lead">「Claude Code のルール」を「Spec Kit の手順」で作れる</p>
+  <div class="card" style="text-align:center">
+    <p class="small">意味ブロック（正本）</p>
+    <div class="arrow">↓</div>
+    <p>Spec Kit の指示書に変換</p>
+    <div class="arrow">↓</div>
+    <p>Claude Code のルールブックを生成</p>
+  </div>
+  <p>これが <strong>Meaning First README</strong> プロジェクトの目標です。</p>
+  <blockquote>
+    人間は要点だけ伝える（認知負荷 低）→ AI がルールブック化 → AI が作業を継続
+  </blockquote>
+</section>
+
+<!-- Slide 9: What changes -->
+<section class="slide" id="s9">
+  <h2>何が変わるか</h2>
+  <div class="compare">
+    <div class="left">
+      <h4>😅 従来</h4>
+      <ul>
+        <li>README を人力で書く</li>
+        <li>ルールが口伝え</li>
+        <li>AI に毎回説明</li>
+        <li>「あれ、こうだったっけ？」が多い</li>
+      </ul>
+    </div>
+    <div class="right">
+      <h4>🙂 この仕組み</h4>
+      <ul>
+        <li>意味ブロックから自動生成</li>
+        <li>ルールがファイルで永続</li>
+        <li>AI が常に最新ルールを参照</li>
+        <li>取り違えが起きにくい</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- Slide 10: Summary -->
+<section class="slide" id="s10">
+  <h2>まとめ</h2>
+  <ol>
+    <li><strong>Claude Code</strong> は AI にルールを常時読ませる仕組み</li>
+    <li>ルールは7つのパーツ（ハーネス）から成る</li>
+    <li>「誰の許可で動くか」も段階的に設定できる</li>
+    <li><strong>Spec Kit</strong> は指示書ファーストの作業手順</li>
+    <li>2つを組み合わせると、AI の取り違えを構造的に防げる</li>
+    <li>人間は要点を伝えるだけ。後は AI が走る</li>
+  </ol>
+  <div class="card">
+    <p>📌 詳しく知りたい人向けスライド: <code>slides/for-engineers.html</code></p>
+    <p>📌 実際のルール定義: <code>content/blocks/</code></p>
+    <p>📌 説明時の台本: <code>slides/script.md</code></p>
+  </div>
+  <p class="footer-note">Meaning First README v1 / 2026-07-26</p>
+</section>
+
+<script>
+  const total = 10;
+  let cur = 1;
+  function show(n){
+    cur = Math.max(1, Math.min(total, n));
+    document.getElementById('counter').textContent = cur + ' / ' + total;
+    document.getElementById('navCount').textContent = cur + '/' + total;
+    document.getElementById('progressFill').style.width = (cur/total*100) + '%';
+    document.getElementById('s'+cur).scrollIntoView({behavior:'smooth', block:'start'});
+  }
+  function next(){ show(cur+1); }
+  function prev(){ show(cur-1); }
+  document.addEventListener('keydown', e=>{
+    if(e.key==='ArrowRight'||e.key===' ') next();
+    if(e.key==='ArrowLeft') prev();
+  });
+  window.addEventListener('scroll', ()=>{
+    const pos = window.scrollY + window.innerHeight/2;
+    for(let i=1;i<=total;i++){
+      const s = document.getElementById('s'+i);
+      if(s.offsetTop <= pos && s.offsetTop + s.offsetHeight > pos){
+        cur = i;
+        document.getElementById('counter').textContent = cur + ' / ' + total;
+        document.getElementById('navCount').textContent = cur + '/' + total;
+        document.getElementById('progressFill').style.width = (cur/total*100) + '%';
+        break;
+      }
+    }
+  });
+</script>
+</body>
+</html>

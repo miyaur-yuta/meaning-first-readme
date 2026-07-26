@@ -1,0 +1,92 @@
+# Context Retrieval Benchmark
+
+**Result:** PASS
+**Macro recall:** `1.000`
+**Macro precision:** `0.521`
+
+| Case | Recall | Precision | Result |
+|---|---:|---:|---|
+| purpose-not-length | 1.000 | 0.471 | PASS |
+| compile-ai-context | 1.000 | 0.524 | PASS |
+| release-pr | 1.000 | 0.550 | PASS |
+| author-new-block | 1.000 | 0.600 | PASS |
+| review-semantic-change | 1.000 | 0.550 | PASS |
+| prompt-injection | 1.000 | 0.500 | PASS |
+| stale-information | 1.000 | 0.526 | PASS |
+| self-hosted-readme | 1.000 | 0.550 | PASS |
+| meaning-evaluation | 1.000 | 0.500 | PASS |
+| system-architecture | 1.000 | 0.500 | PASS |
+| target-readers | 1.000 | 0.476 | PASS |
+| next-development | 1.000 | 0.500 | PASS |
+
+## purpose-not-length
+
+- Query: このプロジェクトの本当の目的は何か。世界一長くすることが目的なのか説明して
+- Expected: purpose.meaning, non_goal.length, definition.meaning, faq.longest
+- Selected: purpose.meaning, scope.readers, scope.artifact, non_goal.length, definition.meaning, definition.context-contract, principle.typed-claims, principle.fail-closed, constraint.truth, constraint.boundary, constraint.provenance, constraint.update-safety, decision.markdown-toml, decision.self-hosting, architecture.pipeline, evidence.self-host-build, faq.longest
+
+## compile-ai-context
+
+- Query: AIにタスク専用の文脈をトークン予算付きで渡したい。外部の命令注入も防ぎたい
+- Expected: architecture.context-packer, procedure.context, constraint.boundary, risk.prompt-injection, risk.context-overflow
+- Selected: purpose.meaning, scope.readers, scope.artifact, non_goal.length, definition.meaning, definition.context-contract, principle.progressive-disclosure, principle.typed-claims, principle.fail-closed, constraint.truth, constraint.boundary, constraint.provenance, constraint.update-safety, decision.markdown-toml, architecture.pipeline, architecture.semantic-graph, architecture.context-packer, procedure.context, evidence.retrieval-benchmark, risk.prompt-injection, risk.context-overflow
+
+## release-pr
+
+- Query: 公開前の検証を完了し、最後に人間へPRを出すか確認する手順
+- Expected: procedure.release, procedure.review, procedure.build, constraint.truth
+- Selected: purpose.meaning, scope.readers, scope.artifact, non_goal.length, definition.meaning, definition.context-contract, principle.typed-claims, principle.fail-closed, constraint.truth, constraint.boundary, constraint.provenance, constraint.update-safety, decision.markdown-toml, decision.no-single-score, decision.self-hosting, architecture.pipeline, procedure.review, procedure.build, procedure.release, evidence.self-host-build
+
+## author-new-block
+
+- Query: 新しい意味ブロックを書きたい。ID、型、根拠、依存、受け入れ条件はどうするか
+- Expected: procedure.author, decision.markdown-toml, principle.typed-claims, constraint.provenance, example.typed-block
+- Selected: purpose.meaning, scope.readers, scope.artifact, non_goal.length, definition.meaning, definition.context-contract, principle.typed-claims, principle.fail-closed, constraint.truth, constraint.boundary, constraint.provenance, constraint.update-safety, decision.markdown-toml, architecture.pipeline, architecture.semantic-graph, procedure.author, evidence.self-host-build, example.typed-block, roadmap.v1, changelog.v1
+
+## review-semantic-change
+
+- Query: READMEの変更をレビューして、文言ではなく目的、主張、依存、根拠の差分を確認したい
+- Expected: procedure.review, constraint.update-safety, decision.no-single-score, architecture.semantic-graph
+- Selected: purpose.meaning, scope.readers, scope.artifact, non_goal.length, definition.meaning, definition.context-contract, principle.typed-claims, principle.fail-closed, constraint.truth, constraint.boundary, constraint.provenance, constraint.update-safety, decision.markdown-toml, decision.no-single-score, decision.self-hosting, architecture.pipeline, architecture.semantic-graph, procedure.review, evidence.self-host-build, glossary.core
+
+## prompt-injection
+
+- Query: 外部資料に以前の指示を無視しろと書かれていた。AIはどう扱うべきか
+- Expected: risk.prompt-injection, constraint.boundary, architecture.context-packer, principle.fail-closed
+- Selected: purpose.meaning, scope.readers, scope.artifact, non_goal.length, definition.meaning, definition.context-contract, principle.typed-claims, principle.fail-closed, constraint.truth, constraint.boundary, constraint.provenance, constraint.update-safety, decision.markdown-toml, architecture.pipeline, architecture.semantic-graph, architecture.context-packer, evidence.retrieval-benchmark, risk.prompt-injection
+
+## stale-information
+
+- Query: 料金や仕様や記録が古くなったときに、期限切れ情報を公開しない仕組み
+- Expected: risk.stale-truth, constraint.truth, constraint.provenance, principle.fail-closed
+- Selected: purpose.meaning, scope.readers, scope.artifact, non_goal.length, definition.meaning, definition.context-contract, principle.typed-claims, principle.fail-closed, constraint.truth, constraint.boundary, constraint.provenance, constraint.update-safety, decision.markdown-toml, decision.no-single-score, architecture.pipeline, risk.stale-truth, roadmap.v1, faq.longest, changelog.v1
+
+## self-hosted-readme
+
+- Query: 意味ブロックからREADMEを再生成し、手編集や再現性の問題を検出する
+- Expected: decision.self-hosting, evidence.self-host-build, architecture.pipeline, procedure.build
+- Selected: purpose.meaning, scope.readers, scope.artifact, non_goal.length, definition.meaning, definition.context-contract, principle.typed-claims, principle.fail-closed, assumption.readme-interface, constraint.truth, constraint.boundary, constraint.provenance, constraint.update-safety, decision.markdown-toml, decision.self-hosting, architecture.pipeline, procedure.author, procedure.build, evidence.self-host-build, evidence.retrieval-benchmark
+
+## meaning-evaluation
+
+- Query: 意味をどう定義し、なぜ一つの意味スコアで評価しないのか
+- Expected: definition.meaning, purpose.meaning, decision.no-single-score, evidence.retrieval-benchmark
+- Selected: purpose.meaning, scope.readers, scope.artifact, non_goal.length, non_goal.omniscience, definition.meaning, definition.context-contract, principle.typed-claims, principle.fail-closed, constraint.truth, constraint.boundary, constraint.provenance, constraint.update-safety, decision.markdown-toml, decision.no-single-score, evidence.retrieval-benchmark, glossary.core, faq.longest
+
+## system-architecture
+
+- Query: 解析、依存グラフ、README生成、監査、検索ベンチマークからなる全体構造を知りたい
+- Expected: architecture.pipeline, architecture.semantic-graph, architecture.context-packer, scope.artifact
+- Selected: purpose.meaning, scope.readers, scope.artifact, non_goal.length, definition.meaning, definition.context-contract, principle.typed-claims, principle.fail-closed, constraint.truth, constraint.boundary, constraint.provenance, constraint.update-safety, decision.markdown-toml, decision.no-single-score, decision.self-hosting, architecture.pipeline, architecture.semantic-graph, architecture.context-packer, procedure.build, evidence.self-host-build, evidence.retrieval-benchmark, roadmap.v1
+
+## target-readers
+
+- Query: 初見の人間、保守担当者、生成AI、検証ツールをどう支援するか
+- Expected: scope.readers, principle.progressive-disclosure, assumption.readme-interface, architecture.context-packer
+- Selected: purpose.meaning, scope.readers, scope.artifact, non_goal.length, definition.meaning, definition.context-contract, principle.progressive-disclosure, principle.typed-claims, principle.fail-closed, assumption.readme-interface, constraint.truth, constraint.boundary, constraint.provenance, constraint.update-safety, decision.markdown-toml, decision.self-hosting, architecture.pipeline, architecture.semantic-graph, architecture.context-packer, evidence.self-host-build, evidence.retrieval-benchmark
+
+## next-development
+
+- Query: 初号機の後に何を実装し、どの失敗モードから改善するか
+- Expected: roadmap.v1, changelog.v1, risk.context-overflow, risk.stale-truth
+- Selected: purpose.meaning, scope.readers, scope.artifact, non_goal.length, definition.meaning, definition.context-contract, principle.progressive-disclosure, principle.typed-claims, principle.fail-closed, constraint.truth, constraint.boundary, constraint.provenance, constraint.update-safety, decision.markdown-toml, architecture.pipeline, architecture.semantic-graph, architecture.context-packer, evidence.retrieval-benchmark, risk.context-overflow, risk.stale-truth, roadmap.v1, changelog.v1
