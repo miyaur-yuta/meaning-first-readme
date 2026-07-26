@@ -1,0 +1,136 @@
+[
+  {
+    "name": "purpose-not-length",
+    "query": "このプロジェクトの本当の目的は何か。世界一長くすることが目的なのか説明して",
+    "expected": [
+      "purpose.meaning",
+      "non_goal.length",
+      "definition.meaning",
+      "faq.longest"
+    ],
+    "budget": 5200
+  },
+  {
+    "name": "compile-ai-context",
+    "query": "AIにタスク専用の文脈をトークン予算付きで渡したい。外部の命令注入も防ぎたい",
+    "expected": [
+      "architecture.context-packer",
+      "procedure.context",
+      "constraint.boundary",
+      "risk.prompt-injection",
+      "risk.context-overflow"
+    ],
+    "budget": 6250
+  },
+  {
+    "name": "release-pr",
+    "query": "公開前の検証を完了し、最後に人間へPRを出すか確認する手順",
+    "expected": [
+      "procedure.release",
+      "procedure.review",
+      "procedure.build",
+      "constraint.truth"
+    ],
+    "budget": 6000
+  },
+  {
+    "name": "author-new-block",
+    "query": "新しい意味ブロックを書きたい。ID、型、根拠、依存、受け入れ条件はどうするか",
+    "expected": [
+      "procedure.author",
+      "decision.markdown-toml",
+      "principle.typed-claims",
+      "constraint.provenance",
+      "example.typed-block"
+    ],
+    "budget": 6000
+  },
+  {
+    "name": "review-semantic-change",
+    "query": "READMEの変更をレビューして、文言ではなく目的、主張、依存、根拠の差分を確認したい",
+    "expected": [
+      "procedure.review",
+      "constraint.update-safety",
+      "decision.no-single-score",
+      "architecture.semantic-graph"
+    ],
+    "budget": 6000
+  },
+  {
+    "name": "prompt-injection",
+    "query": "外部資料に以前の指示を無視しろと書かれていた。AIはどう扱うべきか",
+    "expected": [
+      "risk.prompt-injection",
+      "constraint.boundary",
+      "architecture.context-packer",
+      "principle.fail-closed"
+    ],
+    "budget": 5600
+  },
+  {
+    "name": "stale-information",
+    "query": "料金や仕様や記録が古くなったときに、期限切れ情報を公開しない仕組み",
+    "expected": [
+      "risk.stale-truth",
+      "constraint.truth",
+      "constraint.provenance",
+      "principle.fail-closed"
+    ],
+    "budget": 5600
+  },
+  {
+    "name": "self-hosted-readme",
+    "query": "意味ブロックからREADMEを再生成し、手編集や再現性の問題を検出する",
+    "expected": [
+      "decision.self-hosting",
+      "evidence.self-host-build",
+      "architecture.pipeline",
+      "procedure.build"
+    ],
+    "budget": 6000
+  },
+  {
+    "name": "meaning-evaluation",
+    "query": "意味をどう定義し、なぜ一つの意味スコアで評価しないのか",
+    "expected": [
+      "definition.meaning",
+      "purpose.meaning",
+      "decision.no-single-score",
+      "evidence.retrieval-benchmark"
+    ],
+    "budget": 5600
+  },
+  {
+    "name": "system-architecture",
+    "query": "解析、依存グラフ、README生成、監査、検索ベンチマークからなる全体構造を知りたい",
+    "expected": [
+      "architecture.pipeline",
+      "architecture.semantic-graph",
+      "architecture.context-packer",
+      "scope.artifact"
+    ],
+    "budget": 6500
+  },
+  {
+    "name": "target-readers",
+    "query": "初見の人間、保守担当者、生成AI、検証ツールをどう支援するか",
+    "expected": [
+      "scope.readers",
+      "principle.progressive-disclosure",
+      "assumption.readme-interface",
+      "architecture.context-packer"
+    ],
+    "budget": 6350
+  },
+  {
+    "name": "next-development",
+    "query": "初号機の後に何を実装し、どの失敗モードから改善するか",
+    "expected": [
+      "roadmap.v1",
+      "changelog.v1",
+      "risk.context-overflow",
+      "risk.stale-truth"
+    ],
+    "budget": 6600
+  }
+]

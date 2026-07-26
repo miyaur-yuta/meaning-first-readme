@@ -1,0 +1,42 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.invalid/meaning-first-readme/block.schema.json",
+  "title": "Meaning First README semantic block metadata",
+  "type": "object",
+  "required": ["id", "kind", "title", "summary"],
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z][a-z0-9]*(?:[._-][a-z0-9]+)+$"
+    },
+    "kind": {
+      "enum": ["purpose", "scope", "non_goal", "definition", "principle", "assumption", "fact", "constraint", "decision", "architecture", "procedure", "evidence", "risk", "example", "glossary", "roadmap", "faq", "changelog"]
+    },
+    "title": {"type": "string", "minLength": 1},
+    "summary": {"type": "string", "minLength": 12},
+    "order": {"type": "integer"},
+    "priority": {"type": "integer", "minimum": 0, "maximum": 100},
+    "audience": {
+      "type": "array",
+      "items": {"enum": ["human", "ai", "both"]},
+      "minItems": 1,
+      "uniqueItems": true
+    },
+    "tags": {"type": "array", "items": {"type": "string"}, "uniqueItems": true},
+    "status": {"enum": ["draft", "active", "deprecated", "superseded", "archived"]},
+    "trust": {"enum": ["authoritative", "reviewed", "unverified", "external_untrusted"]},
+    "depends_on": {"type": "array", "items": {"type": "string"}, "uniqueItems": true},
+    "evidence": {"type": "array", "items": {"type": "string"}, "uniqueItems": true},
+    "supports": {"type": "array", "items": {"type": "string"}, "uniqueItems": true},
+    "claims": {"type": "array", "items": {"type": "string"}},
+    "negates": {"type": "array", "items": {"type": "string"}},
+    "acceptance": {"type": "array", "items": {"type": "string"}},
+    "rationale": {"type": "string"},
+    "owner": {"type": "string"},
+    "source": {"type": "string"},
+    "updated": {"type": "string", "format": "date"},
+    "expires": {"type": "string", "format": "date"},
+    "volatile": {"type": "boolean"}
+  },
+  "additionalProperties": true
+}

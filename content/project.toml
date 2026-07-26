@@ -1,0 +1,24 @@
+[project]
+name = "Meaning First README"
+tagline = "目的は意味を達成すること。READMEを、人間とAIのための実行可能な文脈契約にする。"
+language = "ja"
+content_dir = "content/blocks"
+required_kinds = ["purpose", "scope", "non_goal", "definition", "principle", "constraint", "decision", "architecture", "procedure", "evidence", "risk", "roadmap"]
+required_blocks = ["purpose.meaning", "non_goal.length", "definition.meaning", "constraint.truth", "architecture.pipeline", "procedure.release"]
+section_order = ["purpose", "scope", "non_goal", "definition", "principle", "assumption", "constraint", "decision", "architecture", "procedure", "evidence", "risk", "example", "glossary", "roadmap", "faq", "changelog"]
+
+[quality]
+ambiguous_terms = ["TBD", "TODO", "FIXME", "あとで", "いつか", "たぶん", "適宜", "必要に応じて"]
+max_duplicate_similarity = 0.84
+
+[context]
+mandatory_kinds = ["purpose"]
+mandatory_blocks = ["purpose.meaning", "scope.readers", "non_goal.length", "constraint.boundary"]
+max_tokens = 32000
+
+[benchmark]
+minimum_recall = 0.85
+minimum_precision = 0.30
+
+[render]
+generated_notice = "Generated from typed semantic blocks; do not edit README.md directly."

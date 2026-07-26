@@ -1,0 +1,23 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.invalid/meaning-first-readme/snapshot.schema.json",
+  "title": "Meaning First README semantic snapshot",
+  "type": "object",
+  "required": ["schema_version", "repository_digest", "blocks"],
+  "properties": {
+    "schema_version": {"const": 1},
+    "repository_digest": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "blocks": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "kind", "digest"],
+        "properties": {
+          "id": {"type": "string"},
+          "kind": {"type": "string"},
+          "digest": {"type": "string", "pattern": "^[0-9a-f]{64}$"}
+        }
+      }
+    }
+  }
+}
