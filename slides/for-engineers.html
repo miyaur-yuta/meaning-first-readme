@@ -83,14 +83,23 @@
   .warn{background:#422006; border-left:3px solid var(--warm); padding:10px 14px; border-radius:0 6px 6px 0; margin:10px 0}
   .warn::before{content:"⚠️ "}
   a{color:var(--accent)}
+  .progress-bar{
+    position:fixed; top:0; left:0; right:0; height:2px;
+    background:var(--line); z-index:20;
+  }
+  .progress-fill{
+    height:100%; background:linear-gradient(90deg, var(--accent), var(--warm));
+    width:8%; transition:width .3s ease;
+  }
 </style>
 </head>
 <body>
 <div class="slide-num" id="counter">1 / 12</div>
+<div class="progress-bar" id="progressBar"><div class="progress-fill" id="progressFill"></div></div>
 <nav class="nav">
-  <button onclick="prev()">‹</button>
+  <button onclick="prev()" aria-label="prev">‹</button>
   <span class="count" id="navCount">1/12</span>
-  <button onclick="next()">›</button>
+  <button onclick="next()" aria-label="next">›</button>
 </nav>
 
 <!-- Slide 1 -->
@@ -348,6 +357,7 @@ python -m meaning_first_readme context \
     cur = Math.max(1, Math.min(total, n));
     document.getElementById('counter').textContent = cur + ' / ' + total;
     document.getElementById('navCount').textContent = cur + '/' + total;
+    document.getElementById('progressFill').style.width = (cur/total*100) + '%';
     document.getElementById('s'+cur).scrollIntoView({behavior:'smooth', block:'start'});
   }
   function next(){ show(cur+1); }
@@ -364,6 +374,7 @@ python -m meaning_first_readme context \
         cur = i;
         document.getElementById('counter').textContent = cur + ' / ' + total;
         document.getElementById('navCount').textContent = cur + '/' + total;
+        document.getElementById('progressFill').style.width = (cur/total*100) + '%';
         break;
       }
     }
