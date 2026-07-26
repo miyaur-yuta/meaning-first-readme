@@ -10,12 +10,12 @@
 | 項目 | 値 |
 |---|---:|
 | 有効な意味ブロック | 37 |
-| 推定ソーストークン | 10,058 |
+| 推定ソーストークン | 10,050 |
 | 最新ソース更新日 | 2026-07-26 |
-| リポジトリ指紋 | `57f7ea0bcabda99da5f1` |
+| リポジトリ指紋 | `4173a17428bd9386b70b` |
 | 生成規約 | `型付き意味ブロックから生成。README.md は直接編集しない。` |
 
-<!-- mfr:manifest {"active_blocks":37,"block_ids":["purpose.meaning","scope.entry","scope.readers","scope.artifact","non_goal.length","non_goal.omniscience","definition.meaning","definition.context-contract","principle.progressive-disclosure","principle.typed-claims","principle.fail-closed","assumption.readme-interface","constraint.truth","constraint.boundary","constraint.provenance","constraint.update-safety","decision.markdown-toml","decision.no-single-score","decision.self-hosting","architecture.pipeline","architecture.semantic-graph","architecture.context-packer","procedure.author","procedure.review","procedure.build","procedure.context","procedure.release","evidence.self-host-build","evidence.retrieval-benchmark","risk.prompt-injection","risk.context-overflow","risk.stale-truth","example.typed-block","glossary.core","roadmap.v1","faq.longest","changelog.v1"],"estimated_source_tokens":10058,"latest_source_update":"2026-07-26","project":"Meaning First README","repository_digest":"57f7ea0bcabda99da5f104ec7d94e0714ace8d566fef5a0fd5f44d5382bb270c","schema_version":1} -->
+<!-- mfr:manifest {"active_blocks":37,"block_ids":["purpose.meaning","scope.entry","scope.readers","scope.artifact","non_goal.length","non_goal.omniscience","definition.meaning","definition.context-contract","principle.progressive-disclosure","principle.typed-claims","principle.fail-closed","assumption.readme-interface","constraint.truth","constraint.boundary","constraint.provenance","constraint.update-safety","decision.markdown-toml","decision.no-single-score","decision.self-hosting","architecture.pipeline","architecture.semantic-graph","architecture.context-packer","procedure.author","procedure.review","procedure.build","procedure.context","procedure.release","evidence.self-host-build","evidence.retrieval-benchmark","risk.prompt-injection","risk.context-overflow","risk.stale-truth","example.typed-block","glossary.core","roadmap.v1","faq.longest","changelog.v1"],"estimated_source_tokens":10050,"latest_source_update":"2026-07-26","project":"Meaning First README","repository_digest":"4173a17428bd9386b70b05236e59b20b0e9aa78dfe8d5b6ce6ec5d1cbf6cc756","schema_version":1} -->
 
 ## 目次
 
@@ -98,12 +98,12 @@
 
 ## 対象範囲
 
-<!-- mfr:block {"digest":"f375693f08f30e8a","id":"scope.entry","kind":"scope","priority":97,"status":"active"} -->
+<!-- mfr:block {"digest":"e0aa0358bb03343c","id":"scope.entry","kind":"scope","priority":60,"status":"active"} -->
 ### 最初の30秒でやること
 
 > 全体を読む前に、ひとこと説明と最短コマンドだけ通す。
 
-<sub>`scope.entry` · 種別: `scope` · 優先度: `97` · 信頼区分: `reviewed` · 対象: `both` · 更新: `2026-07-26` · 依存: `purpose.meaning`, `scope.readers`</sub>
+<sub>`scope.entry` · 種別: `scope` · 優先度: `60` · 信頼区分: `reviewed` · 対象: `human` · 更新: `2026-07-26` · 依存: `purpose.meaning`, `scope.readers`</sub>
 
 ひとことで言うと: 長いREADMEを書く道具ではない。読んだ人とAIが、目的・禁止事項・次の一手を取り違えないためのREADME生成器。
 
@@ -897,7 +897,7 @@ IDは表示順ではなく概念へ結び付ける。本文を移動してもID�
 ```json
 {
   "schema_version": 1,
-  "repository_digest": "57f7ea0bcabda99da5f104ec7d94e0714ace8d566fef5a0fd5f44d5382bb270c",
+  "repository_digest": "4173a17428bd9386b70b05236e59b20b0e9aa78dfe8d5b6ce6ec5d1cbf6cc756",
   "blocks": [
     {
       "id": "purpose.meaning",
@@ -941,16 +941,14 @@ IDは表示順ではなく概念へ結び付ける。本文を移動してもID�
       "title": "最初の30秒でやること",
       "summary": "全体を読む前に、ひとこと説明と最短コマンドだけ通す。",
       "order": 15,
-      "priority": 97,
+      "priority": 60,
       "audience": [
-        "both"
+        "human"
       ],
       "tags": [
         "入口",
         "最短",
-        "オンボーディング",
-        "レビュー",
-        "コマンド"
+        "オンボーディング"
       ],
       "status": "active",
       "trust": "reviewed",
@@ -971,7 +969,7 @@ IDは表示順ではなく概念へ結び付ける。本文を移動してもID�
       "updated": "2026-07-26",
       "expires": null,
       "volatile": false,
-      "digest": "f375693f08f30e8a8b6c1358673ed4f3a627eabd2315427fd6ad392e83c89f25"
+      "digest": "e0aa0358bb03343cec8d47a56eb662e03225ee3425740f86a2561804e4a32b66"
     },
     {
       "id": "scope.readers",

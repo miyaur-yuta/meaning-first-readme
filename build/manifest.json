@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "repository_digest": "57f7ea0bcabda99da5f104ec7d94e0714ace8d566fef5a0fd5f44d5382bb270c",
+  "repository_digest": "4173a17428bd9386b70b05236e59b20b0e9aa78dfe8d5b6ce6ec5d1cbf6cc756",
   "blocks": [
     {
       "id": "architecture.context-packer",
@@ -1359,16 +1359,14 @@
       "title": "最初の30秒でやること",
       "summary": "全体を読む前に、ひとこと説明と最短コマンドだけ通す。",
       "order": 15,
-      "priority": 97,
+      "priority": 60,
       "audience": [
-        "both"
+        "human"
       ],
       "tags": [
         "入口",
         "最短",
-        "オンボーディング",
-        "レビュー",
-        "コマンド"
+        "オンボーディング"
       ],
       "status": "active",
       "trust": "reviewed",
@@ -1390,7 +1388,7 @@
       "expires": null,
       "volatile": false,
       "body": "ひとことで言うと: 長いREADMEを書く道具ではない。読んだ人とAIが、目的・禁止事項・次の一手を取り違えないためのREADME生成器。\n\nレビューや初見で、最初に全部の章を読む必要はない。\n\n1. 入口: [`docs/START_HERE.md`](docs/START_HERE.md)\n2. 目的の正本: [`content/blocks/001-purpose.md`](content/blocks/001-purpose.md)\n3. 検証結果: [`release/VALIDATION_REPORT.md`](release/VALIDATION_REPORT.md)\n\nローカル確認は次の3コマンドで足りる。\n\n```bash\nexport PYTHONPATH=src\npython -m meaning_first_readme doctor\npython -m meaning_first_readme validate\n```\n\n`README.md` は生成物なので直接編集しない。変更は `content/blocks/` に入れる。",
-      "digest": "f375693f08f30e8a8b6c1358673ed4f3a627eabd2315427fd6ad392e83c89f25"
+      "digest": "e0aa0358bb03343cec8d47a56eb662e03225ee3425740f86a2561804e4a32b66"
     },
     {
       "id": "scope.readers",

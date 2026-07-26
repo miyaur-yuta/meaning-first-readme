@@ -47,7 +47,7 @@
 
 - Query: READMEの変更をレビューして、文言ではなく目的、主張、依存、根拠の差分を確認したい
 - Expected: procedure.review, constraint.update-safety, decision.no-single-score, architecture.semantic-graph
-- Selected: purpose.meaning, scope.entry, scope.readers, scope.artifact, non_goal.length, definition.meaning, definition.context-contract, principle.typed-claims, principle.fail-closed, constraint.truth, constraint.boundary, constraint.provenance, constraint.update-safety, decision.markdown-toml, decision.no-single-score, decision.self-hosting, architecture.pipeline, architecture.semantic-graph, procedure.review, evidence.self-host-build
+- Selected: purpose.meaning, scope.readers, scope.artifact, non_goal.length, definition.meaning, definition.context-contract, principle.typed-claims, principle.fail-closed, constraint.truth, constraint.boundary, constraint.provenance, constraint.update-safety, decision.markdown-toml, decision.no-single-score, decision.self-hosting, architecture.pipeline, architecture.semantic-graph, procedure.review, evidence.self-host-build, glossary.core
 
 ## prompt-injection
 

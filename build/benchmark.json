@@ -154,7 +154,6 @@
       ],
       "selected": [
         "purpose.meaning",
-        "scope.entry",
         "scope.readers",
         "scope.artifact",
         "non_goal.length",
@@ -172,7 +171,8 @@
         "architecture.pipeline",
         "architecture.semantic-graph",
         "procedure.review",
-        "evidence.self-host-build"
+        "evidence.self-host-build",
+        "glossary.core"
       ],
       "recall": 1.0,
       "precision": 0.55,

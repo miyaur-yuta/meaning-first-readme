@@ -1,37 +1,43 @@
-# PR: Meaning First README v1
+# Meaning First README v1
 
-## ひとことで言うと
+## 作りたいもの（1行）
 
-長いREADMEを書く道具ではない。読んだ人とAIが、目的・禁止事項・次の一手を取り違えないためのREADME生成器。
+**READMEを読んだ人とAIが、目的・禁止事項・次の一手を取り違えない状態を作る、依存ゼロのREADME生成器。**
 
-## レビュー経路（この順だけ）
+---
 
-1. `docs/START_HERE.md`
-2. `content/blocks/001-purpose.md`
-3. `release/VALIDATION_REPORT.md`
-4. CI の `meaning-quality` が green か
+## ここだけ見ればOK（所要30秒）
 
-全部を最初から読む必要はない。
+1. ⭐ [`docs/START_HERE.md`](https://github.com/miyaur-yuta/meaning-first-readme/blob/release/v1.0.0/docs/START_HERE.md)
+2. 🎯 [`content/blocks/001-purpose.md`](https://github.com/miyaur-yuta/meaning-first-readme/blob/release/v1.0.0/content/blocks/001-purpose.md)
+3. ✅ [`release/VALIDATION_REPORT.md`](https://github.com/miyaur-yuta/meaning-first-readme/blob/release/v1.0.0/release/VALIDATION_REPORT.md)
 
-## 何が入っているか
+CI: 🟢 3.11 / 3.12 / 3.13 通過済み
 
-- 意味の部品（ブロック）から README を自動生成
-- 検証・監査・タスク別文脈・ベンチマーク・差分
-- 追加ライブラリなしの CLI（`python -m meaning_first_readme`）
+---
 
-## 検証の見方
+## 何ができるようになる？
 
-| 見たいこと | 場所 |
+| Before | After |
 |---|---|
-| 合否 | `release/VALIDATION_REPORT.md` |
-| 生成物 | `README.md`, `build/` |
+| README を手書きで長くする | 意味の部品から自動生成する |
+| 読者が判断を取り違える | 目的・禁止・次手が明示で伝わる |
+| AI が全文を食って迷子 | タスク別に必要な文脈だけ取り出す |
+
+---
+
+## スマホから見る時のヒント
+
+- 上の 3 リンクだけ開けば理解できる
+- 細かい差分は見なくてよい（生成物は自動）
+- コメントあれば順次対応します
 
 ## 既知の限界
 
 - 日本語検索は簡易（同義語に弱い）
-- 注入検査は補助
-- 外部 URL は未検証
+- 注入検査は補助（信頼境界の代替ではない）
+- 外部 URL の到達性は未検証
 
 ## 公開境界
 
-Draft のまま整備してよい。Ready / merge は人間の明示承認後。
+Draft のまま整備中。Ready / merge は人間の明示承認後。

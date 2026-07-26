@@ -23,7 +23,7 @@
         "scope"
       ],
       "required_kinds_present": true,
-      "estimated_tokens": 10058
+      "estimated_tokens": 10050
     },
     "traceability": {
       "eligible_blocks": 3,
