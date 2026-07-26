@@ -30,7 +30,10 @@ README を「正しく書く」ための道具ではない。README を含む **
 
 ### リアルな対話品質
 
-自動生成物は、実際に人間が Claude Code と対話したときに取り違え・迷子・停滞が起きない品質が必要。検証とベンチマークに加えて、代表ペルソナでの対話観察を `evidence` として残す。
+「リアルな対話」とは、生成したハーネスを実際に読み込ませた Claude Code セッションで、**代表ペルソナの典型タスク**を実施したときの振る舞い。主観ではなく観察可能な基準（[`definition.real-conversation`](https://github.com/miyaur-yuta/meaning-first-readme/blob/release/v1.0.0/content/blocks/030-definition-real-conversation.md) 参照）。
+
+含むもの：目的・禁止事項・次の一手が最初の応答に反映されるか、禁止が機械的に守られるか、人間向けビューで俯瞰できるか。
+含まないもの：「なんとなく自然」等の主観、サンプル1の印象。
 
 ---
 
@@ -38,10 +41,23 @@ README を「正しく書く」ための道具ではない。README を含む **
 
 **v1 は README ビューのみ**。CLAUDE.md, Skills, Hooks, Subagents の生成は次段階（[`roadmap`](https://github.com/miyaur-yuta/meaning-first-readme/blob/release/v1.0.0/content/blocks/140-roadmap.md) 参照）。
 
-それでも v1 には意味がある：
-- 意味ブロック管理の基盤が完成
-- 検証・監査・差分の仕組みが動く
-- 次段階は同じ基盤から各種ハーネス設定を生やすだけ
+詳細は [`content/blocks/016-scope-design-boundary.md`](https://github.com/miyaur-yuta/meaning-first-readme/blob/release/v1.0.0/content/blocks/016-scope-design-boundary.md) に明示。
+
+### v1 で作るもの
+
+- 意味ブロック管理（`content/blocks/`）
+- README 生成・検証・監査・ベンチマーク
+- コンテキスト取り出し・差分・スナップショット
+- 自己ホスト
+
+### v1 では作らないもの（明示的に範囲外）
+
+- CLAUDE.md / Skills / Hooks / Subagents / MCP 設定の生成
+- 権限設定（`settings.json` 系）の生成
+- 対話観察の自動化パイプライン
+- ペルソナ全網羅検査
+
+「作ってみたけど設計は後」を防ぐため、未設計部分は可視化したまま次段階に回す。
 
 ---
 

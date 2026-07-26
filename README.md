@@ -9,13 +9,13 @@
 
 | 項目 | 値 |
 |---|---:|
-| 有効な意味ブロック | 41 |
-| 推定ソーストークン | 12,553 |
+| 有効な意味ブロック | 43 |
+| 推定ソーストークン | 13,439 |
 | 最新ソース更新日 | 2026-07-26 |
-| リポジトリ指紋 | `590bea6965ce2556970e` |
+| リポジトリ指紋 | `2c88f02bed6ce6e29f14` |
 | 生成規約 | `型付き意味ブロックから生成。README.md は直接編集しない。` |
 
-<!-- mfr:manifest {"active_blocks":41,"block_ids":["thesis.frictionless-ai-handoff","purpose.meaning","scope.entry","scope.readers","scope.artifact","non_goal.length","non_goal.omniscience","definition.meaning","definition.context-contract","principle.progressive-disclosure","principle.typed-claims","principle.fail-closed","assumption.readme-interface","constraint.truth","constraint.boundary","constraint.provenance","constraint.update-safety","constraint.permission-scope","constraint.real-conversation-quality","decision.markdown-toml","decision.no-single-score","decision.self-hosting","architecture.pipeline","architecture.semantic-graph","architecture.context-packer","procedure.author","procedure.review","procedure.build","procedure.context","procedure.release","evidence.self-host-build","evidence.retrieval-benchmark","risk.prompt-injection","risk.context-overflow","risk.stale-truth","example.quickstart","example.typed-block","glossary.core","roadmap.v1","faq.longest","changelog.v1"],"estimated_source_tokens":12553,"latest_source_update":"2026-07-26","project":"Meaning First README","repository_digest":"590bea6965ce2556970ec9ea4b890f30437efcb96ed18305124c4763eeaa7e7c","schema_version":1} -->
+<!-- mfr:manifest {"active_blocks":43,"block_ids":["thesis.frictionless-ai-handoff","purpose.meaning","scope.entry","scope.design-boundary","scope.readers","scope.artifact","definition.real-conversation","non_goal.length","non_goal.omniscience","definition.meaning","definition.context-contract","principle.progressive-disclosure","principle.typed-claims","principle.fail-closed","assumption.readme-interface","constraint.truth","constraint.boundary","constraint.provenance","constraint.update-safety","constraint.permission-scope","constraint.real-conversation-quality","decision.markdown-toml","decision.no-single-score","decision.self-hosting","architecture.pipeline","architecture.semantic-graph","architecture.context-packer","procedure.author","procedure.review","procedure.build","procedure.context","procedure.release","evidence.self-host-build","evidence.retrieval-benchmark","risk.prompt-injection","risk.context-overflow","risk.stale-truth","example.quickstart","example.typed-block","glossary.core","roadmap.v1","faq.longest","changelog.v1"],"estimated_source_tokens":13439,"latest_source_update":"2026-07-26","project":"Meaning First README","repository_digest":"2c88f02bed6ce6e29f148352dfea6b0559ab9cae5dfed4e5a774bbda664fd342","schema_version":1} -->
 
 ## 目次
 
@@ -24,12 +24,14 @@
   - [目的は「意味を達成すること」](#目的は「意味を達成すること」)
 - [対象範囲](#対象範囲)
   - [最初の30秒でやること](#最初の30秒でやること)
+  - [v1 の設計境界：作り出さず、範囲を固定する](#v1 の設計境界：作り出さず、範囲を固定する)
   - [対象読者と利用主体](#対象読者と利用主体)
   - [成果物の範囲](#成果物の範囲)
 - [非目的](#非目的)
   - [長さは目的ではない](#長さは目的ではない)
   - [万能な百科事典を装わない](#万能な百科事典を装わない)
 - [定義](#定義)
+  - [「リアルな対話」の定義](#「リアルな対話」の定義)
   - [「意味」の運用定義](#「意味」の運用定義)
   - [文脈契約](#文脈契約)
 - [原則](#原則)
@@ -185,6 +187,39 @@ python -m meaning_first_readme validate
 
 <!-- /mfr:block scope.entry -->
 
+<!-- mfr:block {"digest":"70e5d184eb60b37a","id":"scope.design-boundary","kind":"scope","priority":60,"status":"active"} -->
+### v1 の設計境界：作り出さず、範囲を固定する
+
+> v1 は README ビューの生成・検証のみ。ハーネス要素生成・対話観察・全ペルソナ網羅は明示的に範囲外とし、未設計部分を作り出さない。
+
+<sub>`scope.design-boundary` · 種別: `scope` · 優先度: `60` · 信頼区分: `authoritative` · 対象: `human` · 更新: `2026-07-26` · 依存: `thesis.frictionless-ai-handoff`, `constraint.real-conversation-quality`, `definition.real-conversation`</sub>
+
+この PR（v1）は、思い込みで機能を膨らませないために、明示的な設計境界を設ける。
+
+## v1 の範囲（作る）
+
+1. `content/blocks/` の意味ブロック管理
+2. README ビューの生成（`mfr build`）
+3. 検証（`validate`）、監査（`audit`）、ベンチマーク（`benchmark`）
+4. コンテキスト取り出し（`context`）、差分（`diff`）、スナップショット（`snapshot`）
+5. 自己ホスト（この README は自分で生成）
+
+## 範囲外（作らない、この PR では）
+
+- CLAUDE.md / Skills / Hooks / Subagents / MCP 設定の生成
+- 権限設定（`settings.json` 系）の生成
+- 対話観察の自動化パイプライン
+- ペルソナ全網羅の網羅的検査
+- Claude Code 本体の機能改変
+
+これらは [`roadmap`](140-roadmap.md) の次段階以降で、同じ意味ブロック基盤から段階的に生やす。v1 で作り出さないことが、後から間違って前提にしないための境界である。
+
+## なぜ固定するか
+
+「作ってみたけど設計は後」は、取り違えの温床になる。v1 では範囲を明示し、範囲外のものは「未設計」として可視化する。
+
+<!-- /mfr:block scope.design-boundary -->
+
 <!-- mfr:block {"digest":"840ab5128fe8bae0","id":"scope.readers","kind":"scope","priority":95,"status":"active"} -->
 ### 対象読者と利用主体
 
@@ -269,6 +304,38 @@ READMEだけを配布しても読めるが、リポジトリ全体を使うと�
 <!-- /mfr:block non_goal.omniscience -->
 
 ## 定義
+
+<!-- mfr:block {"digest":"e9034a4cb1695b42","id":"definition.real-conversation","kind":"definition","priority":58,"status":"active"} -->
+### 「リアルな対話」の定義
+
+> 整備後のハーネス設定と README が、実際の人間と Claude Code の対話で取り違え・迷子・停滞を起こさない状態を指す。装飾ではなく観察可能な基準。
+
+<sub>`definition.real-conversation` · 種別: `definition` · 優先度: `58` · 信頼区分: `reviewed` · 対象: `human` · 更新: `2026-07-26` · 依存: `constraint.real-conversation-quality`, `thesis.frictionless-ai-handoff`</sub>
+
+「リアルな対話」とは、生成したハーネス設定と README を実際に読み込ませた Claude Code セッションで、**代表ペルソナの典型タスク**を実施したときの振る舞いを指す。
+
+## 含むもの
+
+- ペルソナ（A/B/C）の典型タスクをセッションで再現すること
+- AI の最初の応答に目的・禁止事項・次の一手が反映されているか
+- 禁止事項が Hooks または `deny` で機械的に守られるか
+- 人間向けビューで何を渡しているか俯瞰できるか
+
+## 含まないもの
+
+- 「なんとなく自然に話せた」等の主観
+- サンプルサイズ1の印象
+- 本番環境以外での再現のない成果
+
+## 観察の記録
+
+対話観察の結果は `evidence` 種別の意味ブロックとして残す。これにより、再現性・回帰検出・根拠提示が可能になる。
+
+## なぜ定義が必要か
+
+「リアルな対話品質」を主観のまま放置すると、整備が思い込みにすり替わる。用語を固定することで、何を測るかを共通にする。
+
+<!-- /mfr:block definition.real-conversation -->
 
 <!-- mfr:block {"digest":"1e2193056bac788d","id":"definition.meaning","kind":"definition","priority":100,"status":"active"} -->
 ### 「意味」の運用定義
@@ -1083,7 +1150,7 @@ IDは表示順ではなく概念へ結び付ける。本文を移動してもID�
 ```json
 {
   "schema_version": 1,
-  "repository_digest": "590bea6965ce2556970ec9ea4b890f30437efcb96ed18305124c4763eeaa7e7c",
+  "repository_digest": "2c88f02bed6ce6e29f148352dfea6b0559ab9cae5dfed4e5a774bbda664fd342",
   "blocks": [
     {
       "id": "thesis.frictionless-ai-handoff",
@@ -1199,6 +1266,45 @@ IDは表示順ではなく概念へ結び付ける。本文を移動してもID�
       "digest": "937a7eab0dff28c1bb5b97993a854020fc694ed446bb63881dc1a37134c55fc5"
     },
     {
+      "id": "scope.design-boundary",
+      "kind": "scope",
+      "title": "v1 の設計境界：作り出さず、範囲を固定する",
+      "summary": "v1 は README ビューの生成・検証のみ。ハーネス要素生成・対話観察・全ペルソナ網羅は明示的に範囲外とし、未設計部分を作り出さない。",
+      "order": 16,
+      "priority": 60,
+      "audience": [
+        "human"
+      ],
+      "tags": [
+        "スコープ",
+        "境界",
+        "v1",
+        "設計"
+      ],
+      "status": "active",
+      "trust": "authoritative",
+      "depends_on": [
+        "thesis.frictionless-ai-handoff",
+        "constraint.real-conversation-quality",
+        "definition.real-conversation"
+      ],
+      "evidence": [],
+      "supports": [],
+      "claims": [
+        "v1 は README ビューのみ",
+        "未設計のハーネス生成は範囲外"
+      ],
+      "negates": [],
+      "acceptance": [],
+      "rationale": "",
+      "owner": "project",
+      "source": "",
+      "updated": "2026-07-26",
+      "expires": null,
+      "volatile": false,
+      "digest": "70e5d184eb60b37af48a540902997cb52c687b96e648c60d192ec417f29dd6b4"
+    },
+    {
       "id": "scope.readers",
       "kind": "scope",
       "title": "対象読者と利用主体",
@@ -1270,6 +1376,43 @@ IDは表示順ではなく概念へ結び付ける。本文を移動してもID�
       "expires": null,
       "volatile": false,
       "digest": "dedf49ead4e874dce4ca08e6aa20c2d396c5bda330dc09340ad135686f59f702"
+    },
+    {
+      "id": "definition.real-conversation",
+      "kind": "definition",
+      "title": "「リアルな対話」の定義",
+      "summary": "整備後のハーネス設定と README が、実際の人間と Claude Code の対話で取り違え・迷子・停滞を起こさない状態を指す。装飾ではなく観察可能な基準。",
+      "order": 30,
+      "priority": 58,
+      "audience": [
+        "human"
+      ],
+      "tags": [
+        "定義",
+        "対話",
+        "品質",
+        "用語"
+      ],
+      "status": "active",
+      "trust": "reviewed",
+      "depends_on": [
+        "constraint.real-conversation-quality",
+        "thesis.frictionless-ai-handoff"
+      ],
+      "evidence": [],
+      "supports": [],
+      "claims": [
+        "「リアルな対話」は観察可能な基準であり、主観ではない"
+      ],
+      "negates": [],
+      "acceptance": [],
+      "rationale": "",
+      "owner": "project",
+      "source": "",
+      "updated": "2026-07-26",
+      "expires": null,
+      "volatile": false,
+      "digest": "e9034a4cb1695b42849df4928b4ff4ed3081e11a525b6a591464faa8f870ac84"
     },
     {
       "id": "non_goal.length",

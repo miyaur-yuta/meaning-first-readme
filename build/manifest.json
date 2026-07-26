@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "repository_digest": "590bea6965ce2556970ec9ea4b890f30437efcb96ed18305124c4763eeaa7e7c",
+  "repository_digest": "2c88f02bed6ce6e29f148352dfea6b0559ab9cae5dfed4e5a774bbda664fd342",
   "blocks": [
     {
       "id": "architecture.context-packer",
@@ -606,6 +606,44 @@
       "volatile": false,
       "body": "本プロジェクトにおける「意味」は、文章から受ける印象や感動の大きさではなく、読者の判断能力として観測する。\n\n意味ブロックが有効であるためには、少なくとも次の問いへ答えられる必要がある。\n\n- この情報は何のために存在するか。\n- どの状況で適用し、どの状況では適用しないか。\n- 事実なのか、前提なのか、選択した判断なのか。\n- 何に依存し、何がこの情報を支えるか。\n- 読んだ後に何を実行、確認、保留すべきか。\n- どの条件で古くなり、撤回または再検証されるか。\n\nしたがって、意味は単一の数値へ完全に還元できない。構造的な品質ゲートと、具体的なタスクに対する理解・検索ベンチマークを組み合わせて検証する。",
       "digest": "1e2193056bac788d25855dae44065b5757c1e2d02a026c56aa289749451b5eeb"
+    },
+    {
+      "id": "definition.real-conversation",
+      "kind": "definition",
+      "title": "「リアルな対話」の定義",
+      "summary": "整備後のハーネス設定と README が、実際の人間と Claude Code の対話で取り違え・迷子・停滞を起こさない状態を指す。装飾ではなく観察可能な基準。",
+      "order": 30,
+      "priority": 58,
+      "audience": [
+        "human"
+      ],
+      "tags": [
+        "定義",
+        "対話",
+        "品質",
+        "用語"
+      ],
+      "status": "active",
+      "trust": "reviewed",
+      "depends_on": [
+        "constraint.real-conversation-quality",
+        "thesis.frictionless-ai-handoff"
+      ],
+      "evidence": [],
+      "supports": [],
+      "claims": [
+        "「リアルな対話」は観察可能な基準であり、主観ではない"
+      ],
+      "negates": [],
+      "acceptance": [],
+      "rationale": "",
+      "owner": "project",
+      "source": "",
+      "updated": "2026-07-26",
+      "expires": null,
+      "volatile": false,
+      "body": "「リアルな対話」とは、生成したハーネス設定と README を実際に読み込ませた Claude Code セッションで、**代表ペルソナの典型タスク**を実施したときの振る舞いを指す。\n\n## 含むもの\n\n- ペルソナ（A/B/C）の典型タスクをセッションで再現すること\n- AI の最初の応答に目的・禁止事項・次の一手が反映されているか\n- 禁止事項が Hooks または `deny` で機械的に守られるか\n- 人間向けビューで何を渡しているか俯瞰できるか\n\n## 含まないもの\n\n- 「なんとなく自然に話せた」等の主観\n- サンプルサイズ1の印象\n- 本番環境以外での再現のない成果\n\n## 観察の記録\n\n対話観察の結果は `evidence` 種別の意味ブロックとして残す。これにより、再現性・回帰検出・根拠提示が可能になる。\n\n## なぜ定義が必要か\n\n「リアルな対話品質」を主観のまま放置すると、整備が思い込みにすり替わる。用語を固定することで、何を測るかを共通にする。",
+      "digest": "e9034a4cb1695b42849df4928b4ff4ed3081e11a525b6a591464faa8f870ac84"
     },
     {
       "id": "evidence.retrieval-benchmark",
@@ -1463,6 +1501,46 @@
       "volatile": false,
       "body": "成果物は単一のMarkdownファイルに限定しない。正本は型付きの意味ブロック群であり、READMEはその人間可読ビューである。\n\n成果物に含めるものは以下である。\n\n- `content/blocks/`: 独立して参照できる意味ブロック。\n- `README.md`: ブロックから決定論的に生成される標準ビュー。\n- `mfr validate`: 構造、参照、矛盾、期限、根拠を検査する品質ゲート。\n- `mfr context`: タスクと予算に応じて文脈を選択するコンパイラ。\n- `mfr audit`: 単一スコアに潰さず、複数の品質次元を報告する監査器。\n- `mfr benchmark`: 文脈検索が必要な意味を取り出せるか測るテスト。\n- 意味スナップショットと差分: 文言ではなく、判断・主張・依存の変化を追跡する記録。\n\nREADMEだけを配布しても読めるが、リポジトリ全体を使うと更新可能で検証可能な知識基盤になる。",
       "digest": "dedf49ead4e874dce4ca08e6aa20c2d396c5bda330dc09340ad135686f59f702"
+    },
+    {
+      "id": "scope.design-boundary",
+      "kind": "scope",
+      "title": "v1 の設計境界：作り出さず、範囲を固定する",
+      "summary": "v1 は README ビューの生成・検証のみ。ハーネス要素生成・対話観察・全ペルソナ網羅は明示的に範囲外とし、未設計部分を作り出さない。",
+      "order": 16,
+      "priority": 60,
+      "audience": [
+        "human"
+      ],
+      "tags": [
+        "スコープ",
+        "境界",
+        "v1",
+        "設計"
+      ],
+      "status": "active",
+      "trust": "authoritative",
+      "depends_on": [
+        "thesis.frictionless-ai-handoff",
+        "constraint.real-conversation-quality",
+        "definition.real-conversation"
+      ],
+      "evidence": [],
+      "supports": [],
+      "claims": [
+        "v1 は README ビューのみ",
+        "未設計のハーネス生成は範囲外"
+      ],
+      "negates": [],
+      "acceptance": [],
+      "rationale": "",
+      "owner": "project",
+      "source": "",
+      "updated": "2026-07-26",
+      "expires": null,
+      "volatile": false,
+      "body": "この PR（v1）は、思い込みで機能を膨らませないために、明示的な設計境界を設ける。\n\n## v1 の範囲（作る）\n\n1. `content/blocks/` の意味ブロック管理\n2. README ビューの生成（`mfr build`）\n3. 検証（`validate`）、監査（`audit`）、ベンチマーク（`benchmark`）\n4. コンテキスト取り出し（`context`）、差分（`diff`）、スナップショット（`snapshot`）\n5. 自己ホスト（この README は自分で生成）\n\n## 範囲外（作らない、この PR では）\n\n- CLAUDE.md / Skills / Hooks / Subagents / MCP 設定の生成\n- 権限設定（`settings.json` 系）の生成\n- 対話観察の自動化パイプライン\n- ペルソナ全網羅の網羅的検査\n- Claude Code 本体の機能改変\n\nこれらは [`roadmap`](140-roadmap.md) の次段階以降で、同じ意味ブロック基盤から段階的に生やす。v1 で作り出さないことが、後から間違って前提にしないための境界である。\n\n## なぜ固定するか\n\n「作ってみたけど設計は後」は、取り違えの温床になる。v1 では範囲を明示し、範囲外のものは「未設計」として可視化する。",
+      "digest": "70e5d184eb60b37af48a540902997cb52c687b96e648c60d192ec417f29dd6b4"
     },
     {
       "id": "scope.entry",
